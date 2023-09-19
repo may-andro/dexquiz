@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "931031756090",
+    "project_id": "johto-dexquiz",
+    "storage_bucket": "johto-dexquiz.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:931031756090:android:6bfe58ef14834a728bf403",
+        "android_client_info": {
+          "package_name": "com.mayandro.dexquiz.johto"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBxpV-pze_woMeYIelXXWwgJa_7PISQ804"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
