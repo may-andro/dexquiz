@@ -1,0 +1,19 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'remote_dreamworld.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+RemoteDreamWorld _$RemoteDreamWorldFromJson(Map<String, dynamic> json) =>
+    RemoteDreamWorld(
+      frontDefault: json['front_default'] as String?,
+      frontFemale: json['front_female'] as String?,
+    );
+
+Map<String, dynamic> _$RemoteDreamWorldToJson(RemoteDreamWorld instance) =>
+    <String, dynamic>{
+      'front_default': instance.frontDefault,
+      'front_female': instance.frontFemale,
+    };
