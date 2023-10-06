@@ -1,0 +1,10 @@
+name: Build and Upload all Pokedex every night
+
+on: [push]
+
+jobs:
+  update_kanto_pokedex:
+    uses: ./.github/actions/action_build_pokedex.yaml
+    with:
+      flavor: "kanto"
+

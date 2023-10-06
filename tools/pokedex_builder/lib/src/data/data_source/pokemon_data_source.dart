@@ -15,7 +15,6 @@ class PokemonDataSourceImpl implements PokemonDataSource {
   Future<RemotePokemon> fetchPokemon({required int index}) async {
     try {
       final response = await _remoteClientService.getApiCall('pokemon/$index');
-      print('PokemonDataSourceImpl.fetchPokemon ${response.data}');
       return RemotePokemon.fromJson(response.data);
     } on TypeError catch (e) {
       throw ParsingException(e.stackTrace.toString());

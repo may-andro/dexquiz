@@ -1,0 +1,49 @@
+name: Build Pokedex
+description: 'Fetch pokedex from api and generates a firestore collection json'
+
+inputs:
+  flavor:
+    description: 'The pokedex flavor to fetch, build and upload'
+    required: true
+
+outputs:
+  path:
+    description: Firestore collection path
+    value: ${{ steps.collection-path.outputs.collection-path }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup dart environment
+      uses: dart-lang/setup-dart@v1
+      with:
+        sdk: 3.1.2
+
+    - name: Format the Dart code
+      run: dart format . --set-exit-if-changed
+
+    - name: Install dependencies for pokedex_builder
+      working-directory: ./tools/pokedex_builder
+      run: dart pub get
+
+    - name: Statically analyze the Dart code
+      working-directory: ./tools/pokedex_builder
+      run: dart analyze
+
+    - name: Run the uni tests
+      working-directory: ./tools/pokedex_builder
+      run: dart test
+
+    - name: Get the collection file path
+      id: collection-path
+      run: echo "collection-path=$(echo ../data/firestore/${{ inputs.flavor }}_pokedex.json)" >> $GITHUB_OUTPUT
+
+    - name: Fetch, build and create firestore collection json
+      working-directory: ./tools/pokedex_builder
+      run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} -p ../data/firestore/${{ inputs.flavor }}_pokedex.json
+
+
+
