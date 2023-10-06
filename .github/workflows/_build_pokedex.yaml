@@ -6,14 +6,11 @@ on:
       flavor:
         type: string
         required: true
-    outputs:
-      path:
-        description: Firestore collection path
-        value: ${{ steps.collection-path.outputs.collection-path }}
 
 jobs:
   build_pokedex:
     runs-on: ubuntu-latest
+
     env:
       DART_SDK_VERSION: 3.1.2
       PATH_POKEDEX_BUILDER: ./tools/pokedex_builder
@@ -47,10 +44,6 @@ jobs:
       - name: Create JSON File
         id: create-json
         run: echo '' > temporary.json
-
-      - name: Get the collection file path
-        id: collection-path
-        run: echo "collection-path=$(echo temporary.json)" >> $GITHUB_OUTPUT
 
       - name: Fetch, build and create firestore collection json
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
