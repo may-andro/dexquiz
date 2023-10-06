@@ -51,7 +51,7 @@ jobs:
           name: Test Results
           path: test-results.json
           reporter: dart-json
-          working-directory: ${{ env.WORKING_DIR }}
+          working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
 
       - name: Create JSON File
         id: create-json
