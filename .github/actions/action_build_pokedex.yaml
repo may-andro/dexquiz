@@ -18,11 +18,13 @@ runs:
       uses: actions/checkout@v3
 
     - name: Setup dart environment
+      working-directory: ./tools/pokedex_builder
       uses: dart-lang/setup-dart@v1
       with:
         sdk: 3.1.2
 
     - name: Format the Dart code
+      working-directory: ./tools/pokedex_builder
       run: dart format . --set-exit-if-changed
 
     - name: Install dependencies for pokedex_builder
