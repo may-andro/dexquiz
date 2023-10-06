@@ -28,6 +28,10 @@ jobs:
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: dart format . --set-exit-if-changed
 
+      - name: Run the code generators
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
       - name: Install dependencies for pokedex_builder
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: dart pub get
@@ -38,7 +42,16 @@ jobs:
 
       - name: Run the unit tests
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
-        run: dart test
+        run: dart test --machine > test-results.json
+
+      - name: Generate the test report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Test Results
+          path: test-results.json
+          reporter: dart-json
+          working-directory: ${{ env.WORKING_DIR }}
 
       - name: Create JSON File
         id: create-json
