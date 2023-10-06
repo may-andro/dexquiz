@@ -4,7 +4,6 @@ on:
   workflow_call:
     inputs:
       flavor:
-        description: 'The pokedex flavor to fetch, build and upload'
         type: string
         required: true
     outputs:
