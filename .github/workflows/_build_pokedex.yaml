@@ -42,7 +42,7 @@ jobs:
 
       - name: Run the unit tests
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
-        run: dart test --machine > test-results.json
+        run: dart test
 
       - name: Generate the test report
         uses: dorny/test-reporter@v1
