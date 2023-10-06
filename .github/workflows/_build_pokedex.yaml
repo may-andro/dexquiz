@@ -1,0 +1,61 @@
+name: Build Pokedex
+description: 'Fetch pokedex from api and generates a firestore collection json'
+
+on:
+  workflow_call:
+    inputs:
+      flavor:
+        description: 'The pokedex flavor to fetch, build and upload'
+        type: string
+        required: true
+    outputs:
+      path:
+        description: Firestore collection path
+        value: ${{ steps.collection-path.outputs.collection-path }}
+
+jobs:
+  build_pokedex:
+    runs-on: ubuntu-latest
+    env:
+      DART_SDK_VERSION: 3.1.2
+      PATH_POKEDEX_BUILDER: ./tools/pokedex_builder
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup dart environment
+        working-directory: ./tools/pokedex_builder
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ env.DART_SDK_VERSION }}
+
+      - name: Format the Dart code
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
+        run: dart format . --set-exit-if-changed
+
+      - name: Install dependencies for pokedex_builder
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
+        run: dart pub get
+
+      - name: Statically analyze the Dart code
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
+        run: dart analyze
+
+      - name: Run the unit tests
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
+        run: dart test
+
+      - name: Create JSON File
+        id: create-json
+        run: echo '' > temporary.json
+
+      - name: Get the collection file path
+        id: collection-path
+        run: echo "collection-path=$(echo temporary.json)" >> $GITHUB_OUTPUT
+
+      - name: Fetch, build and create firestore collection json
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
+        run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path temporary.json
+
+
