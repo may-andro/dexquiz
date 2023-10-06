@@ -1,5 +1,4 @@
 name: Build Pokedex
-description: 'Fetch pokedex from api and generates a firestore collection json'
 
 on:
   workflow_call:
