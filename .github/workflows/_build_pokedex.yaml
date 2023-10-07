@@ -47,9 +47,9 @@ jobs:
       #  run: dart test --file-reporter "json:test-results.json"
 
       - name: Fetch, build and create firestore collection json
-        run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ${{ input.collection_path }}
+        run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ${{ inputs.collection_path }}
 
       - name: Print the collection json file
-        run: cat  ${{ input.collection_path }}
+        run: cat  ${{ inputs.collection_path }}
 
 
