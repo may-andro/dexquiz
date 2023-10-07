@@ -96,15 +96,13 @@ jobs:
       #  run: dart test
 
       - name: Create credential json File
-        run: echo "CREDENTIALS_JSON" > {{ inputs.flavor }}_service-account.json
-        env:
-          CREDENTIALS_JSON: ${{ secrets.FIREBASE_CREDENTIALS }}
+        run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > ${{ inputs.flavor }}_service-account.json
 
       - name: Test ENV
         run: cat ${{ needs.build_pokedex.outputs.collection_path }}
 
       - name: Upload to firestore
-        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials {{ inputs.flavor }}_service-account.json --data ${{ needs.build_pokedex.outputs.collection_path }}
+        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ${{ inputs.flavor }}_service-account.json --data ${{ needs.build_pokedex.outputs.collection_path }}
 
 
 
