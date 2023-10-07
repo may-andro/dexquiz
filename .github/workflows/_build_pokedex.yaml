@@ -7,13 +7,18 @@ on:
         type: string
         required: true
 
+env:
+  DART_SDK_VERSION: 3.1.2
+  PATH_POKEDEX_BUILDER: ./tools/pokedex_builder
+
+
 jobs:
   build_pokedex:
     runs-on: ubuntu-latest
 
-    env:
-      DART_SDK_VERSION: 3.1.2
-      PATH_POKEDEX_BUILDER: ./tools/pokedex_builder
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIR }}
 
     steps:
       - name: Checkout repository
@@ -25,23 +30,18 @@ jobs:
           sdk: ${{ env.DART_SDK_VERSION }}
 
       - name: Format the Dart code
-        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: dart format . --set-exit-if-changed
 
       - name: Run the code generators
-        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Install dependencies for pokedex_builder
-        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: dart pub get
 
       - name: Statically analyze the Dart code
-        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: dart analyze
 
       - name: Run the unit tests
-        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: dart test --file-reporter "json:test-results.json"
 
       - name: Generate the test report
@@ -58,7 +58,6 @@ jobs:
         run: echo '' > temporary.json
 
       - name: Fetch, build and create firestore collection json
-        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
         run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path temporary.json
 
       - name: Print the created json file
