@@ -16,29 +16,6 @@ env:
   PATH_POKEDEX_UPLOADER: ./tools/firestore_file_uploader
 
 jobs:
-  create_collection_file:
-    runs-on: ubuntu-latest
-
-    outputs:
-      collection_path: ${{ steps.step1.outputs.test }}
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Create firestore collection json File
-        run: echo '' > ${{ inputs.flavor }}_pokedex_collection.json
-
-      - name: Store json file in workspace
-        run: mv ${{ inputs.flavor }}_pokedex_collection.json ${{ runner.workspace }}/${{ inputs.flavor }}_pokedex_collection.json
-
-      - name: Print the collection json file
-        run: cat  ${{ runner.workspace }}/${{ inputs.flavor }}_pokedex_collection.json
-
-      - name: Set workspace path in environment variable
-        run: echo "COLLECTION_PATH=${{ runner.workspace }}/${{ inputs.flavor }}_pokedex_collection.json" >> $GITHUB_ENV
-
-
   build_pokedex:
     runs-on: ubuntu-latest
 
@@ -118,19 +95,16 @@ jobs:
       #- name: Run the unit tests
       #  run: dart test
 
-      - name: Access firebase credentials json
+      - name: Create credential json File
+        run: echo "CREDENTIALS_JSON" > {{ inputs.flavor }}_service-account.json
         env:
           CREDENTIALS_JSON: ${{ secrets.FIREBASE_CREDENTIALS }}
-        run: echo $CREDENTIALS_JSON
-
-      - name: Create credential json File
-        run: echo "${CREDENTIALS_JSON}" > ${{ inputs.flavor }}_credentials.json
 
       - name: Test ENV
-        run: echo ${{ needs.build_pokedex.outputs.collection_path }}
+        run: cat ${{ needs.build_pokedex.outputs.collection_path }}
 
       - name: Upload to firestore
-        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ${{ inputs.flavor }}_credentials.json --data ${{ needs.build_pokedex.outputs.collection_path }}
+        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials {{ inputs.flavor }}_service-account.json --data ${{ needs.build_pokedex.outputs.collection_path }}
 
 
 
