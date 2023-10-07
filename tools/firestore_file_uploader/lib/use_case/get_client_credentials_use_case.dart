@@ -9,8 +9,9 @@ class GetClientCredentialsUseCase {
   Future<ServiceAccountCredentials> execute(String filePath) async {
     print('GetClientCredentialsUseCase.execute $filePath');
     final credentialsFile = await File(filePath).readAsString();
+    print('GetClientCredentialsUseCase.execute $credentialsFile');
     final credentialsJson = json.decode(credentialsFile);
-    print('GetClientCredentialsUseCase.execute $credentialsFile $credentialsJson');
+    print('GetClientCredentialsUseCase.execute $credentialsJson');
     return ServiceAccountCredentials.fromJson(credentialsJson);
   }
 }

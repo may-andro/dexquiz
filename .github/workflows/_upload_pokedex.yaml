@@ -40,7 +40,7 @@ jobs:
       #- name: Run the code generators
       #  run: dart run build_runner build --delete-conflicting-outputs
 
-      - name: Install dependencies for pokedex_builder
+      - name: Install dependencies for pokedex_file_uploader
         run: dart pub get
 
       #- name: Statically analyze the Dart code
@@ -56,9 +56,6 @@ jobs:
 
       - name: Create credential json File
         run: echo "${CREDENTIALS_JSON}" > ${{ inputs.flavor }}_credentials.json
-
-      - name: Print the credentials json file
-        run: cat  ${{ inputs.flavor }}_credentials.json
 
       - name: Upload to firestore
         run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ${{ inputs.flavor }}_credentials.json --data ${{ inputs.collection_path }}
