@@ -49,8 +49,12 @@ jobs:
       #- name: Run the unit tests
       #  run: dart test
 
-      - name: Create credentials JSON File
-        run: echo ${{ secrets.FIREBASE_CREDENTIALS }} > ${{ inputs.flavor }}_credentials.json
+      - name: Access firebase credentials json
+        env:
+          CREDENTIALS_JSON: ${{ secrets.FIREBASE_CREDENTIALS }}
+
+      - name: Create credential json File
+        run: echo "${CREDENTIALS_JSON}" > ${{ inputs.flavor }}_credentials.json
 
       - name: Print the credentials json file
         run: cat  ${{ inputs.flavor }}_credentials.json
