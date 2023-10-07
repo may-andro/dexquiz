@@ -12,4 +12,5 @@ jobs:
     uses: ./.github/workflows/_upload_pokedex.yaml
     with:
       flavor: 'kanto'
-      firestore_credentials: ${{ secrets.KANTO_FIREBASE_CREDENTIALS }}
+      secrets:
+        FIREBASE_CREDENTIALS: ${{ secrets.KANTO_FIREBASE_CREDENTIALS }}
