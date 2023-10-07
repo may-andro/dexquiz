@@ -52,7 +52,7 @@ jobs:
       - name: Fetch, build and create firestore collection json
         run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ${{ runner.workspace }}/${{ inputs.flavor }}_pokedex_collection.json
 
-      - name: Print the created json file
+      - name: Print the collection json file
         run: cat  ${{ runner.workspace }}/${{ inputs.flavor }}_pokedex_collection.json
 
 
