@@ -27,7 +27,7 @@ jobs:
     uses: ./.github/workflows/_build_pokedex.yaml
     with:
       flavor: 'kanto'
-      collection_path: $KANTO_COLLECTION_PATH
+      collection_path: echo $KANTO_COLLECTION_PATH
 
   upload_kanto_pokedex:
     needs: build_kanto_pokedex
