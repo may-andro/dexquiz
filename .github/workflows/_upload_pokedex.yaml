@@ -57,6 +57,9 @@ jobs:
       - name: Create credential json File
         run: echo "${CREDENTIALS_JSON}" > ${{ inputs.flavor }}_credentials.json
 
+      - name: Test ENV
+        run: echo $KANTO_COLLECTION_PATH
+
       - name: Upload to firestore
         run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ${{ inputs.flavor }}_credentials.json --data ${{ inputs.collection_path }}
 
