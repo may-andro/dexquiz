@@ -10,6 +10,7 @@ jobs:
 
   upload_kanto_pokedex:
     uses: ./.github/workflows/_upload_pokedex.yaml
+    needs: build_kanto_pokedex
     with:
       flavor: 'kanto'
       secrets:
