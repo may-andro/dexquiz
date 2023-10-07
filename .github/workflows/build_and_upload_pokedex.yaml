@@ -34,6 +34,6 @@ jobs:
     uses: ./.github/workflows/_upload_pokedex.yaml
     with:
       flavor: 'kanto'
-      collection_path: $KANTO_COLLECTION_PATH
+      collection_path: echo $KANTO_COLLECTION_PATH
     secrets:
       FIREBASE_CREDENTIALS: ${{ secrets.KANTO_FIREBASE_CREDENTIALS }}
