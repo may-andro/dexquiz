@@ -49,10 +49,7 @@ jobs:
       - name: Create credentials JSON File
         run: echo ${{ inputs.firestore_credentials }} > credentials.json
 
-      - name: Setup environment for Upload Pokedex
-        run: mkdir -p ${{ runner.workspace }}/pokedex
-
       - name: Upload to firestore
-        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials credentials.json --data ${{ runner.workspace }}/pokedex/${{ inputs.flavor }}_pokedex_collection.json
+        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials credentials.json --data ${{ runner.workspace }}/${{ inputs.flavor }}_pokedex_collection.json
 
 
