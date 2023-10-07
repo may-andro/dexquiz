@@ -49,11 +49,11 @@ jobs:
       - name: Create credentials JSON File
         run: echo ${{ inputs.firestore_credentials }} > ${{ inputs.flavor }}_credentials.json
 
-      - name: Print the collection json file
-        run: cat ${{ runner.workspace }}/${{ inputs.flavor }}_pokedex_collection.json
-
       - name: Print the credentials json file
         run: cat  ${{ inputs.flavor }}_credentials.json
+
+      - name: Print the collection json file
+        run: cat ${{ runner.workspace }}/tools/data/${{ inputs.flavor }}_pokedex_collection.json
 
       - name: Upload to firestore
         run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ${{ inputs.flavor }}_credentials.json --data ${{ runner.workspace }}/${{ inputs.flavor }}_pokedex_collection.json
