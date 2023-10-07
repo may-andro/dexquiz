@@ -50,6 +50,6 @@ jobs:
         run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ${{ inputs.collection_path }}
 
       - name: Print the collection json file
-        run: cat  ${{ KANTO_COLLECTION_PATH }}
+        run: cat  ${{ env.KANTO_COLLECTION_PATH }}
 
 
