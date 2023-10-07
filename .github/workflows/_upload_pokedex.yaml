@@ -52,6 +52,7 @@ jobs:
       - name: Access firebase credentials json
         env:
           CREDENTIALS_JSON: ${{ secrets.FIREBASE_CREDENTIALS }}
+        run: echo $CREDENTIALS_JSON
 
       - name: Create credential json File
         run: echo "${CREDENTIALS_JSON}" > ${{ inputs.flavor }}_credentials.json
