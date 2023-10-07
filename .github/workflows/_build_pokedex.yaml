@@ -12,6 +12,8 @@ env:
   PATH_POKEDEX_BUILDER: ./tools/pokedex_builder
 
 permissions:
+  contents: read
+  actions: read
   checks: write
 
 jobs:
