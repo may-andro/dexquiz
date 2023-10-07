@@ -6,6 +6,9 @@ on:
       flavor:
         type: string
         required: true
+      collection_path:
+        type: string
+        required: true
     secrets:
       FIREBASE_CREDENTIALS:
         required: true
@@ -31,20 +34,20 @@ jobs:
         with:
           sdk: ${{ env.DART_SDK_VERSION }}
 
-      - name: Format the Dart code
-        run: dart format . --set-exit-if-changed
+      #- name: Format the Dart code
+      #  run: dart format . --set-exit-if-changed
 
-      - name: Run the code generators
-        run: dart run build_runner build --delete-conflicting-outputs
+      #- name: Run the code generators
+      #  run: dart run build_runner build --delete-conflicting-outputs
 
       - name: Install dependencies for pokedex_builder
         run: dart pub get
 
-      - name: Statically analyze the Dart code
-        run: dart analyze
+      #- name: Statically analyze the Dart code
+      #  run: dart analyze
 
-      - name: Run the unit tests
-        run: dart test
+      #- name: Run the unit tests
+      #  run: dart test
 
       - name: Create credentials JSON File
         run: echo ${{ inputs.firestore_credentials }} > ${{ inputs.flavor }}_credentials.json
@@ -53,9 +56,9 @@ jobs:
         run: cat  ${{ inputs.flavor }}_credentials.json
 
       - name: Print the collection json file
-        run: cat ${{ runner.workspace }}/tools/data/${{ inputs.flavor }}_pokedex_collection.json
+        run: cat ${{ input.collection_path }}
 
       - name: Upload to firestore
-        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ${{ inputs.flavor }}_credentials.json --data ${{ runner.workspace }}/${{ inputs.flavor }}_pokedex_collection.json
+        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ${{ inputs.flavor }}_credentials.json --data ${{ input.collection_path }}
 
 

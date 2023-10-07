@@ -3,7 +3,24 @@ name: Build and Upload all Pokedex every night
 on: [push]
 
 jobs:
+  create_kanto_collection_file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create firestore collection json File
+        run: echo '' > kanto_pokedex_collection.json
+
+      - name: Store json file in workspace
+        run: mv kanto_pokedex_collection.json ${{ runner.workspace }}/kanto_pokedex_collection.json
+
+      - name: Print the collection json file
+        run: cat  ${{ runner.workspace }}/kanto_pokedex_collection.json
+
   build_kanto_pokedex:
+    needs: create_kanto_collection_file
     uses: ./.github/workflows/_build_pokedex.yaml
     with:
       flavor: 'kanto'
