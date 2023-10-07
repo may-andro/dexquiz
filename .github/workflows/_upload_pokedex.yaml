@@ -50,13 +50,13 @@ jobs:
       #  run: dart test
 
       - name: Create credentials JSON File
-        run: echo ${{ inputs.firestore_credentials }} > ${{ inputs.flavor }}_credentials.json
+        run: echo ${{ secrets.FIREBASE_CREDENTIALS }} > ${{ inputs.flavor }}_credentials.json
 
       - name: Print the credentials json file
         run: cat  ${{ inputs.flavor }}_credentials.json
 
       - name: Print the collection json file
-        run: cat ${{ inputs.collection_path }}
+        run: cat  ${{ inputs.collection_path }}
 
       - name: Upload to firestore
         run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ${{ inputs.flavor }}_credentials.json --data ${{ inputs.collection_path }}
