@@ -43,43 +43,16 @@ jobs:
       - name: Run the unit tests
         run: dart test --file-reporter "json:test-results.json"
 
-      - name: Generate Test Report
-        run: |
-          dart pub global activate coverage
-          dart pub global run coverage:collect_coverage --out=coverage.json --resume-isolates --wait-paused
-          dart pub global run coverage:format_coverage --lcov --in=coverage.json --out=lcov.info --packages=.packages --report-on=lib
+      - name: Create firestore collection json File
+        run: echo '' > ${{ inputs.flavor }}_pokedex_collection.json
 
-      - name: Publish Test Report as Comment
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const fs = require('fs');
-            const report = fs.readFileSync('lcov.info', 'utf8');
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: 'Test Coverage Report:\n```lcov\n' + report + '\n```',
-            });
-
-      - name: Generate the test report
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: Test Results
-          path: test-results.json
-          reporter: dart-json
-          working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
-
-      - name: Create JSON File
-        id: create-json
-        run: echo '' > temporary.json
+      - name: Store json file in workspace
+        run: mv ${{ inputs.flavor }}_pokedex_collection.json ${{ runner.workspace }}/pokedex/${{ inputs.flavor }}_pokedex_collection.json
 
       - name: Fetch, build and create firestore collection json
-        run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path temporary.json
+        run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ${{ inputs.flavor }}_pokedex_collection.json
 
       - name: Print the created json file
-        run: cat temporary.json
+        run: cat ${{ inputs.flavor }}_pokedex_collection.json
 
 

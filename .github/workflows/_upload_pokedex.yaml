@@ -1,0 +1,58 @@
+name: Upload Pokedex
+
+on:
+  workflow_call:
+    inputs:
+      flavor:
+        type: string
+        required: true
+      firestore_credentials:
+        type: string
+        required: true
+
+env:
+  DART_SDK_VERSION: 3.1.2
+  PATH_POKEDEX_UPLOADER: ./tools/firestore_file_uploader
+
+jobs:
+  upload_to_firestore:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup dart environment
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ env.DART_SDK_VERSION }}
+
+      - name: Format the Dart code
+        run: dart format . --set-exit-if-changed
+
+      - name: Run the code generators
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Install dependencies for pokedex_builder
+        run: dart pub get
+
+      - name: Statically analyze the Dart code
+        run: dart analyze
+
+      - name: Run the unit tests
+        run: dart test
+
+      - name: Create credentials JSON File
+        run: echo ${{ inputs.firestore_credentials }} > credentials.json
+
+      - name: Setup environment for Upload Pokedex
+        run: mkdir -p ${{ runner.workspace }}/pokedex
+
+      - name: Upload to firestore
+        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials credentials.json --data ${{ runner.workspace }}/pokedex/${{ inputs.flavor }}_pokedex_collection.json
+
+

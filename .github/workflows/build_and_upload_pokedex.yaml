@@ -4,7 +4,17 @@ on: [push]
 
 jobs:
   build_kanto_pokedex:
-    uses: ./.github/workflows/_build_pokedex.yaml
-    with:
-      flavor: "kanto"
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: build pokedex
+        uses: ./.github/workflows/_build_pokedex.yaml
+        with:
+          flavor: 'kanto'
+
+      - name: upload pokedex
+        uses: ./.github/workflows/_build_pokedex.yaml
+        with:
+          flavor: 'kanto'
+          firestore_credentials: ${{ secrets.KANTO_FIREBASE_CREDENTIALS }}
 
