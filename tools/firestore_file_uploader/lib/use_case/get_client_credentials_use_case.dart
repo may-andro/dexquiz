@@ -7,8 +7,10 @@ class GetClientCredentialsUseCase {
   const GetClientCredentialsUseCase();
 
   Future<ServiceAccountCredentials> execute(String filePath) async {
+    print('GetClientCredentialsUseCase.execute $filePath');
     final credentialsFile = await File(filePath).readAsString();
     final credentialsJson = json.decode(credentialsFile);
+    print('GetClientCredentialsUseCase.execute $credentialsFile $credentialsJson');
     return ServiceAccountCredentials.fromJson(credentialsJson);
   }
 }
