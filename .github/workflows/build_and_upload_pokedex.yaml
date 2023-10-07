@@ -9,9 +9,9 @@ jobs:
       flavor: 'kanto'
 
   upload_kanto_pokedex:
-    uses: ./.github/workflows/_upload_pokedex.yaml
     needs: build_kanto_pokedex
+    uses: ./.github/workflows/_upload_pokedex.yaml
     with:
       flavor: 'kanto'
-      secrets:
-        FIREBASE_CREDENTIALS: ${{ secrets.KANTO_FIREBASE_CREDENTIALS }}
+    secrets:
+      FIREBASE_CREDENTIALS: ${{ secrets.KANTO_FIREBASE_CREDENTIALS }}
