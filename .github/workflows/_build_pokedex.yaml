@@ -48,6 +48,26 @@ jobs:
       - name: Run the unit tests
         run: dart test --file-reporter "json:test-results.json"
 
+      - name: Generate Test Report
+        run: |
+          dart pub global activate coverage
+          dart pub global run coverage:collect_coverage --out=coverage.json --resume-isolates --wait-paused
+          dart pub global run coverage:format_coverage --lcov --in=coverage.json --out=lcov.info --packages=.packages --report-on=lib
+
+      - name: Publish Test Report as Comment
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('lcov.info', 'utf8');
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: 'Test Coverage Report:\n```lcov\n' + report + '\n```',
+            });
+
       - name: Generate the test report
         uses: dorny/test-reporter@v1
         if: always()
