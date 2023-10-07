@@ -6,17 +6,44 @@ on:
       flavor:
         type: string
         required: true
-      collection_path:
-        type: string
+    secrets:
+      FIREBASE_CREDENTIALS:
         required: true
 
 env:
   DART_SDK_VERSION: 3.1.2
   PATH_POKEDEX_BUILDER: ./tools/pokedex_builder
+  PATH_POKEDEX_UPLOADER: ./tools/firestore_file_uploader
 
 jobs:
+  create_collection_file:
+    runs-on: ubuntu-latest
+
+    outputs:
+      collection_path: ${{ steps.step1.outputs.test }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Create firestore collection json File
+        run: echo '' > ${{ inputs.flavor }}_pokedex_collection.json
+
+      - name: Store json file in workspace
+        run: mv ${{ inputs.flavor }}_pokedex_collection.json ${{ runner.workspace }}/${{ inputs.flavor }}_pokedex_collection.json
+
+      - name: Print the collection json file
+        run: cat  ${{ runner.workspace }}/${{ inputs.flavor }}_pokedex_collection.json
+
+      - name: Set workspace path in environment variable
+        run: echo "COLLECTION_PATH=${{ runner.workspace }}/${{ inputs.flavor }}_pokedex_collection.json" >> $GITHUB_ENV
+
+
   build_pokedex:
     runs-on: ubuntu-latest
+
+    outputs:
+      collection_path: ${{ steps.output.outputs.collection_path }}
 
     defaults:
       run:
@@ -46,10 +73,64 @@ jobs:
       #- name: Run the unit tests
       #  run: dart test --file-reporter "json:test-results.json"
 
+      - name: Create firestore collection json File
+        run: echo '' > ${{ inputs.flavor }}_pokedex_collection.json
+
       - name: Fetch, build and create firestore collection json
-        run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ${{ inputs.collection_path }}
+        run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ${{ inputs.flavor }}_pokedex_collection.json
 
       - name: Print the collection json file
-        run: cat  ${{ env.KANTO_COLLECTION_PATH }}
+        run: cat ${{ inputs.flavor }}_pokedex_collection.json
+
+      - name: Set the created collection file as output
+        id: output
+        run: echo "collection_path=${{ inputs.flavor }}_pokedex_collection.json" >> "$GITHUB_OUTPUT"
+
+  upload_pokedex:
+    runs-on: ubuntu-latest
+    needs: build_pokedex
+
+    defaults:
+      run:
+        working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup dart environment
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ env.DART_SDK_VERSION }}
+
+      #- name: Format the Dart code
+      #  run: dart format . --set-exit-if-changed
+
+      #- name: Run the code generators
+      #  run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Install dependencies for pokedex_file_uploader
+        run: dart pub get
+
+      #- name: Statically analyze the Dart code
+      #  run: dart analyze
+
+      #- name: Run the unit tests
+      #  run: dart test
+
+      - name: Access firebase credentials json
+        env:
+          CREDENTIALS_JSON: ${{ secrets.FIREBASE_CREDENTIALS }}
+        run: echo $CREDENTIALS_JSON
+
+      - name: Create credential json File
+        run: echo "${CREDENTIALS_JSON}" > ${{ inputs.flavor }}_credentials.json
+
+      - name: Test ENV
+        run: echo ${{ needs.build_pokedex.outputs.collection_path }}
+
+      - name: Upload to firestore
+        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ${{ inputs.flavor }}_credentials.json --data ${{ needs.build_pokedex.outputs.collection_path }}
+
 
 
