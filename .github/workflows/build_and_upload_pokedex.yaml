@@ -9,3 +9,10 @@ jobs:
       flavor: 'kanto'
     secrets:
       FIREBASE_CREDENTIALS: ${{ secrets.KANTO_FIREBASE_CREDENTIALS }}
+
+  build_johto_pokedex:
+    uses: ./.github/workflows/_build_upload_pokedex_workflow.yaml
+    with:
+      flavor: 'johto'
+    secrets:
+      FIREBASE_CREDENTIALS: ${{ secrets.JOHTO_FIREBASE_CREDENTIALS }}
