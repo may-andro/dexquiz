@@ -100,7 +100,7 @@ jobs:
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
 
       - name: Check the pokedex collection
-        run: cat ../tools/data/firestore/pokedex.json
+        run: cat /tools/data/firestore/pokedex.json
 
       - name: Create credential json File
         run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > ../tools/data/firebase/service_account.json
