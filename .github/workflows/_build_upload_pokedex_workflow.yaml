@@ -100,7 +100,7 @@ jobs:
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
 
       - name: Create credential json File
-        run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > ../data/firebase/service_account.json
+        run: echo ${{ secrets.FIREBASE_CREDENTIALS }} > ../data/firebase/service_account.json
         working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
 
       - name: Install dependencies for pokedex_file_uploader

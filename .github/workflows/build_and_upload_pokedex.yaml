@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build_kanto_pokedex:
-    uses: ./.github/workflows/_build_pokedex.yaml
+    uses: ./.github/workflows/_build_upload_pokedex_workflow.yaml
     with:
       flavor: 'kanto'
     secrets:
