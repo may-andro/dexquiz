@@ -25,8 +25,8 @@ class CredentialBuilderCommand extends Command {
 
   @override
   void run() {
-    final credentials = argResults?['credentials'];
-    final filePath = argResults?['path'];
+    final String credentials = argResults?['credentials'];
+    final String filePath = argResults?['path'];
     print('Let see: $credentials $filePath');
     _createCredentialsFileUseCase.execute(
       credentials: credentials,
