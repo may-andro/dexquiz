@@ -11,13 +11,19 @@ CLI tool for uploading data in the [Cloud Firestore](https://firebase.google.com
 
 # Usage
 
+## Build service_account.json for the firebase
+
+### Command templates
+`dart run bin/firestore_file_uploader.dart credential_builder --credentials <credentials> --path <file_path>`
+
+### Examples
+`dart bin/firestore_file_uploader.dart credential_builder --credentials "{\"type\": \"service_account\", \"project_id\": \"kanto-dexquiz\"}" --path ../data/firebase/service_account.json`
+
 ## Update data in firestore
 
 ### Command templates
 `dart run bin/firestore_file_uploader.dart upload --flavor <flavor> --credentials <file_path> --data <file_path>`
 
 ### Examples
-`dart run bin/firestore_file_uploader.dart upload --flavor kanto --credentials ../data/credentials/kanto_dexquiz.json --data ../data/firestore/kanto_pokedex.json`
-`dart run bin/firestore_file_uploader.dart upload --flavor johto --credentials ../data/credentials/johto_dexquiz.json --data ../data/firestore/johto_pokedex.json`
-
-`dart bin/firestore_file_uploader.dart credential_builder --credentials "{\"type\": \"service_account\", \"project_id\": \"kanto-dexquiz\"}" --path ../data/firebase/service_account.json`
+`dart run bin/firestore_file_uploader.dart upload --flavor kanto --credentials ../data/firebase/service_account.json --data ../data/firestore/pokedex.json`
+`dart run bin/firestore_file_uploader.dart upload --flavor johto --credentials ../data/firebase/service_account.json --data ../data/firestore/pokedex.json`
