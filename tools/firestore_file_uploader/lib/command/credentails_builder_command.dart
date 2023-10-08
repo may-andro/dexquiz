@@ -1,5 +1,5 @@
 import 'package:args/command_runner.dart';
-import 'package:firestore_file_uploader/use_case/create_credentails_file_use_case.dart';
+import 'package:firestore_file_uploader/use_case/create_credentials_file_use_case.dart';
 
 class CredentialBuilderCommand extends Command {
   CredentialBuilderCommand(this._createCredentialsFileUseCase) {
@@ -27,7 +27,6 @@ class CredentialBuilderCommand extends Command {
   void run() {
     final String credentials = argResults?['credentials'];
     final String filePath = argResults?['path'];
-    print('Let see: $credentials $filePath');
     _createCredentialsFileUseCase.execute(
       credentials: credentials,
       path: filePath,

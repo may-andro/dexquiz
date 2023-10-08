@@ -108,7 +108,7 @@ jobs:
         working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
 
       - name: Upload to firestore
-        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ../data/firebase/service_account.json --data ../data/firestore/${{ inputs.flavor }}_pokedex.json
+        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ../data/firebase/service_account.json --data ../data/firestore/pokedex.json
         working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
 
 

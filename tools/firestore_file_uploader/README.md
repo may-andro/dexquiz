@@ -20,3 +20,4 @@ CLI tool for uploading data in the [Cloud Firestore](https://firebase.google.com
 `dart run bin/firestore_file_uploader.dart upload --flavor kanto --credentials ../data/credentials/kanto_dexquiz.json --data ../data/firestore/kanto_pokedex.json`
 `dart run bin/firestore_file_uploader.dart upload --flavor johto --credentials ../data/credentials/johto_dexquiz.json --data ../data/firestore/johto_pokedex.json`
 
+`dart bin/firestore_file_uploader.dart credential_builder --credentials "{\"type\": \"service_account\", \"project_id\": \"kanto-dexquiz\"}" --path ../data/firebase/service_account.json`

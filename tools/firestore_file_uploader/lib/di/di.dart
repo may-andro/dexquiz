@@ -1,7 +1,7 @@
 import 'package:firestore_file_uploader/command/credentails_builder_command.dart';
 import 'package:firestore_file_uploader/command/upload_command.dart';
 import 'package:firestore_file_uploader/logger/log.dart';
-import 'package:firestore_file_uploader/use_case/create_credentails_file_use_case.dart';
+import 'package:firestore_file_uploader/use_case/create_credentials_file_use_case.dart';
 import 'package:firestore_file_uploader/use_case/get_api_header_use_case.dart';
 import 'package:firestore_file_uploader/use_case/get_auth_token_use_case.dart';
 import 'package:firestore_file_uploader/use_case/get_base_url_use_case.dart';
