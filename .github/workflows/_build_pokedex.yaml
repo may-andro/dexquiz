@@ -16,36 +16,8 @@ env:
   PATH_POKEDEX_UPLOADER: ./tools/firestore_file_uploader
 
 jobs:
-  job1:
-    runs-on: ubuntu-latest
-    outputs:
-      file-artifact: ${{ steps.create-file.outputs.artifact }}
-    steps:
-      - name: Create File
-        id: create-file
-        run: |
-          echo "This is some content" > my_file.txt
-          echo "::set-output name=artifact::my_file.txt"
-
-  job2:
-    runs-on: ubuntu-latest
-    needs: job1
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ needs.job1.outputs.file-artifact }}
-          path: my_file
-
-      - name: Read Shared File
-        run: |
-          cat my_file/my_file.txt
-
   build_pokedex:
     runs-on: ubuntu-latest
-
-    outputs:
-      collection_path: ${{ steps.output.outputs.collection_path }}
 
     defaults:
       run:
@@ -75,18 +47,14 @@ jobs:
       #- name: Run the unit tests
       #  run: dart test --file-reporter "json:test-results.json"
 
-      - name: Create firestore collection json File
-        run: echo '' > ${{ inputs.flavor }}_pokedex_collection.json
+      - name: Clean the existing pokedex file
+        run: echo '{}' > ../tools/data/firestore/${{ inputs.flavor }}_pokedex.json
 
       - name: Fetch, build and create firestore collection json
-        run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ${{ inputs.flavor }}_pokedex_collection.json
+        run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ../tools/data/firestore/${{ inputs.flavor }}_pokedex.json
 
       - name: Print the collection json file
-        run: cat ${{ inputs.flavor }}_pokedex_collection.json
-
-      - name: Set the created collection file as output
-        id: output
-        run: echo "collection_path=${{ inputs.flavor }}_pokedex_collection.json" >> "$GITHUB_OUTPUT"
+        run: cat ../tools/data/firestore/${{ inputs.flavor }}_pokedex.json
 
   upload_pokedex:
     runs-on: ubuntu-latest
@@ -120,14 +88,17 @@ jobs:
       #- name: Run the unit tests
       #  run: dart test
 
-      - name: Create credential json File
-        run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > ${{ inputs.flavor }}_service-account.json
+      - name: Clean the existing service account file
+        run: echo '{}' > ../tools/data/firebase/service_account.json
 
-      - name: Test ENV
-        run: cat ${{ needs.build_pokedex.outputs.collection_path }}
+      - name: Create credential json File
+        run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > ../tools/data/firebase/service_account.json
+
+      - name: Check the pokedex collection
+        run: cat ../tools/data/firestore/${{ inputs.flavor }}_pokedex.json
 
       - name: Upload to firestore
-        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ${{ inputs.flavor }}_service-account.json --data ${{ needs.build_pokedex.outputs.collection_path }}
+        run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ../tools/data/firebase/service_account.json --data ../tools/data/firestore/${{ inputs.flavor }}_pokedex.json
 
 
 
