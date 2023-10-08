@@ -99,14 +99,11 @@ jobs:
         run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ../data/firestore/pokedex.json
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
 
-      #- name: Clean the existing service account file
-      #  run: echo '{}' > ../tools/data/firebase/service_account.json
+      - name: Check the pokedex collection
+        run: cat ../tools/data/firestore/pokedex.json
 
       - name: Create credential json File
-        run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > ../data/firebase/service_account.json
-
-      - name: Check the pokedex collection
-        run: cat ../data/firestore/pokedex.json
+        run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > ../tools/data/firebase/service_account.json
 
       - name: Install dependencies for pokedex_file_uploader
         run: dart pub get
