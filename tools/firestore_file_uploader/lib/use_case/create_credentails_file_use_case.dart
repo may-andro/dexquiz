@@ -11,6 +11,8 @@ class CreateCredentialsFileUseCase {
 
     //final fileToUpload = await File('../data/credentials/kanto_dexquiz.json').readAsString();
     //final jsonToUpload = json.decode(fileToUpload);
+    //print('collectionJson  ${json.encode(fileToUpload)} ');
+
     final Map<String, dynamic> collectionJson = jsonDecode(credentials);
     print('collectionJson  $collectionJson');
     return File(path).writeAsString(
