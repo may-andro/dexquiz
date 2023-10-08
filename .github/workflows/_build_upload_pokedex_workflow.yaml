@@ -99,27 +99,11 @@ jobs:
         run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ../data/firestore/pokedex.json
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
 
-
-      - name: Convert Firebase Credentials
-        working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
+      - name: Create credential json File
         run: |
-          # Remove leading/trailing whitespace and newline characters
-          CREDENTIALS_JSON=$(echo "${{ secrets.FIREBASE_CREDENTIALS }}" | tr -d '\r\n' | awk '{$1=$1};1')
-            
-          # Escape double quotes for valid JSON
-          CREDENTIALS_JSON=$(echo "$CREDENTIALS_JSON" | sed 's/"/\\"/g')
-            
-          # Wrap in double quotes and output as valid JSON
+          CREDENTIALS_JSON=$(echo "${{ secrets.FIREBASE_CREDENTIALS }}" | tr -d '*')
           echo "$CREDENTIALS_JSON" > ../data/firebase/service_account.json
-            
-          # Display the converted JSON for verification
-          cat ../data/firebase/service_account.json
-        shell: bash
-
-
-      #- name: Create credential json File
-      #  run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > ../data/firebase/service_account.json
-      #  working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
+        working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
 
       - name: Install dependencies for pokedex_file_uploader
         run: dart pub get
