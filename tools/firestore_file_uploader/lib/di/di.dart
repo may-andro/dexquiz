@@ -1,5 +1,7 @@
+import 'package:firestore_file_uploader/command/credentails_builder_command.dart';
 import 'package:firestore_file_uploader/command/upload_command.dart';
 import 'package:firestore_file_uploader/logger/log.dart';
+import 'package:firestore_file_uploader/use_case/create_credentails_file_use_case.dart';
 import 'package:firestore_file_uploader/use_case/get_api_header_use_case.dart';
 import 'package:firestore_file_uploader/use_case/get_auth_token_use_case.dart';
 import 'package:firestore_file_uploader/use_case/get_base_url_use_case.dart';
@@ -72,12 +74,22 @@ void _addUseCasesToDI() {
       locator<Log>(),
     ),
   );
+
+  locator.registerFactory<CreateCredentialsFileUseCase>(
+    () => const CreateCredentialsFileUseCase(),
+  );
 }
 
 void _addCommandsToDI() {
   locator.registerFactory<UploadCommand>(
     () => UploadCommand(
       locator<UploadUseCase>(),
+    ),
+  );
+
+  locator.registerFactory<CredentialBuilderCommand>(
+    () => CredentialBuilderCommand(
+      locator<CreateCredentialsFileUseCase>(),
     ),
   );
 }

@@ -99,14 +99,12 @@ jobs:
         run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ../data/firestore/pokedex.json
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
 
-      - name: Create credential json File
-        run: |
-          CREDENTIALS_JSON=$(echo "${{ secrets.FIREBASE_CREDENTIALS }}" | tr -d '*')
-          echo "$CREDENTIALS_JSON" > ../data/firebase/service_account.json
-        working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
-
       - name: Install dependencies for pokedex_file_uploader
         run: dart pub get
+        working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
+
+      - name: Create credential json File
+        run: dart bin/firestore_file_uploader.dart credential builder --credentials ${{ secrets.FIREBASE_CREDENTIALS }} --path ../data/firebase/service_account.json
         working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
 
       - name: Upload to firestore
