@@ -100,10 +100,12 @@ jobs:
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
 
       - name: Check the pokedex collection
-        run: cat /tools/data/firestore/pokedex.json
+        run: cat ../data/firestore/pokedex.json
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
 
       - name: Create credential json File
-        run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > ../tools/data/firebase/service_account.json
+        run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > ../data/firebase/service_account.json
+        working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
 
       - name: Install dependencies for pokedex_file_uploader
         run: dart pub get
