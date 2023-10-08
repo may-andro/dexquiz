@@ -104,7 +104,7 @@ jobs:
         working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
 
       - name: Create credential json File
-        run: dart bin/firestore_file_uploader.dart credential builder --credentials ${{ secrets.FIREBASE_CREDENTIALS }} --path ../data/firebase/service_account.json
+        run: dart bin/firestore_file_uploader.dart credential_builder --credentials ${{ secrets.FIREBASE_CREDENTIALS }} --path ../data/firebase/service_account.json
         working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
 
       - name: Upload to firestore

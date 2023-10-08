@@ -18,7 +18,7 @@ class CredentialBuilderCommand extends Command {
   final CreateCredentialsFileUseCase _createCredentialsFileUseCase;
 
   @override
-  final name = "credential builder";
+  final name = "credential_builder";
 
   @override
   final description = "Parse the credentials and convert to json";
@@ -27,6 +27,7 @@ class CredentialBuilderCommand extends Command {
   void run() {
     final credentials = argResults?['credentials'];
     final filePath = argResults?['path'];
+    print('Let see: $credentials $filePath');
     _createCredentialsFileUseCase.execute(
       credentials: credentials,
       path: filePath,
