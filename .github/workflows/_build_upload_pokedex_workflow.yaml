@@ -110,7 +110,7 @@ jobs:
           CREDENTIALS_JSON=$(echo "$CREDENTIALS_JSON" | sed 's/"/\\"/g')
             
           # Wrap in double quotes and output as valid JSON
-          echo "{\"FIREBASE_CREDENTIALS\": \"$CREDENTIALS_JSON\"}" > ../data/firebase/service_account.json
+          echo "$CREDENTIALS_JSON" > ../data/firebase/service_account.json
             
           # Display the converted JSON for verification
           cat ../data/firebase/service_account.json
