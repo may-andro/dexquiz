@@ -9,5 +9,6 @@ Future<void> main(List<String> args) async {
     'A tool for uploading json FireStore',
   );
   runner.addCommand(firestore_file_uploader.uploadCommand);
+  runner.addCommand(firestore_file_uploader.credentialBuilderCommand);
   runner.run(args).catchError((error) => print(error));
 }
