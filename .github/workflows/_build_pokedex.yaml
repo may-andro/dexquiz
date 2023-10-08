@@ -16,7 +16,7 @@ env:
   PATH_POKEDEX_UPLOADER: ./tools/firestore_file_uploader
 
 jobs:
-  build_pokedex:
+  test_pokedex_builder:
     runs-on: ubuntu-latest
 
     defaults:
@@ -47,18 +47,8 @@ jobs:
       #- name: Run the unit tests
       #  run: dart test --file-reporter "json:test-results.json"
 
-      - name: Clean the existing pokedex file
-        run: echo '{}' > ../tools/data/firestore/${{ inputs.flavor }}_pokedex.json
-
-      - name: Fetch, build and create firestore collection json
-        run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ../tools/data/firestore/${{ inputs.flavor }}_pokedex.json
-
-      - name: Print the collection json file
-        run: cat ../tools/data/firestore/${{ inputs.flavor }}_pokedex.json
-
-  upload_pokedex:
+  test_firestore_file_uploader:
     runs-on: ubuntu-latest
-    needs: build_pokedex
 
     defaults:
       run:
@@ -88,8 +78,32 @@ jobs:
       #- name: Run the unit tests
       #  run: dart test
 
-      - name: Clean the existing service account file
-        run: echo '{}' > ../tools/data/firebase/service_account.json
+  build_and_upload_pokedex:
+    runs-on: ubuntu-latest
+    needs: [test_pokedex_builder, test_firestore_file_uploader]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup dart environment
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ env.DART_SDK_VERSION }}
+
+      - name: Install dependencies for pokedex_builder
+        run: dart pub get
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
+
+      #- name: Clean the existing pokedex file
+      #  run: echo '{}' > ../tools/data/firestore/${{ inputs.flavor }}_pokedex.json
+
+      - name: Fetch, build and create firestore collection json
+        run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ../tools/data/firestore/${{ inputs.flavor }}_pokedex.json
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
+
+      #- name: Clean the existing service account file
+      #  run: echo '{}' > ../tools/data/firebase/service_account.json
 
       - name: Create credential json File
         run: echo "${{ secrets.FIREBASE_CREDENTIALS }}" > ../tools/data/firebase/service_account.json
@@ -97,8 +111,13 @@ jobs:
       - name: Check the pokedex collection
         run: cat ../tools/data/firestore/${{ inputs.flavor }}_pokedex.json
 
+      - name: Install dependencies for pokedex_file_uploader
+        run: dart pub get
+        working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
+
       - name: Upload to firestore
         run: dart bin/firestore_file_uploader.dart upload --flavor ${{ inputs.flavor }} --credentials ../tools/data/firebase/service_account.json --data ../tools/data/firestore/${{ inputs.flavor }}_pokedex.json
+        working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
 
 
 
