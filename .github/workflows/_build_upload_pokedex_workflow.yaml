@@ -28,7 +28,7 @@ jobs:
           sdk: ${{ env.DART_SDK_VERSION }}
 
       - name: Setup Melos
-        run: dart pub global activate melos
+        run: flutter pub global activate melos
 
       - name: Test, analyse and format all CLI tools
         run: melos cli_tool_quality

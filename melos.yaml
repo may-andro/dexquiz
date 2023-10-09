@@ -142,7 +142,10 @@ scripts:
   cli_tool_quality:
     run: |
       melos dart_format --no-select
-      
+      melos dart_build_runner --no-select
+      melos dart_get --no-select
+      melos dart_analyze --no-select
+      melos dart_test --no-select
 
   flutter_package_quality:
     run: |
