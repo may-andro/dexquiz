@@ -1,0 +1,156 @@
+name: dexquiz
+
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+
+packages:
+  # Include the package in the workspace root.
+  - .
+  # Include all packages inside the `tools` directory that are direct children.
+  - tools/*
+
+scripts:
+  # Flutter packages scripts
+  flutter_version:
+    run: flutter --version
+    description: Run `flutter version` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      flutter: true
+
+  get:
+    run: flutter pub get
+    description: Run `flutter pub get` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      flutter: true
+
+  analyze:
+    run: flutter analyze
+    description: Run `flutter analyze` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      flutter: true
+
+  clean:
+    run: flutter clean
+    description: Run `flutter clean` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      flutter: true
+
+  format:
+    run: flutter format . --set-exit-if-changed
+    description: Run `flutter format` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      flutter: true
+
+  build_runner:
+    run: flutter pub run build_runner build --delete-conflicting-outputs && flutter packages pub run build_runner build
+    description: Run `build_runner` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: build_runner
+
+  test:
+    run: flutter test --exclude-tags 'golden'
+    description: Run `flutter test` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      flutter: true
+
+  update_golden_test:
+    run: flutter test --tags golden --update-goldens
+    description: Update `golden` test files in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: alchemist
+
+  run_golden_test:
+    run: flutter test --tags golden
+    description: Run `golden` tests in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: alchemist
+
+  flutter_gen:
+    run: flutter packages pub run build_runner build
+    description: Run `flutter_gen` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: flutter_gen_runner
+
+
+  # Dart CLI scripts
+  dart_get:
+    run: dart pub get
+    description: Run `dart pub get` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists:
+        - bin
+
+  dart_analyze:
+    run: dart analyze
+    description: Run `dart analyze` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists:
+        - bin
+
+  dart_format:
+    run: dart format . --set-exit-if-changed
+    description: Run `dart format` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists:
+        - bin
+
+  dart_build_runner:
+    run: dart run build_runner build --delete-conflicting-outputs
+    description: Run `build_runner` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists:
+        - bin
+
+  dart_test:
+    run: dart test
+    description: Run `dart test` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dirExists:
+        - bin
+
+  # CI Jobs
+  cli_tool_quality:
+    run: |
+      melos dart_format --no-select
+      melos dart_build_runner --no-select
+      melos dart_get --no-select
+      melos dart_analyze --no-select
+      melos dart_test --no-select
+
+  flutter_package_quality:
+    run: |
+      melos format --no-select
+      melos build_runner --no-select
+      melos get --no-select
+      melos analyze --no-select
+      melos test --no-select
