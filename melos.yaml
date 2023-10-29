@@ -8,6 +8,7 @@ packages:
   - .
   # Include all packages inside the `tools` directory that are direct children.
   - tools/*
+  - layers/*
 
 scripts:
   # Flutter packages scripts
