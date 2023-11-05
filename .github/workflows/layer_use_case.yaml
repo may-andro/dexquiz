@@ -7,6 +7,9 @@ env:
   FLUTTER_VERSION: "3.13.4"
   WORKING_DIR: ./layers/use_case
 
+permissions:
+  checks: write
+
 jobs:
   analyze-module:
     name: Analyze module
