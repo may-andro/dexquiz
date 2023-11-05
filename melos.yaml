@@ -8,6 +8,8 @@ packages:
   - .
   # Include all packages inside the `tools` directory that are direct children.
   - tools/*
+  # Include all packages inside the `layers` directory that are direct children.
+  - layers/*
 
 scripts:
   # Flutter packages scripts
@@ -99,8 +101,7 @@ scripts:
     exec:
       concurrency: 1
     packageFilters:
-      dirExists:
-        - bin
+      noDependsOn: flutter
 
   dart_analyze:
     run: dart analyze
@@ -108,8 +109,7 @@ scripts:
     exec:
       concurrency: 1
     packageFilters:
-      dirExists:
-        - bin
+      noDependsOn: flutter
 
   dart_format:
     run: dart format . --set-exit-if-changed
@@ -117,8 +117,7 @@ scripts:
     exec:
       concurrency: 1
     packageFilters:
-      dirExists:
-        - bin
+      noDependsOn: flutter
 
   dart_build_runner:
     run: dart run build_runner build --delete-conflicting-outputs
@@ -126,8 +125,7 @@ scripts:
     exec:
       concurrency: 1
     packageFilters:
-      dirExists:
-        - bin
+      noDependsOn: flutter
 
   dart_test:
     run: dart test
@@ -135,8 +133,7 @@ scripts:
     exec:
       concurrency: 1
     packageFilters:
-      dirExists:
-        - bin
+      noDependsOn: flutter
 
   # CI Jobs
   cli_tool_quality:
