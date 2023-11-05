@@ -1,9 +1,6 @@
 name: Analyze and test use case layer module
 
-on:
-  push:
-    paths:
-      - layers/use_case/**
+on: push
 
 env:
   DART_SDK_VERSION: 3.1.2
