@@ -1,0 +1,58 @@
+name: Analyze and test use case layer module
+
+on:
+  push:
+    paths:
+      - layers/use_case/**
+
+env:
+  DART_SDK_VERSION: 3.1.2
+  FLUTTER_VERSION: "3.13.4"
+  WORKING_DIR: ./layers/use_case
+
+permissions:
+  checks: write
+
+jobs:
+  analyze-module:
+    name: Analyze module
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIR }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup dart environment
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ env.DART_SDK_VERSION }}
+
+      - name: Get dart dependencies
+        run: dart pub get
+
+      - name: Format the Dart code
+        run: dart format . --set-exit-if-changed lib test
+
+      - name: Run code generators
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Statically analyze the Dart code
+        run: dart analyze lib test
+
+      - name: Run unit tests
+        run: dart test --file-reporter="json:test-results.json"
+
+      - name: Generate test report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Test Results
+          path: test-results.json
+          reporter: dart-json
+          working-directory: ${{ env.WORKING_DIR }}
+
+
+
+
