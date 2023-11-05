@@ -36,7 +36,16 @@ jobs:
         run: dart analyze lib test
 
       - name: Run unit tests
-        run: dart test
+        run: dart test --file-reporter="json:test-results.json"
+
+      - name: Generate test report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Test Results
+          path: test-results.json
+          reporter: dart-json
+          working-directory: ${{ env.WORKING_DIR }}
 
 
 
