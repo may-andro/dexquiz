@@ -1,6 +1,6 @@
-import 'package:log_reporter/src/log_reporter.dart';
+import 'package:log_reporter/src/log/log_reporter.dart';
 
-class LocalLogReporter implements LogReporter {
+class CompositeLogReporter implements LogReporter {
   @override
   Future<void> debug(
     String message, {

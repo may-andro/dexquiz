@@ -1,8 +1,8 @@
-import 'package:log_reporter/src/log_reporter.dart';
+import 'package:log_reporter/src/log/log_reporter.dart';
 
-class CompositeLogReporter implements LogReporter {
+class FirebaseLogReporter implements LogReporter {
   @override
-  Future<void> debug(
+  void debug(
     String message, {
     String? tag,
     error,
@@ -13,7 +13,7 @@ class CompositeLogReporter implements LogReporter {
   }
 
   @override
-  Future<void> error(
+  void error(
     String message, {
     String? tag,
     error,
