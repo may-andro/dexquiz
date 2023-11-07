@@ -1,9 +1,9 @@
 name: Run static code analysis and unit test for firebase module
 
-on:
-  push:
-    paths:
-      - layers/firebase/**
+on: push
+
+permissions:
+  checks: write
 
 jobs:
   test-and-analyze:
