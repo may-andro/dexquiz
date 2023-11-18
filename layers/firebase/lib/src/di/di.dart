@@ -12,17 +12,25 @@ void _injectCrashlytics(final GetIt getIt) {
   getIt.registerFactory(
     () => CrashlyticsForceCrashUseCase(
       getIt.get<FirebaseCrashlytics>(),
+      getIt.get<IsCrashlyticsEnabledUseCase>(),
     ),
   );
   getIt.registerFactory(
-    () => CrashlyticsLogUseCase(getIt.get<FirebaseCrashlytics>()),
+    () => CrashlyticsLogUseCase(
+      getIt.get<FirebaseCrashlytics>(),
+      getIt.get<IsCrashlyticsEnabledUseCase>(),
+    ),
   );
   getIt.registerFactory(
-    () => CrashlyticsRecordErrorUseCase(getIt.get<FirebaseCrashlytics>()),
+    () => CrashlyticsRecordErrorUseCase(
+      getIt.get<FirebaseCrashlytics>(),
+      getIt.get<IsCrashlyticsEnabledUseCase>(),
+    ),
   );
   getIt.registerFactory(
     () => CrashlyticsFlutterRecordErrorUseCase(
       getIt.get<FirebaseCrashlytics>(),
+      getIt.get<IsCrashlyticsEnabledUseCase>(),
     ),
   );
   getIt.registerFactory(
@@ -32,6 +40,9 @@ void _injectCrashlytics(final GetIt getIt) {
     () => SetCrashlyticsEnabledUseCase(getIt.get<FirebaseCrashlytics>()),
   );
   getIt.registerFactory(
-    () => SetCrashlyticsUserUseCase(getIt.get<FirebaseCrashlytics>()),
+    () => SetCrashlyticsUserUseCase(
+      getIt.get<FirebaseCrashlytics>(),
+      getIt.get<IsCrashlyticsEnabledUseCase>(),
+    ),
   );
 }
