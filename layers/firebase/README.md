@@ -25,8 +25,11 @@ TODO: This will be added later
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To get started refer to `lib/src/main.dart`. This is the entry point of the module.
+
+`preSetUpModule`: This method is called to initialize the `Firebase` in the client project.
+`setUpModule`: This methods setup the dependency graph for the module.
+`postSetUpModule`: This methods exposed the post set functionality for the module.
 
 ## Usage
 
@@ -35,4 +38,3 @@ start using the package.
    use_case:
       path: layers/firebase
    ```
-2. Initialise the firebase using `preSetUpModule()` callback.
