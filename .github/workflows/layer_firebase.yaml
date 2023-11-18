@@ -9,7 +9,7 @@ permissions:
   checks: write
 
 jobs:
-  test-and-analyze_firebase_layer:
+  layer_firebase:
     uses: ./.github/workflows/_analyze_and_test_flutter_module.yaml
     with:
       module_path: './layers/firebase'
