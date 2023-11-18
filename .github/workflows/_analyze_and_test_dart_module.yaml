@@ -1,0 +1,58 @@
+name: Analyze and Test Module
+
+on:
+  workflow_call:
+    inputs:
+      module_path:
+        type: string
+        required: true
+
+env:
+  DART_SDK_VERSION: 3.1.2
+
+permissions:
+  checks: write
+
+jobs:
+  analyze-and-test-module:
+    name: Analyze and test module
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ inputs.module_path }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup dart environment
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ env.DART_SDK_VERSION }}
+
+      - name: Get dart dependencies
+        run: dart pub get
+
+      - name: Format the Dart code
+        run: dart format . --set-exit-if-changed lib test
+
+      - name: Run code generators
+        run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Statically analyze the Dart code
+        run: dart analyze lib test
+
+      - name: Run unit tests
+        run: dart test --file-reporter="json:test-results.json"
+
+      - name: Generate test report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Test Results
+          path: test-results.json
+          reporter: dart-json
+          working-directory: ${{ inputs.module_path }}
+
+
+
+

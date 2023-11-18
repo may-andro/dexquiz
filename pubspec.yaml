@@ -13,10 +13,12 @@ dependencies:
 
   cloud_firestore: ^4.9.1
   cupertino_icons: ^1.0.2
-  firebase_analytics: ^10.4.5
-  firebase_core: ^2.15.1
-  firebase_crashlytics: ^3.3.5
-  firebase_remote_config: ^4.2.5
+  get_it: ^7.6.4
+
+  firebase:
+    path: layers/firebase
+  log_reporter:
+    path: layers/log_reporter
 
 dev_dependencies:
   flutter_test:
