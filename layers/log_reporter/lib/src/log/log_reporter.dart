@@ -10,6 +10,6 @@ abstract class LogReporter {
     String message, {
     String? tag,
     dynamic error,
-    StackTrace stacktrace,
+    StackTrace? stacktrace,
   });
 }

@@ -21,6 +21,10 @@ Future<void> runFlavor({
   final crashlyticsLogUseCase = getIt.get<firebase.CrashlyticsLogUseCase>();
   crashlyticsLogUseCase.call('App Started');
 
+  final logReporter = getIt.get<log_reporter.LogReporter>();
+  logReporter.debug('Hey I am the debug logger');
+  logReporter.error('Hey I am the error logger');
+
   final crashlyticsForceCrashUseCase =
       getIt.get<firebase.CrashlyticsForceCrashUseCase>();
   crashlyticsForceCrashUseCase();

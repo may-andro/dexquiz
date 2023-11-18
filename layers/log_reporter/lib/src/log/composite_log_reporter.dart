@@ -1,25 +1,41 @@
 import 'package:log_reporter/src/log/log_reporter.dart';
 
 class CompositeLogReporter implements LogReporter {
+  CompositeLogReporter(this._logReporters);
+
+  final List<LogReporter> _logReporters;
+
   @override
-  Future<void> debug(
+  void debug(
     String message, {
     String? tag,
     error,
     StackTrace? stacktrace,
   }) {
-    // TODO: implement debug
-    throw UnimplementedError();
+    for (var logReporter in _logReporters) {
+      logReporter.debug(
+        message,
+        tag: tag,
+        error: error,
+        stacktrace: stacktrace,
+      );
+    }
   }
 
   @override
-  Future<void> error(
+  void error(
     String message, {
     String? tag,
     error,
     StackTrace? stacktrace,
   }) {
-    // TODO: implement error
-    throw UnimplementedError();
+    for (var logReporter in _logReporters) {
+      logReporter.error(
+        message,
+        tag: tag,
+        error: error,
+        stacktrace: stacktrace,
+      );
+    }
   }
 }
