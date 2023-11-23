@@ -1,0 +1,10 @@
+name: dependency_injector
+description: A package for dependecy injection.
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.1.2 <4.0.0'
+
+
+dev_dependencies:
+  lints: ^3.0.0
