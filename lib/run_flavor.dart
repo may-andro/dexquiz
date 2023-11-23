@@ -1,12 +1,17 @@
 import 'dart:async';
 
-import 'package:dexquiz/build_config.dart';
+import 'package:core/core.dart';
+import 'package:dependency_injector/dependency_injector.dart';
 import 'package:dexquiz/dexquiz_app.dart';
-import 'package:dexquiz/di/di.dart';
+import 'package:dexquiz/module_configurator.dart';
+import 'package:dexquiz/service_locator/get_it_service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:log_reporter/log_reporter.dart' as log_reporter;
 import 'package:firebase/firebase.dart' as firebase;
+import 'package:use_case/use_case.dart' as use_case;
+
+const serviceLocator = GetItServiceLocator();
 
 Future<void> runFlavor({
   required BuildConfig buildConfig,
@@ -14,40 +19,28 @@ Future<void> runFlavor({
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-  await _preSetUpModule(buildConfig);
-  _setupLocator(buildConfig);
-  await _postSetUpModule(buildConfig);
+  await setUpDIGraph<BuildConfig>(
+    configurators: [
+      appModuleConfigurator,
+      firebase.moduleConfigurator,
+      log_reporter.moduleConfigurator,
+      use_case.moduleConfigurator,
+    ],
+    config: buildConfig,
+    serviceLocator: serviceLocator,
+  );
 
-  final crashlyticsLogUseCase = getIt.get<firebase.CrashlyticsLogUseCase>();
+  final crashlyticsLogUseCase =
+      serviceLocator.get<firebase.CrashlyticsLogUseCase>();
   crashlyticsLogUseCase.call('App Started');
 
-  final logReporter = getIt.get<log_reporter.LogReporter>();
+  final logReporter = serviceLocator.get<log_reporter.LogReporter>();
   logReporter.debug('Hey I am the debug logger');
   logReporter.error('Hey I am the error logger');
 
   final crashlyticsForceCrashUseCase =
-      getIt.get<firebase.CrashlyticsForceCrashUseCase>();
+      serviceLocator.get<firebase.CrashlyticsForceCrashUseCase>();
   crashlyticsForceCrashUseCase();
 
   runApp(const DexQuizApp());
-}
-
-void _setupLocator(final BuildConfig buildConfig) {
-  setupAppModule(buildConfig);
-  firebase.setUpModule(getIt);
-  log_reporter.setUpModule(getIt);
-}
-
-Future<void> _preSetUpModule(final BuildConfig buildConfig) async {
-  await firebase.preSetUpModule(
-    firebaseOptions: buildConfig.firebaseOptions,
-    projectName: buildConfig.firebaseProjectName,
-  );
-}
-
-Future<void> _postSetUpModule(final BuildConfig buildConfig) async {
-  await firebase.postSetUpModule(
-    getIt,
-    isCrashlyticsEnabled: true,
-  );
 }

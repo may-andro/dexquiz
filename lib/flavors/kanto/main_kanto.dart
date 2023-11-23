@@ -1,5 +1,5 @@
 import 'package:dexquiz/run_flavor.dart';
-import 'package:dexquiz/build_config.dart';
+import 'package:core/core.dart';
 import 'package:dexquiz/flavors/kanto/firebase_options_kanto.dart';
 
 final _buildConfig = BuildConfig(
@@ -7,6 +7,7 @@ final _buildConfig = BuildConfig(
   buildFlavor: BuildFlavor.kanto,
   firebaseProjectName: 'kanto-dexquiz',
   firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+  isCrashlyticsEnabled: true,
 );
 
 Future<void> main() async {
