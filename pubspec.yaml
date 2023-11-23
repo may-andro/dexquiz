@@ -10,15 +10,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
-  cloud_firestore: ^4.9.1
   cupertino_icons: ^1.0.2
-  get_it: ^7.6.4
 
+  core:
+    path: layers/core
+  dependency_injector:
+    path: layers/dependency_injector
   firebase:
     path: layers/firebase
   log_reporter:
     path: layers/log_reporter
+  use_case:
+    path: layers/use_case
 
 dev_dependencies:
   flutter_test:
