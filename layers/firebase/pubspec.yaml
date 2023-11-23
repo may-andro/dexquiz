@@ -13,7 +13,11 @@ dependencies:
   firebase_core: ^2.15.1
   firebase_crashlytics: ^3.3.5
   firebase_remote_config: ^4.2.5
-  get_it: ^7.6.4
+
+  core:
+    path: ../core
+  dependency_injector:
+    path: ../dependency_injector
 
 dev_dependencies:
   lints: ^3.0.0
