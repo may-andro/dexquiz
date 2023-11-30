@@ -1,0 +1,16 @@
+name: Run static code analysis and unit test for error reporter module
+
+on:
+  push:
+    paths:
+      - layers/error_reporter/**
+
+permissions:
+  checks: write
+
+jobs:
+  layer_error_reporter:
+    uses: ./.github/workflows/_analyze_and_test_flutter_module.yaml
+    with:
+      module_path: './layers/error_reporter'
+
