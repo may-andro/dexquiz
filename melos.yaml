@@ -46,7 +46,7 @@ scripts:
       flutter: true
 
   format:
-    run: flutter format . --set-exit-if-changed
+    run: dart format . --set-exit-if-changed
     description: Run `flutter format` in all packages.
     exec:
       concurrency: 1
