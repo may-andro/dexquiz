@@ -8,7 +8,7 @@ abstract class BaseUseCase<O, I, F extends Failure, T>
   BaseUseCase();
 
   T call(I input) {
-    _tempTag = _tempTag ?? _tag;
+    _tempTag = _tempTag ?? tag;
     return executeWithInterceptor(
       tag: _tempTag ?? '',
       params: input,
@@ -18,10 +18,10 @@ abstract class BaseUseCase<O, I, F extends Failure, T>
 
   T execute(I input);
 
-  String get _tag => '${runtimeType}_${DateTime.now().microsecondsSinceEpoch}';
+  String get tag => '${runtimeType}_${DateTime.now().microsecondsSinceEpoch}';
 
   void reportError(Object error, StackTrace st) {
-    _tempTag = _tempTag ?? _tag;
+    _tempTag = _tempTag ?? tag;
     onError(_tempTag ?? '', error, st);
   }
 }

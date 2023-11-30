@@ -82,7 +82,7 @@ Future<void> runFlavor({
       );
 
       final crashlyticsForceCrashUseCase =
-      serviceLocator.get<firebase.CrashlyticsForceCrashUseCase>();
+          serviceLocator.get<firebase.CrashlyticsForceCrashUseCase>();
       crashlyticsForceCrashUseCase();
 
       runApp(const DexQuizApp());

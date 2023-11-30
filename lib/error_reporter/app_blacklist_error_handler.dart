@@ -6,5 +6,4 @@ class AppBlacklistErrorHandler implements BlacklistErrorHandler {
   bool isBlacklistError(Object error) {
     return error is BlacklistException;
   }
-
 }

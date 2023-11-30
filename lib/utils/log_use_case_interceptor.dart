@@ -13,12 +13,8 @@ class LogUseCaseInterceptor implements UseCaseInterceptor {
 
   @override
   void onError(String tag, Object error, StackTrace? stackTrace) {
-    _logReporter.error(
-      'Error detected: ${error.toString()}',
-      tag: tag,
-      error: error,
-      stacktrace: stackTrace
-    );
+    _logReporter.error('Error detected: ${error.toString()}',
+        tag: tag, error: error, stacktrace: stackTrace);
   }
 
   @override
