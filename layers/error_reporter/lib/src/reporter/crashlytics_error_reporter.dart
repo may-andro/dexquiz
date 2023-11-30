@@ -5,10 +5,12 @@ import 'package:error_reporter/src/reporter/error_reporter.dart';
 import 'package:firebase/firebase.dart';
 import 'package:flutter/material.dart';
 import 'package:log_reporter/log_reporter.dart';
+import 'package:meta/meta.dart';
 
 typedef RecordErrorUseCase = CrashlyticsRecordErrorUseCase;
 typedef RecordFlutterErrorUseCase = CrashlyticsFlutterRecordErrorUseCase;
 
+@internal
 class CrashlyticsErrorReporter implements ErrorReporter {
   CrashlyticsErrorReporter(
     this._isBlacklistedErrorUseCase,

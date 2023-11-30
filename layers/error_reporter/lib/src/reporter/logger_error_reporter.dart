@@ -3,7 +3,9 @@ import 'package:error_reporter/src/fatal_error/fatal_error.dart';
 import 'package:error_reporter/src/reporter/error_reporter.dart';
 import 'package:flutter/material.dart';
 import 'package:log_reporter/log_reporter.dart';
+import 'package:meta/meta.dart';
 
+@internal
 class LoggerErrorReporter implements ErrorReporter {
   LoggerErrorReporter(
     this._isFatalErrorUseCase,
