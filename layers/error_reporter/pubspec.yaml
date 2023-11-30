@@ -1,0 +1,31 @@
+name: error_reporter
+description: A Flutter package for reporting error and handling errors.
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.1.2 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  meta: ^1.9.1
+
+  core:
+    path: ../core
+  dependency_injector:
+    path: ../dependency_injector
+  firebase:
+    path: ../firebase
+  log_reporter:
+    path: ../log_reporter
+  use_case:
+    path: ../use_case
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  mocktail: ^0.3.0
+  build_runner: ^2.4.6
