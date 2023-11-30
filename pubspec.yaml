@@ -11,11 +11,14 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.2
+  get_it: ^7.6.4
 
   core:
     path: layers/core
   dependency_injector:
     path: layers/dependency_injector
+  error_reporter:
+    path: layers/error_reporter
   firebase:
     path: layers/firebase
   log_reporter:

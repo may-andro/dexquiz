@@ -7,7 +7,6 @@ final _buildConfig = BuildConfig(
   buildFlavor: BuildFlavor.johto,
   firebaseOptions: DefaultFirebaseOptions.currentPlatform,
   firebaseProjectName: 'johto-dexquiz',
-  isCrashlyticsEnabled: true,
 );
 
 Future<void> main() async {
