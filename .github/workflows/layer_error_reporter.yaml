@@ -1,9 +1,12 @@
 name: Run static code analysis and unit test for error reporter module
 
+#on:
+#  push:
+#    paths:
+#      - layers/error_reporter/**
+
 on:
-  push:
-    paths:
-      - layers/error_reporter/**
+  push
 
 permissions:
   checks: write

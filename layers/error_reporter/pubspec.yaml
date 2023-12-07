@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  meta: ^1.10.0
+  meta: ^1.9.1
 
   core:
     path: ../core
