@@ -45,7 +45,7 @@ class CrashlyticsErrorReporter implements ErrorReporter {
   }) async {
     _onError(exception, stackTrace);
     _logReporter.error(
-      'Error occurred due to $exception',
+      'Error occurred due to ${exception.toString()}',
       tag: tag,
       error: exception,
       stacktrace: stackTrace,

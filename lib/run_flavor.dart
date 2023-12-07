@@ -9,6 +9,7 @@ import 'package:dexquiz/error_reporter/blacklist_exception.dart';
 import 'package:dexquiz/module_configurator.dart';
 import 'package:dexquiz/service_locator/get_it_service_locator.dart';
 import 'package:dexquiz/utils/log_use_case_interceptor.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:log_reporter/log_reporter.dart' as log_reporter;
@@ -22,6 +23,10 @@ Future<void> runFlavor({
   required BuildConfig buildConfig,
 }) async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
 
   await setUpDIGraph<BuildConfig>(
     configurators: [
@@ -37,63 +42,54 @@ Future<void> runFlavor({
 
   final errorReporter = serviceLocator.get<error_reporter.ErrorReporter>();
 
-  await runZonedGuarded<Future<void>>(
-    () async {
-      WidgetsFlutterBinding.ensureInitialized();
+  // uncaught asynchronous errors that aren't handled by the Flutter framework
+  PlatformDispatcher.instance.onError = (error, stack) {
+    errorReporter.globalErrorHandler(error, stack);
+    return true;
+  };
 
-      final crashlyticsLogUseCase =
-          serviceLocator.get<firebase.CrashlyticsLogUseCase>();
-      crashlyticsLogUseCase.call('App Started');
+  final crashlyticsLogUseCase =
+      serviceLocator.get<firebase.CrashlyticsLogUseCase>();
+  crashlyticsLogUseCase.call('App Started');
 
-      final logReporter = serviceLocator.get<log_reporter.LogReporter>();
-      logReporter.debug('Hey I am the debug logger');
-      logReporter.error('Hey I am the error logger');
+  final logReporter = serviceLocator.get<log_reporter.LogReporter>();
+  logReporter.debug('Hey I am the debug logger');
+  logReporter.error('Hey I am the error logger');
 
-      /// set use case interceptor
-      final logUseCaseInterceptor = serviceLocator.get<LogUseCaseInterceptor>();
-      final useCaseInterceptionHandler =
-          serviceLocator.get<use_case.UseCaseInterceptionHandler>();
-      useCaseInterceptionHandler.register(logUseCaseInterceptor);
+  /// set use case interceptor
+  final logUseCaseInterceptor = serviceLocator.get<LogUseCaseInterceptor>();
+  final useCaseInterceptionHandler =
+      serviceLocator.get<use_case.UseCaseInterceptionHandler>();
+  useCaseInterceptionHandler.register(logUseCaseInterceptor);
 
-      /// set blacklist error
-      final registerBlacklistExceptionHandlerUseCase = serviceLocator
-          .get<error_reporter.RegisterBlacklistErrorHandlerUseCase>();
-      final appBlacklistErrorHandler = AppBlacklistErrorHandler();
-      registerBlacklistExceptionHandlerUseCase.call(appBlacklistErrorHandler);
-      registerBlacklistExceptionHandlerUseCase.call(appBlacklistErrorHandler);
+  /// set blacklist error
+  final registerBlacklistExceptionHandlerUseCase =
+      serviceLocator.get<error_reporter.RegisterBlacklistErrorHandlerUseCase>();
+  final appBlacklistErrorHandler = AppBlacklistErrorHandler();
+  registerBlacklistExceptionHandlerUseCase.call(appBlacklistErrorHandler);
 
-      /// report blacklist error
-      errorReporter.reportError(
-        exception: BlacklistException(),
-        stackTrace: StackTrace.current,
-      );
-
-      /// set fatal error handler
-      final registerFatalErrorHandlerUseCase =
-          serviceLocator.get<error_reporter.RegisterFatalErrorHandlerUseCase>();
-      final appFatalErrorHandler = AppFatalErrorHandler();
-      registerFatalErrorHandlerUseCase(appFatalErrorHandler);
-      registerFatalErrorHandlerUseCase(appFatalErrorHandler);
-
-      /// report fatal error
-      errorReporter.reportError(
-        exception: error_reporter.FatalException(),
-        stackTrace: StackTrace.current,
-      );
-
-      final crashlyticsForceCrashUseCase =
-          serviceLocator.get<firebase.CrashlyticsForceCrashUseCase>();
-      crashlyticsForceCrashUseCase();
-
-      runApp(const DexQuizApp());
-
-      await SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
-    },
-    errorReporter.globalErrorHandler,
+  /// report blacklist error
+  errorReporter.reportError(
+    exception: BlacklistException(),
+    stackTrace: StackTrace.current,
   );
-}
 
-class TestException extends error_reporter.AppException {}
+  /// set fatal error handler
+  final registerFatalErrorHandlerUseCase =
+      serviceLocator.get<error_reporter.RegisterFatalErrorHandlerUseCase>();
+  final appFatalErrorHandler = AppFatalErrorHandler();
+  registerFatalErrorHandlerUseCase(appFatalErrorHandler);
+
+  runApp(const DexQuizApp());
+
+  /// force crash using crashlytics
+  /*final crashlyticsForceCrashUseCase =
+      serviceLocator.get<firebase.CrashlyticsForceCrashUseCase>();
+  crashlyticsForceCrashUseCase();*/
+
+  /// report fatal error
+  /*errorReporter.reportError(
+    exception: error_reporter.FatalException(),
+    stackTrace: StackTrace.current,
+  );*/
+}
