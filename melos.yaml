@@ -8,6 +8,8 @@ packages:
   - .
   # Include all packages inside the `tools` directory that are direct children.
   - tools/*
+  # Include all packages inside the `layers` directory that are direct children.
+  - layers/*
 
 scripts:
   # Flutter packages scripts
@@ -44,15 +46,13 @@ scripts:
       flutter: true
 
   format:
-    run: flutter format . --set-exit-if-changed
+    run: dart format lib test --set-exit-if-changed
     description: Run `flutter format` in all packages.
     exec:
       concurrency: 1
-    packageFilters:
-      flutter: true
 
   build_runner:
-    run: flutter pub run build_runner build --delete-conflicting-outputs && flutter packages pub run build_runner build
+    run: dart run build_runner build --delete-conflicting-outputs
     description: Run `build_runner` in all packages.
     exec:
       concurrency: 1
@@ -84,7 +84,7 @@ scripts:
       dependsOn: alchemist
 
   flutter_gen:
-    run: flutter packages pub run build_runner build
+    run: dart run build_runner build
     description: Run `flutter_gen` in all packages.
     exec:
       concurrency: 1
@@ -109,8 +109,7 @@ scripts:
     exec:
       concurrency: 1
     packageFilters:
-      dirExists:
-        - bin
+      noDependsOn: flutter
 
   dart_analyze:
     run: dart analyze
@@ -118,26 +117,7 @@ scripts:
     exec:
       concurrency: 1
     packageFilters:
-      dirExists:
-        - bin
-
-  dart_format:
-    run: dart format . --set-exit-if-changed
-    description: Run `dart format` in all packages.
-    exec:
-      concurrency: 1
-    packageFilters:
-      dirExists:
-        - bin
-
-  dart_build_runner:
-    run: dart run build_runner build --delete-conflicting-outputs
-    description: Run `build_runner` in all packages.
-    exec:
-      concurrency: 1
-    packageFilters:
-      dirExists:
-        - bin
+      noDependsOn: flutter
 
   dart_test:
     run: dart test
@@ -145,18 +125,31 @@ scripts:
     exec:
       concurrency: 1
     packageFilters:
-      dirExists:
-        - bin
+      noDependsOn: flutter
+
+  # Helper commands
+  get_all:
+    run: |
+      melos dart_get --no-select
+      melos get --no-select
+    description: Get dependencies in all packages.
+
+  pre_push:
+    run: |
+      melos format --no-select
+      melos dart_analyze --no-select
+      melos analyze --no-select
+      melos build_runner --no-select
+      melos dart_test --no-select
+      melos test --no-select
+    description: Format, analyse and test all packages.
+
+  update_all:
+    run: |
+      flutter pub outdated
+      flutter pub upgrade --major-versions
 
   # CI Jobs
-  cli_tool_quality:
-    run: |
-      melos dart_format --no-select
-      melos dart_build_runner --no-select
-      melos dart_get --no-select
-      melos dart_analyze --no-select
-      melos dart_test --no-select
-
   flutter_package_quality:
     run: |
       melos format --no-select
@@ -164,3 +157,15 @@ scripts:
       melos get --no-select
       melos analyze --no-select
       melos test --no-select
+    description: Format, analyse and test all packages.
+
+  cli_tool_quality:
+    run: |
+      melos format --no-select
+      melos build_runner --no-select
+      melos dart_get --no-select
+      melos dart_analyze --no-select
+      melos dart_test --no-select
+    description: Format, analyse and test all packages.
+
+

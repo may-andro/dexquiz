@@ -1,0 +1,19 @@
+name: Run static code analysis and unit test for dependency_injector module
+
+#on:
+#  push:
+#    paths:
+#      - layers/dependency_injector/**
+
+on:
+  push
+
+permissions:
+  checks: write
+
+jobs:
+  layer_dependency_injector:
+    uses: ./.github/workflows/_analyze_and_test_dart_module.yaml
+    with:
+      module_path: './layers/dependency_injector'
+

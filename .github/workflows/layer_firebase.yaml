@@ -1,0 +1,19 @@
+name: Run static code analysis and unit test for firebase module
+
+#on:
+#  push:
+#    paths:
+#      - layers/firebase/**
+
+on:
+  push
+
+permissions:
+  checks: write
+
+jobs:
+  layer_firebase:
+    uses: ./.github/workflows/_analyze_and_test_flutter_module.yaml
+    with:
+      module_path: './layers/firebase'
+

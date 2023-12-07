@@ -1,0 +1,93 @@
+import 'dart:async';
+
+import 'package:core/core.dart';
+import 'package:dependency_injector/dependency_injector.dart';
+import 'package:error_reporter/src/blacklist_error/blacklist_error.dart';
+import 'package:error_reporter/src/fatal_error/fatal_error.dart';
+import 'package:error_reporter/src/reporter/crashlytics_error_reporter.dart';
+import 'package:error_reporter/src/reporter/error_reporter.dart';
+import 'package:error_reporter/src/reporter/logger_error_reporter.dart';
+import 'package:firebase/firebase.dart';
+import 'package:log_reporter/log_reporter.dart';
+
+final moduleConfigurator = _ModuleConfigurator();
+
+class _ModuleConfigurator implements ModuleConfigurator<BuildConfig> {
+  @override
+  FutureOr<void> postDependenciesSetup(
+    BuildConfig config,
+    ServiceLocator serviceLocator,
+  ) async {
+    serviceLocator.get<ErrorReporter>().init();
+  }
+
+  @override
+  FutureOr<void> preDependenciesSetup(
+    BuildConfig config,
+    ServiceLocator serviceLocator,
+  ) {
+    return Future.value();
+  }
+
+  @override
+  FutureOr<void> registerDependencies(
+    BuildConfig config,
+    ServiceLocator serviceLocator,
+  ) {
+    // Blacklist errors
+    serviceLocator.registerSingleton<BlacklistErrorController>(
+      () => BlacklistErrorController(),
+    );
+
+    serviceLocator.registerFactory<RegisterBlacklistErrorHandlerUseCase>(
+      () => RegisterBlacklistErrorHandlerUseCase(
+        serviceLocator.get<BlacklistErrorController>(),
+      ),
+    );
+
+    serviceLocator.registerFactory<IsBlacklistedErrorUseCase>(
+      () => IsBlacklistedErrorUseCase(
+        serviceLocator.get<BlacklistErrorController>(),
+      ),
+    );
+
+    //Fatal Error Handler
+    serviceLocator.registerSingleton<FatalErrorController>(
+      () => FatalErrorController(),
+    );
+
+    serviceLocator.registerFactory<FatalErrorHandlerUseCase>(
+      () => FatalErrorHandlerUseCase(
+        serviceLocator.get<FatalErrorController>(),
+      ),
+    );
+
+    serviceLocator.registerFactory<RegisterFatalErrorHandlerUseCase>(
+      () => RegisterFatalErrorHandlerUseCase(
+        serviceLocator.get<FatalErrorController>(),
+      ),
+    );
+
+    serviceLocator.registerFactory<IsFatalErrorUseCase>(
+      () => IsFatalErrorUseCase(),
+    );
+
+    // Error Reporter
+    ErrorReporter errorReporter = LoggerErrorReporter(
+      serviceLocator.get<IsFatalErrorUseCase>(),
+      serviceLocator.get<FatalErrorHandlerUseCase>(),
+      serviceLocator.get<LogReporter>(),
+    );
+    if (config.buildEnvironment.isFirebaseEnabled) {
+      errorReporter = CrashlyticsErrorReporter(
+        serviceLocator.get<IsBlacklistedErrorUseCase>(),
+        serviceLocator.get<IsFatalErrorUseCase>(),
+        serviceLocator.get<FatalErrorHandlerUseCase>(),
+        serviceLocator.get<CrashlyticsRecordErrorUseCase>(),
+        serviceLocator.get<CrashlyticsFlutterRecordErrorUseCase>(),
+        serviceLocator.get<LogReporter>(),
+      );
+    }
+    serviceLocator.registerSingleton<ErrorReporter>(() => errorReporter);
+  }
+}

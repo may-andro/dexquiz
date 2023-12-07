@@ -1,0 +1,19 @@
+name: Run static code analysis and unit test for core module
+
+#on:
+#  push:
+#    paths:
+#      - layers/core/**
+
+on:
+  push
+
+permissions:
+  checks: write
+
+jobs:
+  layer_core:
+    uses: ./.github/workflows/_analyze_and_test_flutter_module.yaml
+    with:
+      module_path: './layers/core'
+
