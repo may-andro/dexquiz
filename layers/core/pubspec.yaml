@@ -1,5 +1,5 @@
 name: core
-description: A Flutter package for core functionality of the app.
+description: Provides the core functionality of the app.
 publish_to: 'none'
 
 environment:

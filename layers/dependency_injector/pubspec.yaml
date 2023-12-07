@@ -1,5 +1,5 @@
 name: dependency_injector
-description: A package for dependency injection.
+description: Provides the dependency injection.
 publish_to: 'none'
 
 environment:

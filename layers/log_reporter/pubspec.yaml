@@ -1,5 +1,5 @@
 name: log_reporter
-description: A Flutter package used for generating logs.
+description: Provides support for generating logs.
 publish_to: 'none'
 
 environment:

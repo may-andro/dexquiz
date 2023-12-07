@@ -1,5 +1,5 @@
 name: error_reporter
-description: A Flutter package for reporting error and handling errors.
+description: Provides reporting and handling errors.
 publish_to: 'none'
 
 environment:

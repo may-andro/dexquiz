@@ -1,5 +1,5 @@
 name: firebase
-description: A Flutter package to provide all firebase related dependencies.
+description: Provides all firebase related features.
 publish_to: 'none'
 
 environment:

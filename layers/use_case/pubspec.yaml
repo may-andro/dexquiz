@@ -1,5 +1,5 @@
 name: use_case
-description: A Flutter package used for making use cases.
+description: Provides base classes for making use cases.
 publish_to: 'none'
 
 environment:
