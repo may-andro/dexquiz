@@ -1,6 +1,12 @@
 import 'package:firebase/firebase.dart';
 
-enum BuildEnvironment { debug, qa, prod }
+enum BuildEnvironment {
+  debug,
+  qa,
+  prod;
+
+  bool get isFirebaseEnabled => this == BuildEnvironment.prod;
+}
 
 enum BuildFlavor { kanto, johto }
 
@@ -10,12 +16,10 @@ class BuildConfig {
     required this.buildFlavor,
     required this.firebaseProjectName,
     required this.firebaseOptions,
-    required this.isCrashlyticsEnabled,
   });
 
   final BuildEnvironment buildEnvironment;
   final BuildFlavor buildFlavor;
   final String firebaseProjectName;
   final FirebaseOptions firebaseOptions;
-  final bool isCrashlyticsEnabled;
 }

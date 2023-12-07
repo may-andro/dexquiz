@@ -46,15 +46,13 @@ scripts:
       flutter: true
 
   format:
-    run: flutter format . --set-exit-if-changed
+    run: dart format lib test --set-exit-if-changed
     description: Run `flutter format` in all packages.
     exec:
       concurrency: 1
-    packageFilters:
-      flutter: true
 
   build_runner:
-    run: flutter pub run build_runner build --delete-conflicting-outputs && flutter packages pub run build_runner build
+    run: dart run build_runner build --delete-conflicting-outputs
     description: Run `build_runner` in all packages.
     exec:
       concurrency: 1
@@ -86,7 +84,7 @@ scripts:
       dependsOn: alchemist
 
   flutter_gen:
-    run: flutter packages pub run build_runner build
+    run: dart run build_runner build
     description: Run `flutter_gen` in all packages.
     exec:
       concurrency: 1
@@ -111,22 +109,6 @@ scripts:
     packageFilters:
       noDependsOn: flutter
 
-  dart_format:
-    run: dart format . --set-exit-if-changed
-    description: Run `dart format` in all packages.
-    exec:
-      concurrency: 1
-    packageFilters:
-      noDependsOn: flutter
-
-  dart_build_runner:
-    run: dart run build_runner build --delete-conflicting-outputs
-    description: Run `build_runner` in all packages.
-    exec:
-      concurrency: 1
-    packageFilters:
-      noDependsOn: flutter
-
   dart_test:
     run: dart test
     description: Run `dart test` in all packages.
@@ -135,15 +117,29 @@ scripts:
     packageFilters:
       noDependsOn: flutter
 
-  # CI Jobs
-  cli_tool_quality:
+  # Helper commands
+  get_all:
     run: |
-      melos dart_format --no-select
-      melos dart_build_runner --no-select
       melos dart_get --no-select
-      melos dart_analyze --no-select
-      melos dart_test --no-select
+      melos get --no-select
+    description: Get dependencies in all packages.
 
+  pre_push:
+    run: |
+      melos format --no-select
+      melos dart_analyze --no-select
+      melos analyze --no-select
+      melos build_runner --no-select
+      melos dart_test --no-select
+      melos test --no-select
+    description: Format, analyse and test all packages.
+
+  update_all:
+    run: |
+      flutter pub outdated
+      flutter pub upgrade --major-versions
+
+  # CI Jobs
   flutter_package_quality:
     run: |
       melos format --no-select
@@ -151,3 +147,15 @@ scripts:
       melos get --no-select
       melos analyze --no-select
       melos test --no-select
+    description: Format, analyse and test all packages.
+
+  cli_tool_quality:
+    run: |
+      melos format --no-select
+      melos build_runner --no-select
+      melos dart_get --no-select
+      melos dart_analyze --no-select
+      melos dart_test --no-select
+    description: Format, analyse and test all packages.
+
+

@@ -7,7 +7,6 @@ final _buildConfig = BuildConfig(
   buildFlavor: BuildFlavor.kanto,
   firebaseProjectName: 'kanto-dexquiz',
   firebaseOptions: DefaultFirebaseOptions.currentPlatform,
-  isCrashlyticsEnabled: true,
 );
 
 Future<void> main() async {

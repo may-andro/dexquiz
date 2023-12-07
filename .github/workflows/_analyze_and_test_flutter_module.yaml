@@ -8,8 +8,8 @@ on:
         required: true
 
 env:
-  DART_SDK_VERSION: 3.1.2
-  FLUTTER_VERSION: "3.13.4"
+  DART_SDK_VERSION: 3.2.2
+  FLUTTER_VERSION: "3.16.2"
 
 jobs:
   analyze-and-test-module:

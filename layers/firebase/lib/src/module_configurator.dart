@@ -16,7 +16,7 @@ class _ModuleConfigurator implements ModuleConfigurator<BuildConfig> {
   ) {
     final firebaseCrashlytics = serviceLocator.get<FirebaseCrashlytics>();
     firebaseCrashlytics.setCrashlyticsCollectionEnabled(
-      config.isCrashlyticsEnabled,
+      config.buildEnvironment.isFirebaseEnabled,
     );
   }
 

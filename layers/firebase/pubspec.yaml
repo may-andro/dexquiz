@@ -1,5 +1,5 @@
 name: firebase
-description: A Flutter package to provide all firebase related dependencies.
+description: Provides all firebase related features.
 publish_to: 'none'
 
 environment:
@@ -9,10 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  firebase_analytics: ^10.4.5
-  firebase_core: ^2.15.1
-  firebase_crashlytics: ^3.3.5
-  firebase_remote_config: ^4.2.5
+  firebase_analytics: ^10.7.2
+  firebase_core: ^2.24.0
+  firebase_crashlytics: ^3.4.6
+  firebase_remote_config: ^4.3.6
 
   core:
     path: ../core
@@ -22,5 +22,5 @@ dependencies:
 dev_dependencies:
   lints: ^3.0.0
   test: ^1.24.3
-  mocktail: ^0.3.0
+  mocktail: ^1.0.1
   build_runner: ^2.4.6
