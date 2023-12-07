@@ -1,4 +1,4 @@
-import 'package:error_reporter/src/blacklist_Error/is_blacklisted_Error_use_case.dart';
+import 'package:error_reporter/src/blacklist_error/is_blacklisted_error_use_case.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../mock/src/blacklist_error/mock_blacklist_error_controller.dart';
