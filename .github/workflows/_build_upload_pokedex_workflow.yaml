@@ -11,8 +11,8 @@ on:
         required: true
 
 env:
-  DART_SDK_VERSION: 3.2.2
-  FLUTTER_VERSION: "3.16.2"
+  DART_SDK_VERSION: 3.2.3
+  FLUTTER_VERSION: "3.16.3"
   PATH_POKEDEX_BUILDER: ./tools/pokedex_builder
   PATH_POKEDEX_UPLOADER: ./tools/firestore_file_uploader
 

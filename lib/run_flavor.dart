@@ -12,6 +12,7 @@ import 'package:dexquiz/utils/log_use_case_interceptor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:log_reporter/log_reporter.dart' as log_reporter;
 import 'package:firebase/firebase.dart' as firebase;
 import 'package:use_case/use_case.dart' as use_case;
@@ -22,7 +23,9 @@ const serviceLocator = GetItServiceLocator();
 Future<void> runFlavor({
   required BuildConfig buildConfig,
 }) async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
+
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -79,6 +82,8 @@ Future<void> runFlavor({
       serviceLocator.get<error_reporter.RegisterFatalErrorHandlerUseCase>();
   final appFatalErrorHandler = AppFatalErrorHandler();
   registerFatalErrorHandlerUseCase(appFatalErrorHandler);
+
+  FlutterNativeSplash.remove();
 
   runApp(const DexQuizApp());
 

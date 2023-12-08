@@ -91,6 +91,16 @@ scripts:
     packageFilters:
       dependsOn: flutter_gen_runner
 
+  splash_gen:
+    run: |
+      flutter clean
+      flutter pub get
+      dart run flutter_native_splash:create --flavors kanto,johto
+    description: Generate splash screen for all flavors.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: flutter_native_splash
 
   # Dart CLI scripts
   dart_get:

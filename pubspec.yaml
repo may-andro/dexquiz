@@ -11,6 +11,7 @@ dependencies:
   flutter:
     sdk: flutter
   cupertino_icons: ^1.0.6
+  flutter_native_splash: ^2.3.8
   get_it: ^7.6.4
 
   core:
