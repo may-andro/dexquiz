@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:dependency_injector/dependency_injector.dart';
+import 'package:design_system/design_system.dart';
 import 'package:dexquiz/dexquiz_app.dart';
 import 'package:dexquiz/error_reporter/app_blacklist_error_handler.dart';
 import 'package:dexquiz/error_reporter/app_fatal_exception_handler.dart';
@@ -85,7 +86,7 @@ Future<void> runFlavor({
 
   FlutterNativeSplash.remove();
 
-  runApp(const DexQuizApp());
+  runApp(const DexQuizApp(designSystem: DesignSystem.fire));
 
   /// force crash using crashlytics
   /*final crashlyticsForceCrashUseCase =
