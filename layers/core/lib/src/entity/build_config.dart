@@ -1,4 +1,4 @@
-import 'package:firebase/firebase.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 enum BuildEnvironment {
   debug,
