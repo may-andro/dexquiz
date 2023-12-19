@@ -6,6 +6,9 @@ on:
       module_path:
         type: string
         required: true
+      should_run_golden_test:
+        description: 'Should run golden tests'
+        default: 'false'
 
 env:
   DART_SDK_VERSION: 3.2.3
@@ -56,6 +59,19 @@ jobs:
         with:
           name: Test Results
           path: test-results.json
+          reporter: flutter-json
+          working-directory: ${{ inputs.module_path }}
+
+      - if: inputs.should_run_golden_test == 'true'
+        name: Run golden tests
+        run: flutter test --tags 'golden' --dart-define=CI=true --machine > test-results-golden.json
+
+      - if: inputs.should_run_golden_test == 'true'
+        name: Generate golden test report
+        uses: dorny/test-reporter@v1
+        with:
+          name: Golden Test Results
+          path: test-results-golden.json
           reporter: flutter-json
           working-directory: ${{ inputs.module_path }}
 

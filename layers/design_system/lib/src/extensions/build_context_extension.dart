@@ -22,5 +22,5 @@ extension BuildContextExtension on BuildContext {
 
   Brightness get platformBrightness => MediaQuery.of(this).platformBrightness;
 
-  double get textScaleFactor => MediaQuery.of(this).textScaleFactor;
+  double get textScaleFactor => MediaQuery.of(this).textScaler.scale(10) / 10;
 }
