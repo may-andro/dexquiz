@@ -30,7 +30,6 @@ List<TestCase> _getConfigs(DSTheme dsTheme) {
                     variant: variant,
                     border: border,
                     isDisabled: iDisabled,
-
                   ),
                 ),
               );
