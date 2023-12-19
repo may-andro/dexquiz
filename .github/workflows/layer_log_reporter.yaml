@@ -16,4 +16,5 @@ jobs:
     uses: ./.github/workflows/_analyze_and_test_flutter_module.yaml
     with:
       module_path: './layers/log_reporter'
+      should_run_golden_test: 'false'
 
