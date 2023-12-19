@@ -69,7 +69,7 @@ class DarkColorPalette implements DSColorPalette {
       surface: DSColor(0xFF16130E),
       onSurface: DSColor(0xFFCEC5BD),
       disabled: DSColor(0xFF425B6E),
-      onDisabled: DSColor(0xFF17364D),
+      onDisabled: DSColor(0xFF3A3A3A),
       surfaceVariant: DSColor(0xFF4F4539),
       onSurfaceVariant: DSColor(0xFFD2C4B4),
       inverseSurface: DSColor(0xFFEAE1D9),

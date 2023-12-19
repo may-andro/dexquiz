@@ -69,7 +69,7 @@ class LightColorPalette implements DSColorPalette {
       surface: DSColor(0xFFFFF8F3),
       onSurface: DSColor(0xFF1F1B16),
       disabled: DSColor(0xFFDFE3E6),
-      onDisabled: DSColor(0xFFDFE3E6),
+      onDisabled: DSColor(0xFFB3B3B3),
       surfaceVariant: DSColor(0xFFEFE0CF),
       onSurfaceVariant: DSColor(0xFF4F4539),
       inverseSurface: DSColor(0xFF34302A),

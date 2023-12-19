@@ -19,7 +19,7 @@ class DimensImpl implements DSDimens {
   DSElevation get elevationNone => const DSElevation(0);
 
   @override
-  DSRadius get radiusCircular => const DSRadius(double.infinity);
+  DSRadius get radiusCircular => const DSRadius(250);
 
   @override
   DSRadius get radiusLevel1 => const DSRadius(4);
