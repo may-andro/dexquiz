@@ -1,0 +1,65 @@
+name: Storybook Website
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DART_SDK_VERSION: 3.2.3
+  FLUTTER_VERSION: '3.16.3'
+
+#on:
+#  push:
+#    paths:
+#      - 'tools/storybook/**'
+
+on:
+  push
+
+jobs:
+  analyze-and-test-module:
+    name: Analyze and test module
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./tools/storybook
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup dart environment
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ env.DART_SDK_VERSION }}
+
+      - name: Setup the flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
+
+      - name: Get dart dependencies
+        run: flutter pub get
+
+      - name: Format the Dart code
+        run: dart format . --set-exit-if-changed
+
+      - name: Run code generators
+        run: flutter pub run build_runner build --delete-conflicting-outputs
+
+      - name: Statically analyze the Dart code
+        run: flutter analyze
+
+      - name: Run unit tests
+        run: flutter test --machine > test-results.json
+
+      - name: Generate test report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Test Results
+          path: test-results.json
+          reporter: flutter-json
+          working-directory: ./tools/storybook
