@@ -1,3 +1,4 @@
+import 'package:design_system/design_system.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 import 'package:design_system/src/components/atoms/buttons/dto/dto.dart';
@@ -30,6 +31,9 @@ class BaseButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
+        fixedSize: MaterialStateProperty.all(
+          Size(double.infinity, context.space(factor: 6)),
+        ),
         overlayColor: variant.getOverlayColor(context),
         foregroundColor: variant.getForegroundColor(context, isDisabled),
         backgroundColor: variant.getBackgroundColor(context, isDisabled),
@@ -129,7 +133,8 @@ extension _VariantDTOExtension on VariantDTO {
         if (states.contains(MaterialState.disabled) && isDisabled) {
           return getDisabledTextColor(context);
         }
-        if (states.contains(MaterialState.pressed)) {
+        if (states.contains(MaterialState.pressed) ||
+            states.contains(MaterialState.hovered)) {
           return getPressedTextColor(context);
         }
         return getDefaultTextColor(context);
@@ -159,7 +164,8 @@ extension _VariantDTOExtension on VariantDTO {
       if (states.contains(MaterialState.disabled) && isDisabled) {
         color = getDisabledBorderColor(context);
       }
-      if (states.contains(MaterialState.pressed)) {
+      if (states.contains(MaterialState.pressed) ||
+          states.contains(MaterialState.hovered)) {
         color = getPressedBorderColor(context);
       }
       if (loading != null && loading is LinearLoading) {

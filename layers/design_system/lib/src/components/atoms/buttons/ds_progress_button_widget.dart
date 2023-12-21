@@ -6,7 +6,6 @@ class DSProgressButtonWidget extends StatelessWidget {
   const DSProgressButtonWidget({
     required this.label,
     required this.onPressed,
-    this.variant = DSProgressButtonVariant.primary,
     this.border = DSProgressButtonBorder.regular,
     this.isDisabled = false,
     this.iconDirection = DSProgressButtonIconDirection.left,
@@ -18,8 +17,6 @@ class DSProgressButtonWidget extends StatelessWidget {
   final String label;
 
   final VoidCallback onPressed;
-
-  final DSProgressButtonVariant variant;
 
   final DSProgressButtonBorder border;
 
@@ -54,20 +51,6 @@ class DSProgressButtonWidget extends StatelessWidget {
       return LeftIconTextContent(label, iconData);
     }
     return RightIconTextContent(label, iconData);
-  }
-}
-
-enum DSProgressButtonVariant {
-  primary,
-  secondary;
-
-  VariantDTO get variant {
-    switch (this) {
-      case primary:
-        return PrimaryVariant();
-      case secondary:
-        return SecondaryVariant();
-    }
   }
 }
 
