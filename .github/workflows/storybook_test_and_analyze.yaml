@@ -20,6 +20,10 @@ jobs:
   analyze-and-test-storybook:
     name: Analyze and test module
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      repository-projects: write
     defaults:
       run:
         working-directory: ${{ env.PATH_STORYBOOK }}
