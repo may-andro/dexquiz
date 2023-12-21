@@ -8,12 +8,59 @@ name: Analyse and test Storybook
 on:
   push
 
+env:
+  DART_SDK_VERSION: 3.2.3
+  FLUTTER_VERSION: '3.16.3'
+  PATH_STORYBOOK: ./tools/storybook
+
 permissions:
   contents: write
 
 jobs:
-  layer_core:
-    uses: ./.github/workflows/_analyze_and_test_flutter_module.yaml
-    with:
-      module_path: './tools/storybook'
-      should_run_golden_test: 'false'
+  analyze-and-test-storybook:
+    permissions: write-all
+    name: Analyze and test module
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PATH_STORYBOOK }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup dart environment
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ env.DART_SDK_VERSION }}
+
+      - name: Setup the flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
+
+      - name: Get dart dependencies
+        run: flutter pub get
+
+      - name: Format the Dart code
+        run: dart format . --set-exit-if-changed
+
+      - name: Run code generators
+        run: dart run build_runner build --delete-conflicting-outputs && dart run build_runner build
+
+      - name: Statically analyze the Dart code
+        run: flutter analyze
+
+      - name: Run unit tests
+        run: flutter test --machine > test-results.json
+
+      - name: Generate test report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Test Results
+          path: test-results.json
+          reporter: flutter-json
+          working-directory: ${{ env.PATH_STORYBOOK }}
