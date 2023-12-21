@@ -1,19 +1,15 @@
 name: Storybook deploy to Github
 
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
-env:
-  FLUTTER_VERSION: '3.16.3'
-  PATH_STORYBOOK: ./tools/storybook
-
 on:
   schedule:
     - cron: "0 22 * * 1-5" # Every weekday at 22h
 
 #on:
 #  push
+
+env:
+  FLUTTER_VERSION: '3.16.3'
+  PATH_STORYBOOK: ./tools/storybook
 
 permissions:
   contents: write
