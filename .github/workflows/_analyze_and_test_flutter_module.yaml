@@ -17,8 +17,7 @@ env:
 jobs:
   analyze-and-test-module:
     name: Analyze and test module
-    runs-on:
-      ${{ inputs.should_run_golden_test == 'true' ? 'macos-latest' : 'ubuntu-latest' }}
+    runs-on: macos-latest
     defaults:
       run:
         working-directory: ${{ inputs.module_path }}
