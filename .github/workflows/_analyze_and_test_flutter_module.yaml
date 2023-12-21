@@ -92,7 +92,7 @@ jobs:
 
   golden-test-module:
     name: Golden Test module
-    runs-on: macos-13
+    runs-on: macos-latest
     if: inputs.should_run_golden_test == 'true'
     needs:
       - analyze-module
