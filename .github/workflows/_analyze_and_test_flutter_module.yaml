@@ -15,9 +15,9 @@ env:
   FLUTTER_VERSION: "3.16.3"
 
 jobs:
-  analyze-and-test-module:
-    name: Analyze and test module
-    runs-on: macos-latest
+  analyze-module:
+    name: Analyze module
+    runs-on: ubuntu-latest
     defaults:
       run:
         working-directory: ${{ inputs.module_path }}
@@ -50,6 +50,34 @@ jobs:
       - name: Statically analyze the Dart code
         run: flutter analyze
 
+  test-module:
+    name: Test module
+    runs-on: ubuntu-latest
+    needs:
+      - analyze-module
+    defaults:
+      run:
+        working-directory: ${{ inputs.module_path }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup dart environment
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ env.DART_SDK_VERSION }}
+
+      - name: Setup the flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
+
+      - name: Get dart dependencies
+        run: flutter pub get
+
       - name: Run unit tests
         run: flutter test --exclude-tags golden --machine > test-results.json
 
@@ -62,19 +90,45 @@ jobs:
           reporter: flutter-json
           working-directory: ${{ inputs.module_path }}
 
-      - if: inputs.should_run_golden_test == 'true'
-        name: Run golden tests
+  golden-test-module:
+    name: Golden Test module
+    runs-on: macos-13
+    if: inputs.should_run_golden_test == 'true'
+    needs:
+      - analyze-module
+    defaults:
+      run:
+        working-directory: ${{ inputs.module_path }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup dart environment
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ env.DART_SDK_VERSION }}
+
+      - name: Setup the flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
+
+      - name: Get dart dependencies
+        run: flutter pub get
+
+      - name: Run golden tests
         run: flutter test --tags golden --dart-define=CI=true --machine > test-results-golden.json
 
-      - if: inputs.should_run_golden_test == 'true'
-        name: Generate golden test report
+      - name: Generate golden test report
         uses: dorny/test-reporter@v1
+        if: always()
         with:
           name: Golden Test Results
           path: test-results-golden.json
           reporter: flutter-json
           working-directory: ${{ inputs.module_path }}
-
-
 
 
