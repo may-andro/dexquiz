@@ -1,12 +1,12 @@
 name: Run static code analysis and unit test for design system module
 
-#on:
-#  push:
-#    paths:
-#      - layers/design_system/**
-
 on:
-  push
+  push:
+    paths:
+      - layers/design_system/**
+
+#on:
+#  push
 
 permissions:
   checks: write
