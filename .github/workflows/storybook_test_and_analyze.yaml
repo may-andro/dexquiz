@@ -57,13 +57,4 @@ jobs:
         run: flutter analyze
 
       - name: Run unit tests
-        run: flutter test --exclude-tags golden --machine > test-results.json
-
-      - name: Generate test report
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: Test Results
-          path: test-results.json
-          reporter: flutter-json
-          working-directory: ${{ env.PATH_STORYBOOK }}
+        run: flutter test --machine > test-results.json
