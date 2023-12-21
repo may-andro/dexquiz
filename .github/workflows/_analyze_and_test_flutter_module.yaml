@@ -15,9 +15,24 @@ env:
   FLUTTER_VERSION: "3.16.3"
 
 jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      runner: ${{ steps.runner.outputs.runner }}
+    steps:
+      - name: Find runner
+        id: runner
+        run: |
+          if [ ${{ inputs.should_run_golden_test }} == 'false' ]; then
+            echo "runner=ubuntu-latest" >> $GITHUB_OUTPUT
+          else
+            echo "runner=macos-latest" >> $GITHUB_OUTPUT
+          fi
+
   analyze-module:
     name: Analyze module
-    runs-on: ubuntu-latest
+    needs: [ setup ]
+    runs-on: ${{ needs.setup.outputs.runner }}
     defaults:
       run:
         working-directory: ${{ inputs.module_path }}
