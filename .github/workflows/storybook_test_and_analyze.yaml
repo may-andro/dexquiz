@@ -1,4 +1,4 @@
-name: Storybook Website
+name: Analyse and test Storybook
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
