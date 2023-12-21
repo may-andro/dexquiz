@@ -13,9 +13,6 @@ env:
   FLUTTER_VERSION: '3.16.3'
   PATH_STORYBOOK: ./tools/storybook
 
-permissions:
-  contents: write
-
 jobs:
   analyze-and-test-storybook:
     permissions: write-all
