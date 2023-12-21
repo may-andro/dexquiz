@@ -1,0 +1,54 @@
+name: Storybook deploy to Github
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FLUTTER_VERSION: '3.16.3'
+
+on:
+  schedule:
+    - cron: "0 22 * * 1-5" # Every weekday at 22h
+
+jobs:
+  deploy:
+    name: Deploy the web to github action
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+    defaults:
+      run:
+        working-directory: ./tools/storybook
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup the flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
+
+      - name: Cache flutter pub get
+        uses: actions/cache@v2
+        with:
+          path: |
+            ${{ env.FLUTTER_HOME }}/.pub-cache
+            **/.packages
+            **/.flutter-plugins
+            **/.flutter-plugin-dependencies
+            **/.dart_tool/package_config.json
+          key: build-pubspec-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            build-pubspec-
+
+      - name: Get flutter dependencies
+        run: flutter pub get
+
+      - name: Deply to github pages
+        uses: bluefireteam/flutter-gh-pages@v7
+        with:
+          workingDir: ./tools/storybook
+          baseHref: /dexquiz/
