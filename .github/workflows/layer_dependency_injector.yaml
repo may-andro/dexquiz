@@ -1,12 +1,12 @@
 name: Run static code analysis and unit test for dependency_injector module
 
-#on:
-#  push:
-#    paths:
-#      - layers/dependency_injector/**
-
 on:
-  push
+  push:
+    paths:
+      - layers/dependency_injector/**
+
+#on:
+#  push
 
 permissions:
   checks: write

@@ -17,7 +17,8 @@ env:
 jobs:
   analyze-and-test-module:
     name: Analyze and test module
-    runs-on: ubuntu-latest
+    runs-on:
+      ${{ inputs.should_run_golden_test == 'true' ? 'macos-latest' : 'ubuntu-latest' }}
     defaults:
       run:
         working-directory: ${{ inputs.module_path }}
@@ -64,9 +65,16 @@ jobs:
 
       - if: inputs.should_run_golden_test == 'true'
         name: Run golden tests
-        run: flutter test --tags golden --dart-define=CI=true
+        run: flutter test --tags golden --dart-define=CI=true --machine > test-results-golden.json
 
-
+      - if: inputs.should_run_golden_test == 'true'
+        name: Generate golden test report
+        uses: dorny/test-reporter@v1
+        with:
+          name: Golden Test Results
+          path: test-results-golden.json
+          reporter: flutter-json
+          working-directory: ${{ inputs.module_path }}
 
 
 

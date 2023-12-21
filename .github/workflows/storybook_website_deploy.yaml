@@ -7,12 +7,12 @@ concurrency:
 env:
   FLUTTER_VERSION: '3.16.3'
 
-#on:
-#  schedule:
-#    - cron: "0 22 * * 1-5" # Every weekday at 22h
-
 on:
-  push
+  schedule:
+    - cron: "0 22 * * 1-5" # Every weekday at 22h
+
+#on:
+#  push
 
 permissions:
   contents: write

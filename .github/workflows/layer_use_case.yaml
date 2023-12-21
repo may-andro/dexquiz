@@ -1,12 +1,12 @@
 name: Analyze and test use case layer module
 
-#on:
-#  push:
-#    paths:
-#      - layers/use_case/**
-
 on:
-  push
+  push:
+    paths:
+      - layers/use_case/**
+
+#on:
+#  push
 
 permissions:
   checks: write
