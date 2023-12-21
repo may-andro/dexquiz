@@ -1,12 +1,12 @@
 name: Analyse and test Storybook
 
-#on:
-#  push:
-#    paths:
-#      - 'tools/storybook/**'
-
 on:
-  push
+  push:
+    paths:
+      - 'tools/storybook/**'
+
+#on:
+#  push
 
 jobs:
   analyze-and-test-storybook:

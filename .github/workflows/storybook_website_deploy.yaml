@@ -1,14 +1,14 @@
 name: Storybook deploy to Github
 
-#on:
-#  schedule:
-#    - cron: "0 22 * * 1-5" # Every weekday at 22h
-
 on:
-  push
+  schedule:
+    - cron: "0 22 * * 1-5" # Every weekday at 22h
+
+#on:
+#  push
 
 jobs:
-  analyze-and-test-storybook:
+  deploy-storybook:
     uses: ./.github/workflows/_analyze_test_and_deploy_storybook.yaml
     with:
       should_deploy: 'true'
