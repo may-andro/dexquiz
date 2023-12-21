@@ -1,46 +1,14 @@
 name: Storybook deploy to Github
 
-on:
-  schedule:
-    - cron: "0 22 * * 1-5" # Every weekday at 22h
-
 #on:
-#  push
+#  schedule:
+#    - cron: "0 22 * * 1-5" # Every weekday at 22h
 
-env:
-  FLUTTER_VERSION: '3.16.3'
-  PATH_STORYBOOK: ./tools/storybook
-
-permissions:
-  contents: write
+on:
+  push
 
 jobs:
-  deploy-storybook:
-    name: Deploy the web to github action
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ${{ env.PATH_STORYBOOK }}
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Setup the flutter environment
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: ${{env.FLUTTER_VERSION}}
-          cache: true
-          cache-key: flutter
-          cache-path: ${{ runner.tool_cache }}/flutter
-
-      - name: Get flutter dependencies
-        run: flutter pub get
-
-      - name: Run code generators
-        run: dart run build_runner build --delete-conflicting-outputs && dart run build_runner build
-
-      - name: Deply to github pages
-        uses: bluefireteam/flutter-gh-pages@v7
-        with:
-          workingDir: ${{ env.PATH_STORYBOOK }}
-          baseHref: /dexquiz/
+  analyze-and-test-storybook:
+    uses: ./.github/workflows/_analyze_test_and_deploy_storybook.yaml
+    with:
+      should_deploy: 'true'
