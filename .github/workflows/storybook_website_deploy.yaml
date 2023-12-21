@@ -14,11 +14,13 @@ env:
 on:
   push
 
+permissions:
+  contents: write
+
 jobs:
   deploy-storybook:
     name: Deploy the web to github action
     runs-on: ubuntu-latest
-    if: github.event.pull_request.draft == false
     defaults:
       run:
         working-directory: ./tools/storybook

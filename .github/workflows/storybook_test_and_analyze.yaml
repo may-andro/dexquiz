@@ -16,6 +16,9 @@ env:
 on:
   push
 
+permissions:
+  contents: write
+
 jobs:
   analyze-and-test-storybook:
     name: Analyze and test module
