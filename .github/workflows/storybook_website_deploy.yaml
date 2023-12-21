@@ -7,12 +7,15 @@ concurrency:
 env:
   FLUTTER_VERSION: '3.16.3'
 
+#on:
+#  schedule:
+#    - cron: "0 22 * * 1-5" # Every weekday at 22h
+
 on:
-  schedule:
-    - cron: "0 22 * * 1-5" # Every weekday at 22h
+  push
 
 jobs:
-  deploy:
+  deploy-storybook:
     name: Deploy the web to github action
     runs-on: ubuntu-latest
     if: github.event.pull_request.draft == false
@@ -31,21 +34,11 @@ jobs:
           cache-key: flutter
           cache-path: ${{ runner.tool_cache }}/flutter
 
-      - name: Cache flutter pub get
-        uses: actions/cache@v2
-        with:
-          path: |
-            ${{ env.FLUTTER_HOME }}/.pub-cache
-            **/.packages
-            **/.flutter-plugins
-            **/.flutter-plugin-dependencies
-            **/.dart_tool/package_config.json
-          key: build-pubspec-${{ hashFiles('**/pubspec.lock') }}
-          restore-keys: |
-            build-pubspec-
-
       - name: Get flutter dependencies
         run: flutter pub get
+
+      - name: Run code generators
+        run: dart run build_runner build --delete-conflicting-outputs && dart run build_runner build
 
       - name: Deply to github pages
         uses: bluefireteam/flutter-gh-pages@v7

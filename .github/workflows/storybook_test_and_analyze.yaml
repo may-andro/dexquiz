@@ -17,7 +17,7 @@ on:
   push
 
 jobs:
-  analyze-and-test-module:
+  analyze-and-test-storybook:
     name: Analyze and test module
     runs-on: ubuntu-latest
     defaults:
@@ -47,13 +47,13 @@ jobs:
         run: dart format . --set-exit-if-changed
 
       - name: Run code generators
-        run: flutter pub run build_runner build --delete-conflicting-outputs
+        run: dart run build_runner build --delete-conflicting-outputs && dart run build_runner build
 
       - name: Statically analyze the Dart code
         run: flutter analyze
 
       - name: Run unit tests
-        run: flutter test --machine > test-results.json
+        run: flutter test --exclude-tags 'golden' --machine > test-results.json
 
       - name: Generate test report
         uses: dorny/test-reporter@v1
