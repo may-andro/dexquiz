@@ -62,13 +62,13 @@ jobs:
           reporter: flutter-json
           working-directory: ${{ inputs.module_path }}
 
-      - if: inputs.should_run_golden_test == 'true'
-        name: Run golden tests
+      - name: Run golden tests
         run: flutter test --tags golden --dart-define=CI=true --machine > test-results-golden.json
+        if: inputs.should_run_golden_test == 'true'
 
-      - if: inputs.should_run_golden_test == 'true'
-        name: Generate golden test report
+      - name: Generate golden test report
         uses: dorny/test-reporter@v1
+        if: always() && inputs.should_run_golden_test == 'true'
         with:
           name: Golden Test Results
           path: test-results-golden.json
