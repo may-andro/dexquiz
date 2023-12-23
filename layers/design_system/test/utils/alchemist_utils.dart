@@ -34,12 +34,12 @@ void groupGoldenForBrightnessAndDS(
       final dsTheme = DSTheme(
         brightness: brightness,
         designSystem: designSystem,
-        textScaleFactor: 1,
       );
       final testCases = testCasesCallback(dsTheme);
       groupGolden(
         widgetUnderTest,
-        dsTheme,
+        brightness,
+        designSystem,
         testCases,
         label: label,
       );
@@ -56,17 +56,18 @@ void groupGoldenForBrightnessAndDS(
 /// golden images (below the title) and will be part of the golden files' name.
 void groupGolden(
   String widgetUnderTest,
-  DSTheme dsTheme,
+  Brightness brightness,
+  DesignSystem designSystem,
   List<TestCase> testCases, {
   String? label,
 }) {
   group(widgetUnderTest, () {
     goldenTest(
-      'on ${dsTheme.brightness} with ${dsTheme.designSystem}',
+      'on $brightness with $designSystem',
       fileName: '${widgetUnderTest.toString().snakeCase}_'
           '${label == null ? '' : '${label.snakeCase.replaceAll(' ', '')}_'}'
-          '${dsTheme.designSystem.title.toLowerCase().snakeCase..replaceAll(' ', '')}_'
-          '${dsTheme.brightness.title.toLowerCase().snakeCase..replaceAll(' ', '')}',
+          '${designSystem.title.toLowerCase().snakeCase..replaceAll(' ', '')}_'
+          '${brightness.title.toLowerCase().snakeCase..replaceAll(' ', '')}',
       pumpBeforeTest: precacheImages,
       builder: () => GoldenTestGroup(
         scenarioConstraints: const BoxConstraints(maxWidth: 600),
@@ -74,7 +75,8 @@ void groupGolden(
           (testCase) {
             return _TestCaseWidget(
               testCase,
-              dsTheme: dsTheme,
+              designSystem: designSystem,
+              brightness: brightness,
             );
           },
         ).toList(),
@@ -88,18 +90,21 @@ void groupGolden(
 class _TestCaseWidget extends StatelessWidget {
   const _TestCaseWidget(
     this.testCase, {
-    required this.dsTheme,
+    required this.brightness,
+    required this.designSystem,
   });
 
   final TestCase testCase;
-  final DSTheme dsTheme;
+  final Brightness brightness;
+  final DesignSystem designSystem;
 
   @override
   Widget build(BuildContext context) {
     return GoldenTestScenario(
       name: testCase.description,
-      child: DSThemeWidget(
-        dsTheme: dsTheme,
+      child: DSThemeBuilderWidget(
+        brightness: brightness,
+        designSystem: designSystem,
         child: testCase.widget,
       ),
     );
