@@ -4,6 +4,8 @@ import 'package:meta/meta.dart';
 
 @internal
 class TypographyImpl implements DSTypography {
+  const TypographyImpl();
+
   @override
   DSTextStyle get displayLarge {
     return const DSTextStyle(

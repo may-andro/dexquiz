@@ -2,9 +2,7 @@ import 'package:design_system/src/foundations/dimens/ds_grid.dart';
 import 'package:design_system/src/foundations/foundations.dart';
 
 class DimensImpl implements DSDimens {
-  DimensImpl(this.textScaleFactor);
-
-  final double textScaleFactor;
+  const DimensImpl();
 
   @override
   DSElevation get elevationLevel1 => const DSElevation(2);

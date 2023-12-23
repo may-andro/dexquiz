@@ -17,17 +17,13 @@ class _TestWidget extends StatelessWidget {
 }
 
 void main() {
-  group(DSThemeWidget, () {
-    testWidgets('should able to access $DSTheme via $DSThemeWidget',
+  group(DSThemeBuilderWidget, () {
+    testWidgets('should able to access $DSTheme via $DSThemeBuilderWidget',
         (WidgetTester tester) async {
-      final theme = DSTheme(
+      const testWidget = TestWidgetWrapper(
         brightness: Brightness.light,
         designSystem: DesignSystem.fire,
-        textScaleFactor: 1,
-      );
-      final testWidget = TestWidgetWrapper(
-        dsTheme: theme,
-        child: const _TestWidget(),
+        child: _TestWidget(),
       );
 
       await tester.pumpWidget(testWidget);
@@ -35,10 +31,8 @@ void main() {
 
       final finder = find.textContaining('Find me');
       final Text widget = tester.widget(finder);
-      expect(
-        widget.style?.color,
-        theme.colorPalette.brand.primary.color,
-      );
+      expect(widget.style?.color, isNotNull);
+      expect(widget.style?.color?.value, 0xFF805600);
     });
   });
 }

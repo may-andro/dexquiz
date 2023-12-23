@@ -1,12 +1,14 @@
-import 'package:design_system/src/theme/ds_theme.dart';
-import 'package:design_system/src/extensions/ds_theme_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
+import 'package:design_system/src/extensions/ds_theme_extension.dart';
+import 'package:design_system/src/theme/ds_theme.dart';
 
+@internal
 final class DSThemeWidget extends InheritedWidget {
   DSThemeWidget({
+    super.key,
     required this.dsTheme,
     required Widget child,
-    super.key,
   }) : super(child: _ThemeWidget(dsTheme: dsTheme, child: child));
 
   final DSTheme dsTheme;

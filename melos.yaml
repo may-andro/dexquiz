@@ -75,7 +75,7 @@ scripts:
     packageFilters:
       dependsOn: alchemist
 
-  run_golden_test:
+  golden_test:
     run: flutter test --tags golden
     description: Run `golden` tests in all packages.
     exec:

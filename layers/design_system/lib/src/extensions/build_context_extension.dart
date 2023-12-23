@@ -14,7 +14,9 @@ extension BuildContextExtension on BuildContext {
 
   DSDimens get dimens => theme.dimens;
 
-  double space({double factor = 1}) => factor * theme.dimens.grid.value;
+  double space({double factor = 1}) {
+    return factor * theme.dimens.grid.value * textScaleFactor;
+  }
 
   double get screenHeight => MediaQuery.of(this).size.height;
 

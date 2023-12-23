@@ -9,36 +9,36 @@ extension DesignSystemExtension on DesignSystem {
   DSColorPalette get darkColorPalette {
     switch (this) {
       case DesignSystem.grass:
-        return grass.DarkColorPalette();
+        return const grass.DarkColorPalette();
       case DesignSystem.fire:
-        return fire.DarkColorPalette();
+        return const fire.DarkColorPalette();
     }
   }
 
   DSColorPalette get lightColorPalette {
     switch (this) {
       case DesignSystem.grass:
-        return grass.LightColorPalette();
+        return const grass.LightColorPalette();
       case DesignSystem.fire:
-        return fire.LightColorPalette();
+        return const fire.LightColorPalette();
     }
   }
 
-  DSDimens getDimens(double textScaleFactor) {
+  DSDimens getDimens() {
     switch (this) {
       case DesignSystem.grass:
-        return grass.DimensImpl(textScaleFactor);
+        return const grass.DimensImpl();
       case DesignSystem.fire:
-        return fire.DimensImpl(textScaleFactor);
+        return const fire.DimensImpl();
     }
   }
 
   DSTypography get typography {
     switch (this) {
       case DesignSystem.grass:
-        return grass.TypographyImpl();
+        return const grass.TypographyImpl();
       case DesignSystem.fire:
-        return fire.TypographyImpl();
+        return const fire.TypographyImpl();
     }
   }
 }

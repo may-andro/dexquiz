@@ -3,6 +3,8 @@ import 'package:meta/meta.dart';
 
 @internal
 class LightColorPalette implements DSColorPalette {
+  const LightColorPalette();
+
   @override
   BrandColorScheme get brand {
     return const BrandColorScheme(

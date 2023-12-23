@@ -8,16 +8,12 @@ class DexQuizApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = DSTheme(
-      brightness: context.platformBrightness,
-      designSystem: designSystem,
-      textScaleFactor: context.textScaleFactor,
-    );
     return MaterialApp(
       title: 'DexQuiz',
       builder: (context, child) {
-        return DSThemeWidget(
-          dsTheme: theme,
+        return DSThemeBuilderWidget(
+          brightness: context.platformBrightness,
+          designSystem: designSystem,
           child: child ?? const SizedBox.shrink(),
         );
       },
@@ -62,14 +58,14 @@ class LaunchPage extends StatelessWidget {
                 variant: DSButtonVariant.text,
                 icon: Icons.access_time,
               ),
-              DSDividerWidget(variant: DSDividerVariant.level1),
+              const DSDividerWidget(variant: DSDividerVariant.level1),
               DSIconButtonWidget(
                 Icons.access_time,
                 color: context.colorPalette.brand.primary,
                 onPressed: () {},
               ),
-              DSErrorIconWidget(),
-              DSLoadingWidget()
+              const DSErrorIconWidget(),
+              const DSLoadingWidget()
             ],
           ),
         ),

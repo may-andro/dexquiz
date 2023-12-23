@@ -1,22 +1,26 @@
+import 'package:design_system/src/design_systems/design_systems.dart';
 import 'package:design_system/src/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class TestWidgetWrapper extends StatelessWidget {
   const TestWidgetWrapper({
     super.key,
-    required this.dsTheme,
+    required this.brightness,
+    required this.designSystem,
     required this.child,
   });
 
-  final DSTheme dsTheme;
+  final Brightness brightness;
+  final DesignSystem designSystem;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       builder: (_, child) {
-        return DSThemeWidget(
-          dsTheme: dsTheme,
+        return DSThemeBuilderWidget(
+          brightness: brightness,
+          designSystem: designSystem,
           child: child!,
         );
       },

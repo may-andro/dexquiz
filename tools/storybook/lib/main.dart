@@ -27,44 +27,33 @@ class StorybookApp extends StatelessWidget {
             ...Devices.android.all,
           ],
         ),
-        ThemeAddon<DSTheme>(
+        TextScaleAddon(
+          scales: [0.5, 0.75, 1.0, 1.5, 2.0],
+          initialScale: 1,
+        ),
+        ThemeAddon<_CustomTheme>(
           themes: [
             WidgetbookTheme(
               name: 'Grass [Light]',
-              data: DSTheme(
-                brightness: Brightness.light,
-                designSystem: DesignSystem.grass,
-                textScaleFactor: 1,
-              ),
+              data: _CustomTheme(Brightness.light, DesignSystem.grass),
             ),
             WidgetbookTheme(
               name: 'Grass [Dark]',
-              data: DSTheme(
-                brightness: Brightness.dark,
-                designSystem: DesignSystem.grass,
-                textScaleFactor: 1,
-              ),
+              data: _CustomTheme(Brightness.dark, DesignSystem.grass),
             ),
             WidgetbookTheme(
               name: 'Fire [Light]',
-              data: DSTheme(
-                brightness: Brightness.light,
-                designSystem: DesignSystem.fire,
-                textScaleFactor: 1,
-              ),
+              data: _CustomTheme(Brightness.light, DesignSystem.fire),
             ),
             WidgetbookTheme(
               name: 'Fire [Dark]',
-              data: DSTheme(
-                brightness: Brightness.dark,
-                designSystem: DesignSystem.fire,
-                textScaleFactor: 1,
-              ),
+              data: _CustomTheme(Brightness.dark, DesignSystem.fire),
             ),
           ],
           themeBuilder: (context, theme, child) {
-            return DSThemeWidget(
-              dsTheme: theme,
+            return DSThemeBuilderWidget(
+              designSystem: theme.designSystem,
+              brightness: theme.brightness,
               child: child,
             );
           },
@@ -72,4 +61,11 @@ class StorybookApp extends StatelessWidget {
       ],
     );
   }
+}
+
+class _CustomTheme {
+  _CustomTheme(this.brightness, this.designSystem);
+
+  final Brightness brightness;
+  final DesignSystem designSystem;
 }

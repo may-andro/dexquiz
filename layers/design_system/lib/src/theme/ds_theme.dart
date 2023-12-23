@@ -10,17 +10,14 @@ final class DSTheme {
   DSTheme({
     required this.brightness,
     required this.designSystem,
-    required this.textScaleFactor,
   })  : _lightColorPalette = brightness.getLightColorPalette(designSystem),
         _darkColorPalette = brightness.getDarkColorPalette(designSystem),
         _typography = designSystem.typography,
-        _dimens = designSystem.getDimens(textScaleFactor);
+        _dimens = designSystem.getDimens();
 
   final Brightness brightness;
 
   final DesignSystem designSystem;
-
-  final double textScaleFactor;
 
   final DSColorPalette _lightColorPalette;
 

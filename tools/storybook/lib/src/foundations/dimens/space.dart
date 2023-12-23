@@ -23,12 +23,18 @@ class SpaceDimension extends StatelessWidget {
         child: Card(
           color: context.colorPalette.brand.primary.color,
           child: SizedBox(
-            height: context.knobs
-                    .list(label: 'Factor', options: [1, 5, 10, 20, 30]) *
-                context.dimens.grid.value,
-            width: context.knobs
-                    .list(label: 'Factor', options: [1, 5, 10, 20, 30]) *
-                context.dimens.grid.value,
+            height: context.space(
+              factor: context.knobs.list(
+                label: 'Factor',
+                options: [1, 5, 10, 20, 30],
+              ),
+            ),
+            width: context.space(
+              factor: context.knobs.list(
+                label: 'Factor',
+                options: [1, 5, 10, 20, 30],
+              ),
+            ),
           ),
         ),
       ),
