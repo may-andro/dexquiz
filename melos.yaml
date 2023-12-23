@@ -75,7 +75,7 @@ scripts:
     packageFilters:
       dependsOn: alchemist
 
-  run_golden_test:
+  golden_test:
     run: flutter test --tags golden
     description: Run `golden` tests in all packages.
     exec:
@@ -90,6 +90,14 @@ scripts:
       concurrency: 1
     packageFilters:
       dependsOn: flutter_gen_runner
+
+  gen_sb:
+    run: dart run build_runner build --delete-conflicting-outputs && dart run build_runner build
+    description: Run file generator in Storybook.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: widgetbook_generator
 
   splash_gen:
     run: |

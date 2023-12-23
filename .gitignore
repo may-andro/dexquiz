@@ -49,3 +49,10 @@ pubspec_overrides.yaml
 # Mason
 /.mason/
 /mason-lock.json
+
+# Unit and UI tests related
+/test_results/
+/failed-*.png
+/index.html
+widget_tests.xml
+test-results.json

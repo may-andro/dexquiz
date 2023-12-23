@@ -1,18 +1,19 @@
 name: Analyze and test use case layer module
 
-#on:
-#  push:
-#    paths:
-#      - layers/use_case/**
-
 on:
-  push
+  push:
+    paths:
+      - layers/use_case/**
+
+#on:
+#  push
 
 permissions:
   checks: write
 
 jobs:
-  layer_firebase:
+  layer_use_case:
     uses: ./.github/workflows/_analyze_and_test_flutter_module.yaml
     with:
       module_path: './layers/use_case'
+      should_run_golden_test: 'false'
