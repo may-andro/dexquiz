@@ -10,6 +10,8 @@ dependencies:
   flutter:
     sdk: flutter
 
+  meta: any
+
   dependency_injector:
     path: ../dependency_injector
   firebase:
