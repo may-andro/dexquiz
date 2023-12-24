@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:core/core.dart';
 import 'package:dependency_injector/dependency_injector.dart';
 import 'package:error_reporter/src/blacklist_error/blacklist_error.dart';
 import 'package:error_reporter/src/fatal_error/fatal_error.dart';
@@ -10,12 +9,13 @@ import 'package:error_reporter/src/reporter/logger_error_reporter.dart';
 import 'package:firebase/firebase.dart';
 import 'package:log_reporter/log_reporter.dart';
 
-final moduleConfigurator = _ModuleConfigurator();
+class ErrorReporterModuleConfigurator implements ModuleConfigurator {
+  ErrorReporterModuleConfigurator(this.isFirebaseEnabled);
 
-class _ModuleConfigurator implements ModuleConfigurator<BuildConfig> {
+  final bool isFirebaseEnabled;
+
   @override
   FutureOr<void> postDependenciesSetup(
-    BuildConfig config,
     ServiceLocator serviceLocator,
   ) async {
     serviceLocator.get<ErrorReporter>().init();
@@ -23,7 +23,6 @@ class _ModuleConfigurator implements ModuleConfigurator<BuildConfig> {
 
   @override
   FutureOr<void> preDependenciesSetup(
-    BuildConfig config,
     ServiceLocator serviceLocator,
   ) {
     return Future.value();
@@ -31,7 +30,6 @@ class _ModuleConfigurator implements ModuleConfigurator<BuildConfig> {
 
   @override
   FutureOr<void> registerDependencies(
-    BuildConfig config,
     ServiceLocator serviceLocator,
   ) {
     // Blacklist errors
@@ -78,7 +76,7 @@ class _ModuleConfigurator implements ModuleConfigurator<BuildConfig> {
       serviceLocator.get<FatalErrorHandlerUseCase>(),
       serviceLocator.get<LogReporter>(),
     );
-    if (config.buildEnvironment.isFirebaseEnabled) {
+    if (isFirebaseEnabled) {
       errorReporter = CrashlyticsErrorReporter(
         serviceLocator.get<IsBlacklistedErrorUseCase>(),
         serviceLocator.get<IsFatalErrorUseCase>(),

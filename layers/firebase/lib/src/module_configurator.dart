@@ -1,41 +1,37 @@
 import 'dart:async';
 
-import 'package:core/core.dart';
 import 'package:dependency_injector/dependency_injector.dart';
 import 'package:firebase/src/crashlytics/crashlytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
-final moduleConfigurator = _ModuleConfigurator();
+class FirebaseModuleConfigurator implements ModuleConfigurator {
+  FirebaseModuleConfigurator(
+    this.isFirebaseEnabled,
+    this.firebaseProjectName,
+    this.firebaseOptions,
+  );
 
-class _ModuleConfigurator implements ModuleConfigurator<BuildConfig> {
+  final bool isFirebaseEnabled;
+  final String firebaseProjectName;
+  final FirebaseOptions firebaseOptions;
+
   @override
-  FutureOr<void> postDependenciesSetup(
-    BuildConfig config,
-    ServiceLocator serviceLocator,
-  ) {
+  FutureOr<void> postDependenciesSetup(ServiceLocator serviceLocator) {
     final firebaseCrashlytics = serviceLocator.get<FirebaseCrashlytics>();
-    firebaseCrashlytics.setCrashlyticsCollectionEnabled(
-      config.buildEnvironment.isFirebaseEnabled,
-    );
+    firebaseCrashlytics.setCrashlyticsCollectionEnabled(isFirebaseEnabled);
   }
 
   @override
-  FutureOr<void> preDependenciesSetup(
-    BuildConfig config,
-    ServiceLocator serviceLocator,
-  ) async {
+  FutureOr<void> preDependenciesSetup(ServiceLocator serviceLocator) async {
     await Firebase.initializeApp(
-      name: config.firebaseProjectName,
-      options: config.firebaseOptions,
+      name: firebaseProjectName,
+      options: firebaseOptions,
     );
   }
 
   @override
-  FutureOr<void> registerDependencies(
-    BuildConfig config,
-    ServiceLocator serviceLocator,
-  ) {
+  FutureOr<void> registerDependencies(ServiceLocator serviceLocator) {
     _injectCrashlytics(serviceLocator);
   }
 

@@ -1,17 +1,17 @@
 import 'dart:async';
 
-import 'package:dependency_injector/dependency_injector.dart';
 import 'package:get_it/get_it.dart';
+import 'package:meta/meta.dart';
+import 'package:dependency_injector/dependency_injector.dart';
 
 final _getIt = GetIt.asNewInstance();
 
+@internal
 class GetItServiceLocator implements ServiceLocator {
   const GetItServiceLocator();
 
   @override
-  T get<T extends Object>() {
-    return _getIt.get<T>();
-  }
+  T get<T extends Object>() => _getIt.get<T>();
 
   @override
   void registerFactory<T extends Object>(
@@ -37,9 +37,7 @@ class GetItServiceLocator implements ServiceLocator {
   }
 
   @override
-  bool isRegistered<T extends Object>() {
-    return _getIt.isRegistered<T>();
-  }
+  bool isRegistered<T extends Object>() => _getIt.isRegistered<T>();
 
   @override
   Future<void> unregister<T extends Object>() async {
@@ -47,7 +45,5 @@ class GetItServiceLocator implements ServiceLocator {
   }
 
   @override
-  Future<void> reset() {
-    return _getIt.reset();
-  }
+  Future<void> reset() => _getIt.reset();
 }

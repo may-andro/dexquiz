@@ -5,10 +5,12 @@ import 'package:dexquiz/flavors/johto/firebase_options_johto.dart';
 final _buildConfig = BuildConfig(
   buildEnvironment: BuildEnvironment.prod,
   buildFlavor: BuildFlavor.johto,
-  firebaseOptions: DefaultFirebaseOptions.currentPlatform,
-  firebaseProjectName: 'johto-dexquiz',
 );
 
 Future<void> main() async {
-  runFlavor(buildConfig: _buildConfig);
+  runFlavor(
+    buildConfig: _buildConfig,
+    firebaseOptions: DefaultFirebaseOptions.currentPlatform,
+    firebaseProjectName: 'johto-dexquiz',
+  );
 }

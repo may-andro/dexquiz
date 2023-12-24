@@ -8,20 +8,19 @@ import 'package:dexquiz/error_reporter/app_blacklist_error_handler.dart';
 import 'package:dexquiz/error_reporter/app_fatal_exception_handler.dart';
 import 'package:dexquiz/error_reporter/blacklist_exception.dart';
 import 'package:dexquiz/module_configurator.dart';
-import 'package:dexquiz/service_locator/get_it_service_locator.dart';
 import 'package:dexquiz/utils/log_use_case_interceptor.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-import 'package:log_reporter/log_reporter.dart' as log_reporter;
-import 'package:firebase/firebase.dart' as firebase;
-import 'package:use_case/use_case.dart' as use_case;
-import 'package:error_reporter/error_reporter.dart' as error_reporter;
-
-const serviceLocator = GetItServiceLocator();
+import 'package:log_reporter/log_reporter.dart';
+import 'package:firebase/firebase.dart';
+import 'package:use_case/use_case.dart';
+import 'package:error_reporter/error_reporter.dart';
 
 Future<void> runFlavor({
+  required String firebaseProjectName,
+  required FirebaseOptions firebaseOptions,
   required BuildConfig buildConfig,
 }) async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -32,19 +31,28 @@ Future<void> runFlavor({
     DeviceOrientation.portraitDown,
   ]);
 
-  await setUpDIGraph<BuildConfig>(
+  final appModuleConfigurator = AppModuleConfigurator(buildConfig);
+  final firebaseModuleConfigurator = FirebaseModuleConfigurator(
+    buildConfig.buildEnvironment.isFirebaseEnabled,
+    firebaseProjectName,
+    firebaseOptions,
+  );
+  final logReporterModuleConfigurator = LogReporterModuleConfigurator();
+  final useCaseModuleConfigurator = UseCaseModuleConfigurator();
+  final errorReporterModuleConfigurator = ErrorReporterModuleConfigurator(
+    buildConfig.buildEnvironment.isFirebaseEnabled,
+  );
+  await setUpDIGraph(
     configurators: [
       appModuleConfigurator,
-      firebase.moduleConfigurator,
-      log_reporter.moduleConfigurator,
-      use_case.moduleConfigurator,
-      error_reporter.moduleConfigurator,
+      firebaseModuleConfigurator,
+      logReporterModuleConfigurator,
+      useCaseModuleConfigurator,
+      errorReporterModuleConfigurator,
     ],
-    config: buildConfig,
-    serviceLocator: serviceLocator,
   );
 
-  final errorReporter = serviceLocator.get<error_reporter.ErrorReporter>();
+  final errorReporter = appServiceLocator.get<ErrorReporter>();
 
   // uncaught asynchronous errors that aren't handled by the Flutter framework
   PlatformDispatcher.instance.onError = (error, stack) {
@@ -52,23 +60,22 @@ Future<void> runFlavor({
     return true;
   };
 
-  final crashlyticsLogUseCase =
-      serviceLocator.get<firebase.CrashlyticsLogUseCase>();
+  final crashlyticsLogUseCase = appServiceLocator.get<CrashlyticsLogUseCase>();
   crashlyticsLogUseCase.call('App Started');
 
-  final logReporter = serviceLocator.get<log_reporter.LogReporter>();
+  final logReporter = appServiceLocator.get<LogReporter>();
   logReporter.debug('Hey I am the debug logger');
   logReporter.error('Hey I am the error logger');
 
   /// set use case interceptor
-  final logUseCaseInterceptor = serviceLocator.get<LogUseCaseInterceptor>();
+  final logUseCaseInterceptor = appServiceLocator.get<LogUseCaseInterceptor>();
   final useCaseInterceptionHandler =
-      serviceLocator.get<use_case.UseCaseInterceptionHandler>();
+      appServiceLocator.get<UseCaseInterceptionHandler>();
   useCaseInterceptionHandler.register(logUseCaseInterceptor);
 
   /// set blacklist error
   final registerBlacklistExceptionHandlerUseCase =
-      serviceLocator.get<error_reporter.RegisterBlacklistErrorHandlerUseCase>();
+      appServiceLocator.get<RegisterBlacklistErrorHandlerUseCase>();
   final appBlacklistErrorHandler = AppBlacklistErrorHandler();
   registerBlacklistExceptionHandlerUseCase.call(appBlacklistErrorHandler);
 
@@ -80,7 +87,7 @@ Future<void> runFlavor({
 
   /// set fatal error handler
   final registerFatalErrorHandlerUseCase =
-      serviceLocator.get<error_reporter.RegisterFatalErrorHandlerUseCase>();
+      appServiceLocator.get<RegisterFatalErrorHandlerUseCase>();
   final appFatalErrorHandler = AppFatalErrorHandler();
   registerFatalErrorHandlerUseCase(appFatalErrorHandler);
 

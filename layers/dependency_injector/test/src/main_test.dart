@@ -4,61 +4,40 @@ import 'package:dependency_injector/src/main.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
-class MockModuleConfigurator<T> extends Mock implements ModuleConfigurator<T> {}
+class MockModuleConfigurator extends Mock implements ModuleConfigurator {}
 
 class MockServiceLocator extends Mock implements ServiceLocator {}
 
 void main() {
   group('setUpDIGraph', () {
     test('setUpDIGraph test', () async {
-      final mockConfigurator1 = MockModuleConfigurator<String>();
-      final mockConfigurator2 = MockModuleConfigurator<String>();
+      final mockConfigurator1 = MockModuleConfigurator();
+      final mockConfigurator2 = MockModuleConfigurator();
       final mockServiceLocator = MockServiceLocator();
-      final config = 'test_config';
-      final configurators = [mockConfigurator1, mockConfigurator2];
 
       await setUpDIGraph(
-        configurators: configurators,
-        config: config,
+        configurators: [mockConfigurator1, mockConfigurator2],
         serviceLocator: mockServiceLocator,
       );
 
       verify(
-        () => mockConfigurator1.preDependenciesSetup(
-          config,
-          mockServiceLocator,
-        ),
+        () => mockConfigurator1.preDependenciesSetup(mockServiceLocator),
       ).called(1);
       verify(
-        () => mockConfigurator1.registerDependencies(
-          config,
-          mockServiceLocator,
-        ),
+        () => mockConfigurator1.registerDependencies(mockServiceLocator),
       ).called(1);
       verify(
-        () => mockConfigurator1.postDependenciesSetup(
-          config,
-          mockServiceLocator,
-        ),
+        () => mockConfigurator1.postDependenciesSetup(mockServiceLocator),
       ).called(1);
 
       verify(
-        () => mockConfigurator2.preDependenciesSetup(
-          config,
-          mockServiceLocator,
-        ),
+        () => mockConfigurator2.preDependenciesSetup(mockServiceLocator),
       ).called(1);
       verify(
-        () => mockConfigurator2.registerDependencies(
-          config,
-          mockServiceLocator,
-        ),
+        () => mockConfigurator2.registerDependencies(mockServiceLocator),
       ).called(1);
       verify(
-        () => mockConfigurator2.postDependenciesSetup(
-          config,
-          mockServiceLocator,
-        ),
+        () => mockConfigurator2.postDependenciesSetup(mockServiceLocator),
       ).called(1);
     });
   });
