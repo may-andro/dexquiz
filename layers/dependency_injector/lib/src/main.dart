@@ -1,18 +1,17 @@
-import 'package:dependency_injector/src/locator/service_locator.dart';
+import 'package:dependency_injector/src/locator/get_it_service_locator.dart';
 import 'package:dependency_injector/src/configurator/module_configurator.dart';
+import 'package:dependency_injector/src/locator/service_locator.dart';
 
-Future<void> setUpDIGraph<T>({
-  required List<ModuleConfigurator<T>> configurators,
-  required T config,
-  required ServiceLocator serviceLocator,
+Future<void> setUpDIGraph({
+  required List<ModuleConfigurator> configurators,
+  ServiceLocator? serviceLocator,
 }) async {
+  final tempServiceLocator = serviceLocator ?? GetItServiceLocator();
+
   await Future.wait(
     configurators.map((configurator) {
       return Future.value(
-        configurator.preDependenciesSetup(
-          config,
-          serviceLocator,
-        ),
+        configurator.preDependenciesSetup(tempServiceLocator),
       );
     }),
   );
@@ -20,10 +19,7 @@ Future<void> setUpDIGraph<T>({
   await Future.wait(
     configurators.map((configurator) {
       return Future.value(
-        configurator.registerDependencies(
-          config,
-          serviceLocator,
-        ),
+        configurator.registerDependencies(tempServiceLocator),
       );
     }),
   );
@@ -31,10 +27,7 @@ Future<void> setUpDIGraph<T>({
   await Future.wait(
     configurators.map((configurator) {
       return Future.value(
-        configurator.postDependenciesSetup(
-          config,
-          serviceLocator,
-        ),
+        configurator.postDependenciesSetup(tempServiceLocator),
       );
     }),
   );

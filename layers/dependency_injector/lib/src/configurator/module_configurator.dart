@@ -2,19 +2,10 @@ import 'dart:async';
 
 import 'package:dependency_injector/src/locator/service_locator.dart';
 
-abstract class ModuleConfigurator<T> {
-  FutureOr<void> preDependenciesSetup(
-    T config,
-    ServiceLocator serviceLocator,
-  );
+abstract class ModuleConfigurator {
+  FutureOr<void> preDependenciesSetup(ServiceLocator serviceLocator);
 
-  FutureOr<void> registerDependencies(
-    T config,
-    ServiceLocator serviceLocator,
-  );
+  FutureOr<void> registerDependencies(ServiceLocator serviceLocator);
 
-  FutureOr<void> postDependenciesSetup(
-    T config,
-    ServiceLocator serviceLocator,
-  );
+  FutureOr<void> postDependenciesSetup(ServiceLocator serviceLocator);
 }

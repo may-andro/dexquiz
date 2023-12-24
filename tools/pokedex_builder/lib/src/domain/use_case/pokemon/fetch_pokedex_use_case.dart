@@ -6,8 +6,7 @@ import 'package:dartz/dartz.dart';
 import 'package:pokedex_builder/src/exception/exceptions.dart';
 
 sealed class FetchPokedexFailure extends BasicFailure {
-  const FetchPokedexFailure({String? message, Object? cause})
-      : super(message: message, cause: cause);
+  const FetchPokedexFailure({super.message, super.cause});
 }
 
 class InvalidRangeFailure extends FetchPokedexFailure {
@@ -24,7 +23,7 @@ class UnknownRegionFailure extends FetchPokedexFailure {
 }
 
 class ParsingFailure extends FetchPokedexFailure {
-  const ParsingFailure({Object? cause}) : super(cause: cause);
+  const ParsingFailure({super.cause});
 }
 
 class ServerFailure extends FetchPokedexFailure {
