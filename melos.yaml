@@ -51,7 +51,7 @@ scripts:
     exec:
       concurrency: 1
 
-  build_runner:
+  gen:
     run: dart run build_runner build --delete-conflicting-outputs
     description: Run `build_runner` in all packages.
     exec:
@@ -83,7 +83,7 @@ scripts:
     packageFilters:
       dependsOn: alchemist
 
-  flutter_gen:
+  gen_flutter:
     run: dart run build_runner build
     description: Run `flutter_gen` in all packages.
     exec:
@@ -147,7 +147,7 @@ scripts:
       melos format --no-select
       melos dart_analyze --no-select
       melos analyze --no-select
-      melos build_runner --no-select
+      melos gen --no-select
       melos dart_test --no-select
       melos test --no-select
     description: Format, analyse and test all packages.
@@ -161,7 +161,7 @@ scripts:
   flutter_package_quality:
     run: |
       melos format --no-select
-      melos build_runner --no-select
+      melos gen --no-select
       melos get --no-select
       melos analyze --no-select
       melos test --no-select
@@ -170,7 +170,7 @@ scripts:
   cli_tool_quality:
     run: |
       melos format --no-select
-      melos build_runner --no-select
+      melos gen --no-select
       melos dart_get --no-select
       melos dart_analyze --no-select
       melos dart_test --no-select

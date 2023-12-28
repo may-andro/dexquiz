@@ -1,4 +1,8 @@
 import 'package:design_system/design_system.dart';
+import 'package:dexquiz/demo/clear_grocery_cache.dart';
+import 'package:dexquiz/demo/groceries_screen.dart';
+import 'package:dexquiz/demo/grocery_cache.dart';
+import 'package:dexquiz/module_configurator.dart';
 import 'package:flutter/material.dart';
 
 class DexQuizApp extends StatelessWidget {
@@ -17,7 +21,10 @@ class DexQuizApp extends StatelessWidget {
           child: child ?? const SizedBox.shrink(),
         );
       },
-      home: const LaunchPage(),
+      home: GroceriesScreen(
+        appServiceLocator.get<GroceryCache>(),
+        appServiceLocator.get<ClearGroceryCache>(),
+      ),
     );
   }
 }
