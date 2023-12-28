@@ -21,8 +21,8 @@ class TestDBCache extends DBCache<TestEntity> {
 }
 
 class MockedHiveInterface extends Mock implements HiveInterface {
-  void mockBox<E>(Box<E> expected, {String? forName}) {
-    when(() => box<E>(forName ?? any())).thenReturn(expected);
+  void mockBox<E>(Box<E> expected) {
+    when(() => box<E>(any())).thenReturn(expected);
   }
 }
 
@@ -62,7 +62,7 @@ void main() {
 
     setUp(() async {
       mockedBox = MockedBox();
-      when(() => mockedHive.box<TestEntity>('box')).thenReturn(mockedBox);
+      mockedHive.mockBox<TestEntity>(mockedBox);
 
       testDBCache = TestDBCache(mockedBox);
     });
