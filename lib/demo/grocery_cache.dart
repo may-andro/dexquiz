@@ -8,7 +8,6 @@ import 'package:dexquiz/demo/grocery.dart';
   Duration get timeToLive => const Duration(minutes: 1);
 }*/
 
-
 class GroceryCache extends DBCache<Grocery> {
   GroceryCache(super.box);
 

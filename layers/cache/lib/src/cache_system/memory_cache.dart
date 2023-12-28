@@ -5,7 +5,7 @@ class MemoryCache<T> extends Cache {
   int? _cachedTimestamp;
 
   T? get() {
-    if(_model == null) return null;
+    if (_model == null) return null;
     if (isExpired) {
       delete();
       return null;

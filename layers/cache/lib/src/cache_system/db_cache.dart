@@ -33,7 +33,7 @@ class DBCache<T extends BoxEntity> extends Cache {
 
   Future<T?> get(dynamic key) async {
     final entity = _box.get(key);
-    if(entity == null) return null;
+    if (entity == null) return null;
     _cacheTimestamp = entity.cachedTimestamp;
     if (isExpired) {
       await delete(key);
