@@ -1,12 +1,12 @@
 name: Run static code analysis and unit test for cache module
 
-#on:
-#  push:
-#    paths:
-#      - layers/cache/**
-
 on:
-  push
+  push:
+    paths:
+      - layers/cache/**
+
+#on:
+#  push
 
 permissions:
   checks: write

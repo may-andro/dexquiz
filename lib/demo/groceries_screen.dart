@@ -131,7 +131,13 @@ class _GroceriesScreenState extends State<GroceriesScreen> {
                 _qtyController.clear();
               });
             },
-            onExitPressed: Navigator.of(context).pop,
+            onExitPressed: () {
+              Navigator.of(context).pop();
+              setState(() {
+                _itemController.clear();
+                _qtyController.clear();
+              });
+            },
           ),
         );
       },

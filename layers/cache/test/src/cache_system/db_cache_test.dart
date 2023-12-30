@@ -20,12 +20,6 @@ class TestDBCache extends DBCache<TestEntity> {
   Duration get timeToLive => const Duration(milliseconds: 300);
 }
 
-class MockedHiveInterface extends Mock implements HiveInterface {
-  void mockBox<E>(Box<E> expected) {
-    when(() => box<E>(any())).thenReturn(expected);
-  }
-}
-
 class MockedBox<T> extends Mock implements Box<T> {
   void mockValues(List<T> expected) {
     when(() => values).thenReturn(expected);
@@ -57,12 +51,11 @@ class MockedBox<T> extends Mock implements Box<T> {
 void main() {
   group(DBCache, () {
     late TestDBCache testDBCache;
+
     late MockedBox<TestEntity> mockedBox;
-    final mockedHive = MockedHiveInterface();
 
     setUp(() async {
       mockedBox = MockedBox();
-      mockedHive.mockBox<TestEntity>(mockedBox);
 
       testDBCache = TestDBCache(mockedBox);
     });

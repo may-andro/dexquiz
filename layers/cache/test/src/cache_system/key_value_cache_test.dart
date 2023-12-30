@@ -62,7 +62,6 @@ void main() {
         mockedSharedPreferences.mockRemove();
         mockedSharedPreferences.mockPut();
 
-        //await keyValueCache.put('test');
         final result = await keyValueCache.get();
 
         verifyNever(() => mockedSharedPreferences.remove(any()));
