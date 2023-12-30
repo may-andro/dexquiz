@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cache/cache.dart';
 import 'package:core/core.dart';
 import 'package:dependency_injector/dependency_injector.dart';
 import 'package:design_system/design_system.dart';
@@ -42,6 +43,7 @@ Future<void> runFlavor({
   final errorReporterModuleConfigurator = ErrorReporterModuleConfigurator(
     buildConfig.buildEnvironment.isFirebaseEnabled,
   );
+  const cacheModuleConfigurator = CacheModuleConfigurator();
   await setUpDIGraph(
     configurators: [
       appModuleConfigurator,
@@ -49,6 +51,7 @@ Future<void> runFlavor({
       logReporterModuleConfigurator,
       useCaseModuleConfigurator,
       errorReporterModuleConfigurator,
+      cacheModuleConfigurator,
     ],
   );
 

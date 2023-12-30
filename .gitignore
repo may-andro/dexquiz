@@ -56,3 +56,6 @@ pubspec_overrides.yaml
 /index.html
 widget_tests.xml
 test-results.json
+
+# build_runner generated files
+**.g.dart

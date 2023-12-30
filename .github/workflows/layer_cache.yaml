@@ -1,0 +1,20 @@
+name: Run static code analysis and unit test for cache module
+
+on:
+  push:
+    paths:
+      - layers/cache/**
+
+#on:
+#  push
+
+permissions:
+  checks: write
+
+jobs:
+  layer_cache:
+    uses: ./.github/workflows/_analyze_and_test_flutter_module.yaml
+    with:
+      module_path: './layers/cache'
+      should_run_golden_test: 'false'
+
