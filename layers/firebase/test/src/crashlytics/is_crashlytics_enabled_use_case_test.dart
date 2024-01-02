@@ -1,6 +1,6 @@
 import 'package:firebase/src/crashlytics/is_crashlytics_enabled_use_case.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:test/test.dart';
+import 'package:flutter_test/flutter_test.dart';
 
 import '../../_mock/mock_firebase_crashlytics.dart';
 
