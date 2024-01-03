@@ -2,6 +2,7 @@
 
 - [Getting Started](#getting-started)
 - [Usage](#usage)
+- [CI](#ci)
 
 ## Getting Started
 
@@ -23,3 +24,7 @@ The module exposes various use cases for controlling the storage behaviour of th
 use_case:
   path: layers/feature_flag
 ```
+
+## CI
+
+The layer has CI/CD for github action: `layer_feature_flag`.
