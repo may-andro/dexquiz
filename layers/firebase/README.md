@@ -21,7 +21,12 @@ TODO: This will be added later
 
 ### Remote Config
 
-TODO: This will be added later
+The module exposes couple of use cases which can be used for getting and setting values of remote configs.
+- [x] `GetAllFeatureFlagsUseCase`
+- [x] `InitModuleUseCase`
+- [x] `IsFeatureEnabledUseCase`
+- [x] `SetFeatureEnabledUseCase`
+- [x] `UpdateCacheUseCase`
 
 ## Getting started
 

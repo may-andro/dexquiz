@@ -23,6 +23,8 @@ dependencies:
     path: layers/design_system
   error_reporter:
     path: layers/error_reporter
+  feature_flag:
+    path: layers/feature_flag
   firebase:
     path: layers/firebase
   log_reporter:

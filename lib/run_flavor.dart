@@ -10,6 +10,7 @@ import 'package:dexquiz/error_reporter/app_fatal_exception_handler.dart';
 import 'package:dexquiz/error_reporter/blacklist_exception.dart';
 import 'package:dexquiz/module_configurator.dart';
 import 'package:dexquiz/utils/log_use_case_interceptor.dart';
+import 'package:feature_flag/feature_flag.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -32,26 +33,23 @@ Future<void> runFlavor({
     DeviceOrientation.portraitDown,
   ]);
 
-  final appModuleConfigurator = AppModuleConfigurator(buildConfig);
   final firebaseModuleConfigurator = FirebaseModuleConfigurator(
     buildConfig.buildEnvironment.isFirebaseEnabled,
     firebaseProjectName,
     firebaseOptions,
   );
-  final logReporterModuleConfigurator = LogReporterModuleConfigurator();
-  final useCaseModuleConfigurator = UseCaseModuleConfigurator();
   final errorReporterModuleConfigurator = ErrorReporterModuleConfigurator(
     buildConfig.buildEnvironment.isFirebaseEnabled,
   );
-  const cacheModuleConfigurator = CacheModuleConfigurator();
   await setUpDIGraph(
     configurators: [
-      appModuleConfigurator,
+      AppModuleConfigurator(buildConfig),
       firebaseModuleConfigurator,
-      logReporterModuleConfigurator,
-      useCaseModuleConfigurator,
+      LogReporterModuleConfigurator(),
+      UseCaseModuleConfigurator(),
       errorReporterModuleConfigurator,
-      cacheModuleConfigurator,
+      const CacheModuleConfigurator(),
+      const FeatureFlagModuleConfigurator(),
     ],
   );
 
