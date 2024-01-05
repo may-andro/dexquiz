@@ -1,8 +1,0 @@
-include: package:flutter_lints/flutter.yaml
-
-linter:
-  rules:
-    - avoid_renaming_method_parameters: false
-
-exclude:
-  - lib/**.g.dart

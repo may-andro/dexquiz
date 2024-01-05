@@ -20,7 +20,7 @@ class InitModuleUseCase extends BaseNoParamAsyncUseCase<void, NoFailure> {
       final cache = await _featureFlagCache.all;
       if (cache.isEmpty) {
         _logReporter.debug('No feature flag is found');
-        _updateCacheUseCase();
+        await _updateCacheUseCase();
       }
       return const Right(null);
     } catch (e, st) {

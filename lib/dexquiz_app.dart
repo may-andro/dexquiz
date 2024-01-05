@@ -39,10 +39,9 @@ class _DevMenuScreenState extends State<DevMenuScreen> {
         title: const Text("Feature Flags"),
         actions: [
           IconButton(
-            onPressed: () {
-              setState(() {
-                appServiceLocator.get<UpdateCacheUseCase>().call();
-              });
+            onPressed: () async {
+              await appServiceLocator.get<UpdateCacheUseCase>().call();
+              setState(() {});
             },
             icon: const Icon(Icons.delete),
           )
@@ -74,15 +73,14 @@ class _DevMenuScreenState extends State<DevMenuScreen> {
                           ),
                           trailing: Switch(
                             value: isEnabled,
-                            onChanged: (flag) {
-                              setState(() {
-                                setFeatureEnabledUseCase(
-                                  SetFeatureEnabledParam(
-                                    feature,
-                                    isEnabled: flag,
-                                  ),
-                                );
-                              });
+                            onChanged: (flag) async {
+                              await setFeatureEnabledUseCase(
+                                SetFeatureEnabledParam(
+                                  feature,
+                                  isEnabled: flag,
+                                ),
+                              );
+                              setState(() {});
                             },
                           ),
                         );

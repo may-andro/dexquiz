@@ -16,8 +16,8 @@ class FeatureFlagModuleConfigurator implements ModuleConfigurator {
   const FeatureFlagModuleConfigurator();
 
   @override
-  FutureOr<void> postDependenciesSetup(ServiceLocator serviceLocator) {
-    serviceLocator.get<InitModuleUseCase>().call();
+  FutureOr<void> postDependenciesSetup(ServiceLocator serviceLocator) async {
+    await serviceLocator.get<InitModuleUseCase>().call();
   }
 
   @override

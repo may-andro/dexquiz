@@ -7,7 +7,7 @@ class FeatureFlagConfig extends BoxEntity {
   @HiveField(2)
   final String featureKey;
   @HiveField(3)
-  final dynamic isEnabled;
+  final bool isEnabled;
 
   FeatureFlagConfig({
     required this.featureKey,
