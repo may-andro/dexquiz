@@ -1,8 +1,6 @@
 import 'package:design_system/design_system.dart';
-import 'package:dexquiz/demo/clear_grocery_cache.dart';
-import 'package:dexquiz/demo/groceries_screen.dart';
-import 'package:dexquiz/demo/grocery_cache.dart';
 import 'package:dexquiz/module_configurator.dart';
+import 'package:feature_flag/feature_flag.dart';
 import 'package:flutter/material.dart';
 
 class DexQuizApp extends StatelessWidget {
@@ -21,60 +19,82 @@ class DexQuizApp extends StatelessWidget {
           child: child ?? const SizedBox.shrink(),
         );
       },
-      home: GroceriesScreen(
-        appServiceLocator.get<GroceryCache>(),
-        appServiceLocator.get<ClearGroceryCache>(),
-      ),
+      home: const DevMenuScreen(),
     );
   }
 }
 
-class LaunchPage extends StatelessWidget {
-  const LaunchPage({super.key});
+class DevMenuScreen extends StatefulWidget {
+  const DevMenuScreen({super.key});
 
+  @override
+  State<DevMenuScreen> createState() => _DevMenuScreenState();
+}
+
+class _DevMenuScreenState extends State<DevMenuScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Feature Flags"),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await appServiceLocator.get<UpdateCacheUseCase>().call();
+              setState(() {});
+            },
+            icon: const Icon(Icons.delete),
+          )
+        ],
+      ),
       backgroundColor: context.colorPalette.background.primary.color,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
-          child: Column(
-            children: [
-              DSButtonWidget(
-                label: 'Primary',
-                onPressed: () {},
-                variant: DSButtonVariant.primary,
-                icon: Icons.access_time,
-              ),
-              DSButtonWidget(
-                label: 'Secondary',
-                onPressed: () {},
-                variant: DSButtonVariant.secondary,
-                icon: Icons.access_time,
-              ),
-              DSButtonWidget(
-                label: 'Error',
-                onPressed: () {},
-                variant: DSButtonVariant.error,
-                icon: Icons.access_time,
-              ),
-              DSButtonWidget(
-                label: 'Text',
-                onPressed: () {},
-                variant: DSButtonVariant.text,
-                icon: Icons.access_time,
-              ),
-              const DSDividerWidget(variant: DSDividerVariant.level1),
-              DSIconButtonWidget(
-                Icons.access_time,
-                color: context.colorPalette.brand.primary,
-                onPressed: () {},
-              ),
-              const DSErrorIconWidget(),
-              const DSLoadingWidget()
-            ],
-          ),
+          child: FutureBuilder(
+              future: appServiceLocator.get<GetAllFeatureFlagsUseCase>().call(),
+              builder: (context, snapshot) {
+                final setFeatureEnabledUseCase =
+                    appServiceLocator.get<SetFeatureEnabledUseCase>();
+                if (snapshot.hasData) {
+                  if (snapshot.data?.isRight ?? false) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.right.length,
+                      itemBuilder: (_, index) {
+                        final feature =
+                            snapshot.data!.right.keys.elementAt(index);
+                        final isEnabled =
+                            snapshot.data!.right.values.elementAt(index);
+                        return ListTile(
+                          title: DSTextWidget(
+                            feature.name,
+                            color: context.colorPalette.neutral.grey9,
+                            style: context.typography.bodyLarge,
+                          ),
+                          trailing: Switch(
+                            value: isEnabled,
+                            onChanged: (flag) async {
+                              await setFeatureEnabledUseCase(
+                                SetFeatureEnabledParam(
+                                  feature,
+                                  isEnabled: flag,
+                                ),
+                              );
+                              setState(() {});
+                            },
+                          ),
+                        );
+                      },
+                    );
+                  }
+                  if (snapshot.data?.isLeft ?? false) {
+                    return const CircularProgressIndicator();
+                  }
+                  return const CircularProgressIndicator();
+                } else {
+                  return const CircularProgressIndicator();
+                }
+              }),
         ),
       ),
     );

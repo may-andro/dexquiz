@@ -110,6 +110,16 @@ scripts:
     packageFilters:
       dependsOn: flutter_native_splash
 
+  generate_db:
+    run: |
+      flutter clean
+      dart run build_runner build --delete-conflicting-outputs
+    description: Generate db models files
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: hive_generator
+
   # Dart CLI scripts
   dart_get:
     run: dart pub get
