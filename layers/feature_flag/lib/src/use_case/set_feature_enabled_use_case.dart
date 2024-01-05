@@ -19,16 +19,20 @@ class SetFeatureEnabledUseCase
   @override
   AsyncEither<NoFailure, void> execute(SetFeatureEnabledParam param) async {
     try {
-      await _featureFlagCache.put(
-        FeatureFlagConfig(
-          featureKey: param.feature.key,
-          isEnabled: param.isEnabled,
-        ),
-      );
+      await _featureFlagCache.put(param.featureFlagConfig);
       return const Right(null);
     } on Exception catch (e, st) {
       reportError(e, st);
       return Left(NoFailure());
     }
+  }
+}
+
+extension _SetFeatureEnabledParamExtension on SetFeatureEnabledParam {
+  FeatureFlagConfig get featureFlagConfig {
+    return FeatureFlagConfig(
+      featureKey: feature.key,
+      isEnabled: isEnabled,
+    );
   }
 }

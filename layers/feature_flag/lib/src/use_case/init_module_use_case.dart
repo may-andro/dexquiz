@@ -16,11 +16,16 @@ class InitModuleUseCase extends BaseNoParamAsyncUseCase<void, NoFailure> {
 
   @override
   AsyncEither<NoFailure, void> execute() async {
-    final cache = await _featureFlagCache.all;
-    if (cache.isEmpty) {
-      _logReporter.debug('No feature flag is found');
-      _updateCacheUseCase();
+    try {
+      final cache = await _featureFlagCache.all;
+      if (cache.isEmpty) {
+        _logReporter.debug('No feature flag is found');
+        _updateCacheUseCase();
+      }
+      return const Right(null);
+    } catch (e, st) {
+      reportError(e, st);
+      return Left(NoFailure());
     }
-    return const Right(null);
   }
 }

@@ -15,14 +15,19 @@ class UpdateCacheUseCase extends BaseNoParamAsyncUseCase<void, NoFailure> {
 
   @override
   AsyncEither<NoFailure, void> execute() async {
-    final localFeatureFlags = Feature.values.map((feature) {
-      return FeatureFlagConfig(
-        featureKey: feature.key,
-        isEnabled: _getRemoteConfigValueUseCase(feature.key).asBool(),
-      );
-    }).toList();
-    await _featureFlagCache.deleteAll();
-    await _featureFlagCache.putAll(localFeatureFlags);
-    return const Right(null);
+    try {
+      final localFeatureFlags = Feature.values.map((feature) {
+        return FeatureFlagConfig(
+          featureKey: feature.key,
+          isEnabled: _getRemoteConfigValueUseCase(feature.key).asBool(),
+        );
+      }).toList();
+      await _featureFlagCache.deleteAll();
+      await _featureFlagCache.putAll(localFeatureFlags);
+      return const Right(null);
+    } on Exception catch (e, st) {
+      reportError(e, st);
+      return Left(NoFailure());
+    }
   }
 }
