@@ -9,9 +9,9 @@ class IsFeatureEnabledUseCase
   final FeatureFlagCache _featureFlagCache;
 
   @override
-  AsyncEither<NoFailure, bool> execute(Feature input) async {
+  AsyncEither<NoFailure, bool> execute(Feature feature) async {
     try {
-      final localFeature = await _featureFlagCache.get(input.key);
+      final localFeature = await _featureFlagCache.get(feature.key);
       return Right(localFeature?.isEnabled ?? false);
     } on Exception catch (e, st) {
       reportError(e, st);
