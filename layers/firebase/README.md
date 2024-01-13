@@ -17,7 +17,21 @@ The module exposes couple of use cases which can be used for logging and crash r
 
 ### Analytics
 
-TODO: This will be added later
+The module exposes couple of use cases which can be used for sending events to `Firebase Analytics`.
+- [x] `LogEventUseCase`
+- [x] `SetDefaultParamsToEventUseCase`
+- [x] `SetUserUseCase`
+
+To enable analytics debug mode on Android, run the following command in your terminal, while your device(Android) is connected / Emulator is running.
+```
+adb shell setprop debug.firebase.analytics.app com.mayandro.dexquiz.kanto
+```
+or 
+```
+adb shell setprop debug.firebase.analytics.app com.mayandro.dexquiz.johto
+```
+
+Refer to [docs](https://firebase.flutter.dev/docs/analytics/overview) for more info.
 
 ### Remote Config
 

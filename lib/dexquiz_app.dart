@@ -1,17 +1,24 @@
 import 'package:design_system/design_system.dart';
 import 'package:dexquiz/module_configurator.dart';
 import 'package:feature_flag/feature_flag.dart';
+import 'package:firebase/firebase.dart';
 import 'package:flutter/material.dart';
 
 class DexQuizApp extends StatelessWidget {
-  const DexQuizApp({required this.designSystem, super.key});
+  const DexQuizApp({
+    required this.designSystem,
+    required this.navigationObservers,
+    super.key,
+  });
 
   final DesignSystem designSystem;
+  final List<NavigatorObserver> navigationObservers;
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'DexQuiz',
+      navigatorObservers: navigationObservers,
       builder: (context, child) {
         return DSThemeBuilderWidget(
           brightness: context.platformBrightness,
@@ -33,6 +40,18 @@ class DevMenuScreen extends StatefulWidget {
 
 class _DevMenuScreenState extends State<DevMenuScreen> {
   @override
+  void initState() {
+    appServiceLocator.get<SetUserUseCase>().call('Test');
+    appServiceLocator.get<LogEventUseCase>().call(
+      'flutter_screen',
+      parameters: {
+        'screen_name': 'Dev Menu Screen',
+      },
+    );
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -41,6 +60,9 @@ class _DevMenuScreenState extends State<DevMenuScreen> {
           IconButton(
             onPressed: () async {
               await appServiceLocator.get<UpdateCacheUseCase>().call();
+              await appServiceLocator
+                  .get<LogEventUseCase>()
+                  .call('delete_button');
               setState(() {});
             },
             icon: const Icon(Icons.delete),
@@ -80,6 +102,9 @@ class _DevMenuScreenState extends State<DevMenuScreen> {
                                   isEnabled: flag,
                                 ),
                               );
+                              await appServiceLocator
+                                  .get<LogEventUseCase>()
+                                  .call(feature.name);
                               setState(() {});
                             },
                           ),

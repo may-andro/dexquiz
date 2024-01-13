@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:dependency_injector/dependency_injector.dart';
+import 'package:firebase/src/analytics/analytics.dart';
 import 'package:firebase/src/crashlytics/crashlytics.dart';
 import 'package:firebase/src/remote_config/get_remote_config_value_use_case.dart';
 import 'package:firebase/src/remote_config/remote_configs.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
@@ -23,6 +25,17 @@ class FirebaseModuleConfigurator implements ModuleConfigurator {
   FutureOr<void> postDependenciesSetup(ServiceLocator serviceLocator) {
     final firebaseCrashlytics = serviceLocator.get<FirebaseCrashlytics>();
     firebaseCrashlytics.setCrashlyticsCollectionEnabled(isFirebaseEnabled);
+
+    final crashlyticsLogUseCase = serviceLocator.get<CrashlyticsLogUseCase>();
+    crashlyticsLogUseCase.call('App Started');
+
+    final logEventUseCase = serviceLocator.get<LogEventUseCase>();
+    logEventUseCase.call(
+      'app_started',
+      parameters: {
+        'time': '${DateTime.now().microsecondsSinceEpoch}',
+      },
+    );
   }
 
   @override
@@ -36,6 +49,7 @@ class FirebaseModuleConfigurator implements ModuleConfigurator {
   @override
   FutureOr<void> registerDependencies(ServiceLocator serviceLocator) async {
     _injectCrashlytics(serviceLocator);
+    _injectAnalytics(serviceLocator);
     await _injectRemoteConfig(serviceLocator);
   }
 
@@ -91,6 +105,25 @@ class FirebaseModuleConfigurator implements ModuleConfigurator {
 
     serviceLocator.registerFactory(
       () => GetRemoteConfigValueUseCase(remoteConfig),
+    );
+  }
+
+  void _injectAnalytics(ServiceLocator serviceLocator) {
+    final firebaseAnalytics = FirebaseAnalytics.instance;
+    firebaseAnalytics.setAnalyticsCollectionEnabled(isFirebaseEnabled);
+
+    serviceLocator.registerFactory(
+      () => FirebaseAnalyticsObserver(analytics: firebaseAnalytics),
+    );
+
+    serviceLocator.registerFactory(
+      () => LogEventUseCase(firebaseAnalytics),
+    );
+    serviceLocator.registerFactory(
+      () => SetDefaultParamsToEventUseCase(firebaseAnalytics),
+    );
+    serviceLocator.registerFactory(
+      () => SetUserUseCase(firebaseAnalytics),
     );
   }
 }
