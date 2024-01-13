@@ -53,5 +53,6 @@ Future<void> runFlavor({
     navigationObservers: [
       appServiceLocator.get<FirebaseAnalyticsObserver>(),
     ],
+    buildConfig: appServiceLocator.get<BuildConfig>(),
   ));
 }

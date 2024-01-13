@@ -1,6 +1,5 @@
 enum BuildEnvironment {
-  debug,
-  qa,
+  staging,
   prod;
 
   bool get isFirebaseEnabled => this == BuildEnvironment.prod;

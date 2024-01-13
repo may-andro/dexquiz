@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
 import 'package:dexquiz/module_configurator.dart';
 import 'package:feature_flag/feature_flag.dart';
@@ -8,11 +9,13 @@ class DexQuizApp extends StatelessWidget {
   const DexQuizApp({
     required this.designSystem,
     required this.navigationObservers,
+    required this.buildConfig,
     super.key,
   });
 
   final DesignSystem designSystem;
   final List<NavigatorObserver> navigationObservers;
+  final BuildConfig buildConfig;
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +29,15 @@ class DexQuizApp extends StatelessWidget {
           child: child ?? const SizedBox.shrink(),
         );
       },
-      home: const DevMenuScreen(),
+      home: DevMenuScreen(buildConfig: buildConfig),
     );
   }
 }
 
 class DevMenuScreen extends StatefulWidget {
-  const DevMenuScreen({super.key});
+  const DevMenuScreen({required this.buildConfig, super.key});
+
+  final BuildConfig buildConfig;
 
   @override
   State<DevMenuScreen> createState() => _DevMenuScreenState();
@@ -55,7 +60,9 @@ class _DevMenuScreenState extends State<DevMenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Feature Flags"),
+        title: Text(
+          "${widget.buildConfig.buildFlavor.name.toUpperCase()}-[${widget.buildConfig.buildEnvironment.name.toUpperCase()}]",
+        ),
         actions: [
           IconButton(
             onPressed: () async {
