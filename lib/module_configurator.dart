@@ -6,7 +6,6 @@ import 'package:dexquiz/error_reporter/app_blacklist_error_handler.dart';
 import 'package:dexquiz/error_reporter/app_fatal_exception_handler.dart';
 import 'package:dexquiz/utils/log_use_case_interceptor.dart';
 import 'package:error_reporter/error_reporter.dart';
-import 'package:firebase/firebase.dart';
 import 'package:flutter/foundation.dart';
 import 'package:log_reporter/log_reporter.dart';
 import 'package:use_case/use_case.dart';
@@ -28,29 +27,20 @@ class AppModuleConfigurator implements ModuleConfigurator {
       return true;
     };
 
-    /// app started
-    final crashlyticsLogUseCase =
-        appServiceLocator.get<CrashlyticsLogUseCase>();
-    crashlyticsLogUseCase.call('App Started');
-
     /// set use case interceptor
-    final logUseCaseInterceptor =
-        appServiceLocator.get<LogUseCaseInterceptor>();
-    final useCaseInterceptionHandler =
-        appServiceLocator.get<UseCaseInterceptionHandler>();
-    useCaseInterceptionHandler.register(logUseCaseInterceptor);
+    appServiceLocator.get<UseCaseInterceptionHandler>().register(
+          appServiceLocator.get<LogUseCaseInterceptor>(),
+        );
 
     /// set blacklist error
-    final registerBlacklistExceptionHandlerUseCase =
-        appServiceLocator.get<RegisterBlacklistErrorHandlerUseCase>();
-    final appBlacklistErrorHandler = AppBlacklistErrorHandler();
-    registerBlacklistExceptionHandlerUseCase.call(appBlacklistErrorHandler);
+    appServiceLocator.get<RegisterBlacklistErrorHandlerUseCase>().call(
+          AppBlacklistErrorHandler(),
+        );
 
     /// set fatal error handler
-    final registerFatalErrorHandlerUseCase =
-        appServiceLocator.get<RegisterFatalErrorHandlerUseCase>();
-    final appFatalErrorHandler = AppFatalErrorHandler();
-    registerFatalErrorHandlerUseCase(appFatalErrorHandler);
+    appServiceLocator.get<RegisterFatalErrorHandlerUseCase>().call(
+          AppFatalErrorHandler(),
+        );
   }
 
   @override

@@ -48,5 +48,10 @@ Future<void> runFlavor({
 
   FlutterNativeSplash.remove();
 
-  runApp(const DexQuizApp(designSystem: DesignSystem.fire));
+  runApp(DexQuizApp(
+    designSystem: DesignSystem.fire,
+    navigationObservers: [
+      appServiceLocator.get<FirebaseAnalyticsObserver>(),
+    ],
+  ));
 }

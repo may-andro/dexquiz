@@ -24,7 +24,7 @@ void main() {
 
     group('call', () {
       final error = '';
-      final st = null;
+      final StackTrace? st = null;
       final isFatal = true;
 
       setUp(() {
