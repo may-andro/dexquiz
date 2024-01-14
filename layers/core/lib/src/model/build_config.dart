@@ -1,9 +1,10 @@
 enum BuildEnvironment {
-  debug,
-  qa,
+  staging,
   prod;
 
   bool get isFirebaseEnabled => this == BuildEnvironment.prod;
+
+  bool get isFeatureFlagCached => this == BuildEnvironment.staging;
 }
 
 enum BuildFlavor { kanto, johto }

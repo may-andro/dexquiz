@@ -12,6 +12,8 @@ dependencies:
 
   cache:
     path: ../cache
+  core:
+    path: ../core
   dependency_injector:
     path: ../dependency_injector
   firebase:

@@ -1,3 +1,3 @@
 library core;
 
-export 'src/entity/build_config.dart';
+export 'src/model/build_config.dart';
