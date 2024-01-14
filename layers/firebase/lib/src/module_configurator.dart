@@ -1,7 +1,9 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dependency_injector/dependency_injector.dart';
 import 'package:firebase/src/analytics/analytics.dart';
+import 'package:firebase/src/firestore/firestore.dart';
 import 'package:firebase/src/crashlytics/crashlytics.dart';
 import 'package:firebase/src/remote_config/get_all_remote_configs_use_case.dart';
 import 'package:firebase/src/remote_config/get_remote_config_value_use_case.dart';
@@ -52,6 +54,7 @@ class FirebaseModuleConfigurator implements ModuleConfigurator {
     _injectCrashlytics(serviceLocator);
     await _injectRemoteConfig(serviceLocator);
     _injectAnalytics(serviceLocator);
+    _injectFirestore(serviceLocator);
   }
 
   void _injectCrashlytics(ServiceLocator serviceLocator) {
@@ -128,6 +131,29 @@ class FirebaseModuleConfigurator implements ModuleConfigurator {
     );
     serviceLocator.registerFactory(
       () => SetUserUseCase(firebaseAnalytics),
+    );
+  }
+
+  void _injectFirestore(ServiceLocator serviceLocator) {
+    final firebaseFirestore = FirebaseFirestore.instance;
+
+    serviceLocator.registerFactory(
+      () => AddToCollectionUseCase(firebaseFirestore),
+    );
+    serviceLocator.registerFactory(
+      () => GetCollectionUseCase(firebaseFirestore),
+    );
+    serviceLocator.registerFactory(
+      () => AddDocumentUseCase(firebaseFirestore),
+    );
+    serviceLocator.registerFactory(
+      () => DeleteDocumentUseCase(firebaseFirestore),
+    );
+    serviceLocator.registerFactory(
+      () => GetDocumentUseCase(firebaseFirestore),
+    );
+    serviceLocator.registerFactory(
+      () => UpdateDocumentUseCase(firebaseFirestore),
     );
   }
 }
