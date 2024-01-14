@@ -66,7 +66,7 @@ class _DevMenuScreenState extends State<DevMenuScreen> {
         actions: [
           IconButton(
             onPressed: () async {
-              await appServiceLocator.get<UpdateCacheUseCase>().call();
+              await appServiceLocator.get<ResetFeatureFlagsUseCase>().call();
               await appServiceLocator
                   .get<LogEventUseCase>()
                   .call('delete_button');
@@ -81,10 +81,10 @@ class _DevMenuScreenState extends State<DevMenuScreen> {
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: FutureBuilder(
-              future: appServiceLocator.get<GetAllFeatureFlagsUseCase>().call(),
+              future: appServiceLocator.get<GetFeatureFlagsUseCase>().call(),
               builder: (context, snapshot) {
                 final setFeatureEnabledUseCase =
-                    appServiceLocator.get<SetFeatureEnabledUseCase>();
+                    appServiceLocator.get<SetFeatureFlagStatusUseCase>();
                 if (snapshot.hasData) {
                   if (snapshot.data?.isRight ?? false) {
                     return ListView.builder(
@@ -104,7 +104,7 @@ class _DevMenuScreenState extends State<DevMenuScreen> {
                             value: isEnabled,
                             onChanged: (flag) async {
                               await setFeatureEnabledUseCase(
-                                SetFeatureEnabledParam(
+                                SetFeatureFlagStatusParam(
                                   feature,
                                   isEnabled: flag,
                                 ),

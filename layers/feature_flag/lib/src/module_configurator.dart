@@ -1,23 +1,28 @@
 import 'dart:async';
 
 import 'package:cache/cache.dart';
+import 'package:core/core.dart';
 import 'package:dependency_injector/dependency_injector.dart';
-import 'package:feature_flag/src/cache/feature_flag_cache.dart';
-import 'package:feature_flag/src/cache/feature_flag_config.dart';
-import 'package:feature_flag/src/use_case/get_all_feature_flags_use_case.dart';
-import 'package:feature_flag/src/use_case/init_module_use_case.dart';
-import 'package:feature_flag/src/use_case/update_cache_use_case.dart';
-import 'package:feature_flag/src/use_case/is_feature_enabled_use_case.dart';
-import 'package:feature_flag/src/use_case/set_feature_enabled_use_case.dart';
+import 'package:feature_flag/src/data/cache/feature_flag_cache.dart';
+import 'package:feature_flag/src/data/cache/feature_flag_config.dart';
+import 'package:feature_flag/src/data/repository/build_feature_flag_repository.dart';
+import 'package:feature_flag/src/data/repository/cached_feature_flag_repository.dart';
+import 'package:feature_flag/src/data/repository/remote_feature_flag_repository.dart';
+import 'package:feature_flag/src/domain/repository/feature_flag_repository.dart';
+import 'package:feature_flag/src/domain/use_case/init_feature_flags_use_case.dart';
 import 'package:firebase/firebase.dart';
-import 'package:log_reporter/log_reporter.dart';
+
+import 'domain/use_case/get_feature_flags_use_case.dart';
+import 'domain/use_case/is_feature_enabled_use_case.dart';
+import 'domain/use_case/reset_feature_flags_use_case.dart';
+import 'domain/use_case/set_feature_status_use_case.dart';
 
 class FeatureFlagModuleConfigurator implements ModuleConfigurator {
   const FeatureFlagModuleConfigurator();
 
   @override
   FutureOr<void> postDependenciesSetup(ServiceLocator serviceLocator) async {
-    await serviceLocator.get<InitModuleUseCase>().call();
+    await serviceLocator.get<InitFeatureFlagsUseCase>().call();
   }
 
   @override
@@ -30,33 +35,53 @@ class FeatureFlagModuleConfigurator implements ModuleConfigurator {
     final featureFlagBox = await hive.openBox<FeatureFlagConfig>(
       'feature_flag_box',
     );
+
+    // cache
     serviceLocator.registerSingleton(
       () => FeatureFlagCache(featureFlagBox),
     );
 
+    // repository
+    final remoteFeatureFlagRepository = RemoteFeatureFlagRepository(
+      serviceLocator.get<GetAllRemoteConfigsUseCase>(),
+    );
+    final cachedFeatureFlagRepository = CachedFeatureFlagRepository(
+      remoteFeatureFlagRepository,
+      serviceLocator.get<FeatureFlagCache>(),
+    );
+    serviceLocator.registerSingleton<FeatureFlagRepository>(
+      () => BuildFeatureFlagRepository(
+        serviceLocator.get<BuildConfig>(),
+        remoteFeatureFlagRepository,
+        cachedFeatureFlagRepository,
+      ),
+    );
+
+    // use case
     serviceLocator.registerFactory(
-      () => GetAllFeatureFlagsUseCase(
-        serviceLocator.get<FeatureFlagCache>(),
+      () => GetFeatureFlagsUseCase(
+        serviceLocator.get<FeatureFlagRepository>(),
       ),
     );
     serviceLocator.registerFactory(
-      () => InitModuleUseCase(
-        serviceLocator.get<UpdateCacheUseCase>(),
-        serviceLocator.get<FeatureFlagCache>(),
-        serviceLocator.get<LogReporter>(),
+      () => InitFeatureFlagsUseCase(
+        serviceLocator.get<FeatureFlagRepository>(),
       ),
     );
     serviceLocator.registerFactory(
-      () => UpdateCacheUseCase(
-        serviceLocator.get<GetRemoteConfigValueUseCase>(),
-        serviceLocator.get<FeatureFlagCache>(),
+      () => IsFeatureEnabledUseCase(
+        serviceLocator.get<FeatureFlagRepository>(),
       ),
     );
     serviceLocator.registerFactory(
-      () => IsFeatureEnabledUseCase(serviceLocator.get<FeatureFlagCache>()),
+      () => ResetFeatureFlagsUseCase(
+        serviceLocator.get<FeatureFlagRepository>(),
+      ),
     );
     serviceLocator.registerSingleton(
-      () => SetFeatureEnabledUseCase(serviceLocator.get<FeatureFlagCache>()),
+      () => SetFeatureFlagStatusUseCase(
+        serviceLocator.get<FeatureFlagRepository>(),
+      ),
     );
   }
 }

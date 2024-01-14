@@ -16,13 +16,9 @@ Future<void> setUpDIGraph({
     }),
   );
 
-  await Future.wait(
-    configurators.map((configurator) {
-      return Future.value(
-        configurator.registerDependencies(tempServiceLocator),
-      );
-    }),
-  );
+  for(var configurator in configurators) {
+    await configurator.registerDependencies(tempServiceLocator);
+  }
 
   await Future.wait(
     configurators.map((configurator) {

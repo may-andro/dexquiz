@@ -3,8 +3,9 @@ import 'dart:async';
 import 'package:dependency_injector/dependency_injector.dart';
 import 'package:firebase/src/analytics/analytics.dart';
 import 'package:firebase/src/crashlytics/crashlytics.dart';
+import 'package:firebase/src/remote_config/get_all_remote_configs_use_case.dart';
 import 'package:firebase/src/remote_config/get_remote_config_value_use_case.dart';
-import 'package:firebase/src/remote_config/remote_configs.dart';
+import 'package:firebase/src/remote_config/initialise_remote_config_use_case.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -49,8 +50,8 @@ class FirebaseModuleConfigurator implements ModuleConfigurator {
   @override
   FutureOr<void> registerDependencies(ServiceLocator serviceLocator) async {
     _injectCrashlytics(serviceLocator);
-    _injectAnalytics(serviceLocator);
     await _injectRemoteConfig(serviceLocator);
+    _injectAnalytics(serviceLocator);
   }
 
   void _injectCrashlytics(ServiceLocator serviceLocator) {
@@ -100,11 +101,14 @@ class FirebaseModuleConfigurator implements ModuleConfigurator {
 
   Future<void> _injectRemoteConfig(ServiceLocator serviceLocator) async {
     final remoteConfig = FirebaseRemoteConfig.instance;
-    await remoteConfig.setDefaults(RemoteConfigs.defaultConfigsMap);
-    await remoteConfig.fetchAndActivate();
+    await InitialiseRemoteConfigUseCase(remoteConfig).call();
 
     serviceLocator.registerFactory(
       () => GetRemoteConfigValueUseCase(remoteConfig),
+    );
+
+    serviceLocator.registerFactory(
+      () => GetAllRemoteConfigsUseCase(remoteConfig),
     );
   }
 
