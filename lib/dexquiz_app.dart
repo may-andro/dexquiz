@@ -4,6 +4,7 @@ import 'package:dexquiz/module_configurator.dart';
 import 'package:feature_flag/feature_flag.dart';
 import 'package:firebase/firebase.dart';
 import 'package:flutter/material.dart';
+import 'package:remote/remote.dart';
 
 class DexQuizApp extends StatelessWidget {
   const DexQuizApp({
@@ -29,7 +30,7 @@ class DexQuizApp extends StatelessWidget {
           child: child ?? const SizedBox.shrink(),
         );
       },
-      home: FirestoreDemoWidget(buildConfig: buildConfig),
+      home: RemoteApiTestWidget(buildConfig: buildConfig),
     );
   }
 }
@@ -103,6 +104,61 @@ class _FirestoreDemoWidgetState extends State<FirestoreDemoWidget> {
               }
               return const Center(child: CircularProgressIndicator());
             }),
+      ),
+    );
+  }
+}
+
+class RemoteApiTestWidget extends StatefulWidget {
+  const RemoteApiTestWidget({required this.buildConfig, super.key});
+
+  final BuildConfig buildConfig;
+
+  @override
+  State<RemoteApiTestWidget> createState() => _RemoteApiTestWidgetState();
+}
+
+class _RemoteApiTestWidgetState extends State<RemoteApiTestWidget> {
+  late final RestApiService restApiService;
+
+  @override
+  void initState() {
+    restApiService = appServiceLocator.get<RestApiService>();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: FutureBuilder(
+        future: restApiService.get('pokemon/1'),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: DSTextWidget(
+                  '${snapshot.data}',
+                  color: context.colorPalette.neutral.grey9,
+                  style: context.typography.bodyLarge,
+                ),
+              ),
+            );
+          }
+          if (snapshot.hasError) {
+            return Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: DSTextWidget(
+                  'Error happened ${snapshot.error}',
+                  color: context.colorPalette.neutral.grey9,
+                  style: context.typography.bodyLarge,
+                ),
+              ),
+            );
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
       ),
     );
   }

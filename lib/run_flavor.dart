@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:log_reporter/log_reporter.dart';
 import 'package:firebase/firebase.dart';
+import 'package:remote/remote.dart';
 import 'package:use_case/use_case.dart';
 import 'package:error_reporter/error_reporter.dart';
 
@@ -43,6 +44,10 @@ Future<void> runFlavor({
       ),
       const CacheModuleConfigurator(),
       const FeatureFlagModuleConfigurator(),
+      RemoteModuleConfigurator(
+        buildConfig.buildEnvironment.isRemoteLoggingEnabled,
+        'https://pokeapi.co/api/v2/',
+      ),
     ],
   );
 

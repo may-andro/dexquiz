@@ -30,6 +30,8 @@ dependencies:
     path: layers/firebase
   log_reporter:
     path: layers/log_reporter
+  remote:
+    path: layers/remote
   use_case:
     path: layers/use_case
 
