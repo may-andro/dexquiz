@@ -29,7 +29,81 @@ class DexQuizApp extends StatelessWidget {
           child: child ?? const SizedBox.shrink(),
         );
       },
-      home: DevMenuScreen(buildConfig: buildConfig),
+      home: FirestoreDemoWidget(buildConfig: buildConfig),
+    );
+  }
+}
+
+class FirestoreDemoWidget extends StatefulWidget {
+  const FirestoreDemoWidget({required this.buildConfig, super.key});
+
+  final BuildConfig buildConfig;
+
+  @override
+  State<FirestoreDemoWidget> createState() => _FirestoreDemoWidgetState();
+}
+
+class _FirestoreDemoWidgetState extends State<FirestoreDemoWidget> {
+  late final GetDocumentUseCase getDocumentUseCase;
+
+  @override
+  void initState() {
+    getDocumentUseCase = appServiceLocator.get<GetDocumentUseCase>();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: context.colorPalette.background.primary.color,
+      body: SafeArea(
+        child: FutureBuilder(
+            future: getDocumentUseCase.call(GetDocumentParam(
+              'pokedex',
+              widget.buildConfig.buildFlavor.name,
+            )),
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                final data = snapshot.data;
+                if (data != null && data.isNotEmpty) {
+                  final list = data.keys.toList();
+                  return ListView.builder(
+                    itemCount: list.length,
+                    itemBuilder: (context, index) {
+                      return DSTextWidget(
+                        list[index],
+                        color: context.colorPalette.neutral.grey9,
+                        style: context.typography.bodyLarge,
+                      );
+                    },
+                  );
+                }
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: DSTextWidget(
+                      'Empty List',
+                      color: context.colorPalette.neutral.grey9,
+                      style: context.typography.bodyLarge,
+                    ),
+                  ),
+                );
+              }
+              if (snapshot.hasError) {
+                return Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: DSTextWidget(
+                      'Error happened ${snapshot.error}',
+                      color: context.colorPalette.neutral.grey9,
+                      style: context.typography.bodyLarge,
+                    ),
+                  ),
+                );
+              }
+              return const Center(child: CircularProgressIndicator());
+            }),
+      ),
     );
   }
 }
