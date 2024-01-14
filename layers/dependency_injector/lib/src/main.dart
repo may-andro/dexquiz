@@ -16,7 +16,7 @@ Future<void> setUpDIGraph({
     }),
   );
 
-  for(var configurator in configurators) {
+  for (var configurator in configurators) {
     await configurator.registerDependencies(tempServiceLocator);
   }
 
