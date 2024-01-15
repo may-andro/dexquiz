@@ -12,9 +12,13 @@ class AppConfig extends Equatable {
     this.pokedexEndEntry,
   );
 
+  @JsonKey(name: 'theme_code')
   final String themeCode;
+  @JsonKey(name: 'minimum_required_app_version')
   final String minimumRequiredAppVersion;
+  @JsonKey(name: 'pokedex_start_entry')
   final int pokedexStartEntry;
+  @JsonKey(name: 'pokedex_end_entry')
   final int pokedexEndEntry;
 
   factory AppConfig.fromJson(Map<String, dynamic> json) =>

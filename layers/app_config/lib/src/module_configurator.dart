@@ -7,7 +7,7 @@ import 'package:dependency_injector/dependency_injector.dart';
 import 'package:firebase/firebase.dart';
 
 class AppConfigModuleConfigurator implements ModuleConfigurator {
-  AppConfigModuleConfigurator();
+  const AppConfigModuleConfigurator();
 
   @override
   FutureOr<void> postDependenciesSetup(ServiceLocator serviceLocator) {}
