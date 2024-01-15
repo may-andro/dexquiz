@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:app_config/app_config.dart';
 import 'package:cache/cache.dart';
 import 'package:core/core.dart';
 import 'package:dependency_injector/dependency_injector.dart';
@@ -48,6 +49,7 @@ Future<void> runFlavor({
         buildConfig.buildEnvironment.isRemoteLoggingEnabled,
         'https://pokeapi.co/api/v2/',
       ),
+      const AppConfigModuleConfigurator(),
     ],
   );
 
