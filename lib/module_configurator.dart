@@ -4,6 +4,7 @@ import 'package:core/core.dart';
 import 'package:dependency_injector/dependency_injector.dart';
 import 'package:dexquiz/error_reporter/app_blacklist_error_handler.dart';
 import 'package:dexquiz/error_reporter/app_fatal_exception_handler.dart';
+import 'package:dexquiz/utils/app_bloc_observer.dart';
 import 'package:dexquiz/utils/log_use_case_interceptor.dart';
 import 'package:error_reporter/error_reporter.dart';
 import 'package:flutter/foundation.dart';
@@ -53,6 +54,10 @@ class AppModuleConfigurator implements ModuleConfigurator {
 
     serviceLocator.registerFactory(
       () => LogUseCaseInterceptor(serviceLocator.get<LogReporter>()),
+    );
+
+    serviceLocator.registerFactory(
+      () => AppBlocObserver(serviceLocator.get<LogReporter>()),
     );
   }
 }
