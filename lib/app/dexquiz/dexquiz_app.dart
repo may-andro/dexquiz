@@ -30,7 +30,7 @@ class DexQuizApp extends StatelessWidget {
           child: child ?? const SizedBox.shrink(),
         );
       },
-      home: RemoteApiTestWidget(buildConfig: buildConfig),
+      home: DevMenuScreen(buildConfig: buildConfig),
     );
   }
 }
@@ -102,7 +102,7 @@ class _FirestoreDemoWidgetState extends State<FirestoreDemoWidget> {
                   ),
                 );
               }
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator(color: Colors.yellow,));
             }),
       ),
     );

@@ -18,7 +18,7 @@ class GetAppConfigUseCase
       return Right(appConfig);
     } catch (error, st) {
       reportError(error, st);
-      return Left(UnknownAppConfigFailure());
+      return Left(UnknownAppConfigFailure(cause: error));
     }
   }
 }
