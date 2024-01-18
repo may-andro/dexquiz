@@ -102,7 +102,10 @@ class _FirestoreDemoWidgetState extends State<FirestoreDemoWidget> {
                   ),
                 );
               }
-              return const Center(child: CircularProgressIndicator(color: Colors.yellow,));
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: Colors.yellow,
+              ));
             }),
       ),
     );

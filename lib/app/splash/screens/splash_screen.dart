@@ -20,55 +20,61 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final isSplashDescriptive =
-        buildConfig.buildEnvironment.isSplashDescriptive;
+    final isDescriptive = buildConfig.buildEnvironment.isSplashDescriptive;
     return BlocProvider(
       create: (_) => SplashBloc(
-        buildConfig,
+        const DIGraphService(),
         moduleConfigurators,
-      )..add(OnStartEvent()),
+      )..add(StartSetUp()),
       child: Scaffold(
-        body: BlocBuilder<SplashBloc, SplashState>(builder: (context, state) {
-          if (state.designSystem != null) {
-            onInitializationSuccessful(state.designSystem!);
-            return const SizedBox.shrink();
-          }
-
-          if (state.error != null) {
-            return Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                children: [
-                  const Spacer(),
-                  const SplashIconWidget('assets/images/splash.png'),
-                  const Spacer(),
-                  SplashErrorWidget(state.error)
-                ],
-              ),
-            );
-          }
-
-          return Padding(
-            padding: const EdgeInsets.all(24),
-            child: Column(
-              children: [
-                const Spacer(),
-                SplashIconWidget(state.imagePath),
-                const Spacer(),
-                if (state.setUpStatus != null) ...[
-                  SplashInfoWidget(
-                    state.setUpStatus!,
-                    isEnabled: isSplashDescriptive,
-                  ),
-                  SplashMessageWidget(
-                    (state.setUpStatus!.length / SetUpStatus.values.length),
-                    isEnabled: !isSplashDescriptive,
-                  ),
-                ]
-              ],
-            ),
-          );
-        }),
+        body: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: BlocBuilder<SplashBloc, SplashState>(
+            builder: (context, state) {
+              switch (state) {
+                case SetUpCompeted():
+                  {
+                    onInitializationSuccessful(state.designSystem);
+                    return const SizedBox.shrink();
+                  }
+                case SetUpError():
+                  {
+                    return Column(
+                      children: [
+                        const Spacer(),
+                        Center(
+                          child: SizedBox(
+                            width: context.screenWidth * 0.8,
+                            child: Image.asset('assets/images/splash.png'),
+                          ),
+                        ),
+                        const Spacer(),
+                        SplashErrorWidget(state.cause)
+                      ],
+                    );
+                  }
+                case SetUpProgress():
+                  {
+                    return Column(
+                      children: [
+                        const Spacer(),
+                        SplashIconWidget(buildConfig),
+                        const Spacer(),
+                        SplashInfoWidget(
+                          state.setUpStatus,
+                          isEnabled: isDescriptive,
+                        ),
+                        SplashMessageWidget(
+                          state.progress,
+                          isEnabled: !isDescriptive,
+                        ),
+                      ],
+                    );
+                  }
+              }
+            },
+          ),
+        ),
       ),
     );
   }

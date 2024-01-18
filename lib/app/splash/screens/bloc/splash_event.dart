@@ -1,26 +1,10 @@
-import 'package:dependency_injector/dependency_injector.dart';
-import 'package:design_system/design_system.dart';
+import 'package:equatable/equatable.dart';
 
-sealed class SplashEvent {
+sealed class SplashEvent extends Equatable {
   const SplashEvent();
+
+  @override
+  List<Object> get props => [];
 }
 
-final class OnStartEvent extends SplashEvent {}
-
-final class OnErrorEvent extends SplashEvent {
-  final Object? cause;
-
-  OnErrorEvent(this.cause);
-}
-
-final class OnUpdateStatusEvent extends SplashEvent {
-  final List<SetUpStatus> setUpStatus;
-
-  OnUpdateStatusEvent(this.setUpStatus);
-}
-
-final class OnDesignSystemEvent extends SplashEvent {
-  final DesignSystem designSystem;
-
-  OnDesignSystemEvent(this.designSystem);
-}
+final class StartSetUp extends SplashEvent {}
