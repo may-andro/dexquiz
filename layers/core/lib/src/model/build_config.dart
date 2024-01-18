@@ -7,6 +7,8 @@ enum BuildEnvironment {
   bool get isFeatureFlagCached => this == BuildEnvironment.staging;
 
   bool get isRemoteLoggingEnabled => this == BuildEnvironment.staging;
+
+  bool get isSplashDescriptive => this == BuildEnvironment.staging;
 }
 
 enum BuildFlavor { kanto, johto }

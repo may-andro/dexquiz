@@ -110,7 +110,7 @@ scripts:
     packageFilters:
       dependsOn: flutter_native_splash
 
-  generate_db:
+  gen_db:
     run: |
       flutter clean
       dart run build_runner build --delete-conflicting-outputs
