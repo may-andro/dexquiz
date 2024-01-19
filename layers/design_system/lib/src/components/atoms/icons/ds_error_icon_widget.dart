@@ -15,7 +15,7 @@ class DSErrorIconWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Lottie.asset(
-      Assets.lottie.error,
+      Assets.lottieFiles.error,
       package: 'design_system',
       repeat: true,
       height: height,

@@ -50,7 +50,7 @@ class _DSLoadingWidgetState extends State<DSLoadingWidget>
         );
       },
       child: DSLocalImageWidget(
-        Assets.image.badgePokemon.path,
+        Assets.images.badgePokemon.path,
         height: widget.height,
         width: widget.width,
       ),
