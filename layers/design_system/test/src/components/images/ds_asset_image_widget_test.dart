@@ -1,8 +1,5 @@
-import 'dart:convert';
-
 import 'package:design_system/src/components/atoms/images/ds_asset_image_widget.dart';
 import 'package:design_system/src/theme/theme.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import '../../../utils/alchemist_utils.dart';
@@ -35,14 +32,4 @@ List<TestCase> _getConfigs(DSTheme dsTheme) {
     }
   }
   return list;
-}
-
-class TestAssetBundle extends CachingAssetBundle {
-  @override
-  Future<ByteData> load(String key) async {
-    if (key == 'resources/test') {
-      return ByteData.sublistView(utf8.encode('Hello World!'));
-    }
-    return ByteData(0);
-  }
 }
