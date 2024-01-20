@@ -26,7 +26,7 @@ jobs:
           if [ ${{ inputs.should_run_golden_test }} == 'false' ]; then
             echo "runner=ubuntu-latest" >> $GITHUB_OUTPUT
           else
-            echo "runner=macos-latest" >> $GITHUB_OUTPUT
+            echo "runner=macos-13-xlarge" >> $GITHUB_OUTPUT
           fi
 
   analyze-module:
