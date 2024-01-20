@@ -66,6 +66,14 @@ class $AssetsImagesGen {
   AssetGenImage get badgeIce =>
       const AssetGenImage('assets/images/badge_ice.png');
 
+  /// File path: assets/images/badge_johtodex.png
+  AssetGenImage get badgeJohtodex =>
+      const AssetGenImage('assets/images/badge_johtodex.png');
+
+  /// File path: assets/images/badge_kantodex.png
+  AssetGenImage get badgeKantodex =>
+      const AssetGenImage('assets/images/badge_kantodex.png');
+
   /// File path: assets/images/badge_lugia.png
   AssetGenImage get badgeLugia =>
       const AssetGenImage('assets/images/badge_lugia.png');
@@ -90,6 +98,10 @@ class $AssetsImagesGen {
   AssetGenImage get badgePokemon =>
       const AssetGenImage('assets/images/badge_pokemon.png');
 
+  /// File path: assets/images/badge_pokemons.png
+  AssetGenImage get badgePokemons =>
+      const AssetGenImage('assets/images/badge_pokemons.png');
+
   /// File path: assets/images/badge_psychic.png
   AssetGenImage get badgePsychic =>
       const AssetGenImage('assets/images/badge_psychic.png');
@@ -98,9 +110,17 @@ class $AssetsImagesGen {
   AssetGenImage get badgeRock =>
       const AssetGenImage('assets/images/badge_rock.png');
 
+  /// File path: assets/images/badge_ryhorn.png
+  AssetGenImage get badgeRyhorn =>
+      const AssetGenImage('assets/images/badge_ryhorn.png');
+
   /// File path: assets/images/badge_steel.png
   AssetGenImage get badgeSteel =>
       const AssetGenImage('assets/images/badge_steel.png');
+
+  /// File path: assets/images/badge_victory.png
+  AssetGenImage get badgeVictory =>
+      const AssetGenImage('assets/images/badge_victory.png');
 
   /// File path: assets/images/badge_water.png
   AssetGenImage get badgeWater =>
@@ -226,15 +246,20 @@ class $AssetsImagesGen {
         badgeGhost,
         badgeGrass,
         badgeIce,
+        badgeJohtodex,
+        badgeKantodex,
         badgeLugia,
         badgeMagikarp,
         badgeNormal,
         badgePikachu,
         badgePoison,
         badgePokemon,
+        badgePokemons,
         badgePsychic,
         badgeRock,
+        badgeRyhorn,
         badgeSteel,
+        badgeVictory,
         badgeWater,
         pokeBadge,
         pokeball,
