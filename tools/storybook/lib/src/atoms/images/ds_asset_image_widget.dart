@@ -52,7 +52,8 @@ class DSAssetImage extends StatelessWidget {
                     Option(Assets.images.pokeBadge.path, 'Poke Badge'),
                     Option(Assets.images.pokeball.path, 'Pokeball'),
                     Option(Assets.images.pokeballGreat.path, 'Pokeball Great'),
-                    Option(Assets.images.pokeballPremier.path, 'Pokeball Premier'),
+                    Option(
+                        Assets.images.pokeballPremier.path, 'Pokeball Premier'),
                     Option(Assets.images.pokeballUltra.path, 'Pokeball Ultra'),
                     Option(Assets.images.pokemonJhoto.path, 'Pokemon Jhoto'),
                     Option(Assets.images.pokemonLogo.path, 'Pokemon Logo'),
