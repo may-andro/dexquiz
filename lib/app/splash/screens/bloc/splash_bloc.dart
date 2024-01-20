@@ -43,7 +43,7 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
     final getAppConfigUseCase = appServiceLocator.get<GetAppConfigUseCase>();
     final appConfig = await getAppConfigUseCase();
     appConfig.fold(
-      (left) => emit(SetUpError(left.cause)),
+      (left) => emit(SetUpError(left.message ?? left.cause)),
       (right) {
         final designSystem = DesignSystem.values.firstWhereOrNull(
               (designSystem) {
