@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class DSLocalImageWidget extends StatelessWidget {
-  const DSLocalImageWidget(
+class DSAssetImageWidget extends StatelessWidget {
+  const DSAssetImageWidget(
     this.path, {
     this.height,
     this.width,

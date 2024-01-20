@@ -13,12 +13,21 @@ class GetAppConfigUseCase
     try {
       final appConfig = await _appConfigRepository.getAppConfig();
       if (appConfig == null) {
-        return Left(NoAppConfigFoundFailure());
+        return Left(
+          NoAppConfigFoundFailure(
+            message: 'No configuration for the app found.',
+          ),
+        );
       }
       return Right(appConfig);
     } catch (error, st) {
       reportError(error, st);
-      return Left(UnknownAppConfigFailure(cause: error));
+      return Left(
+        UnknownAppConfigFailure(
+          message: 'App failed to fetch the required configuration',
+          cause: error,
+        ),
+      );
     }
   }
 }

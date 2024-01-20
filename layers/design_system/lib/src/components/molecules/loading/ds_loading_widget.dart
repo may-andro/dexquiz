@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:design_system/src/components/atoms/atoms.dart';
-import 'package:design_system/assets/assets.gen.dart';
 
 class DSLoadingWidget extends StatefulWidget {
   const DSLoadingWidget({
@@ -49,8 +48,8 @@ class _DSLoadingWidgetState extends State<DSLoadingWidget>
           child: child,
         );
       },
-      child: DSLocalImageWidget(
-        Assets.image.badgePokemon.path,
+      child: DSAssetImageWidget(
+        Assets.images.badgePokemon.path,
         height: widget.height,
         width: widget.width,
       ),
