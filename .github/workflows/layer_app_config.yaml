@@ -2,6 +2,8 @@ name: Run static code analysis and unit test for app config module
 
 on:
   push:
+    branches:
+      - staging
     paths:
       - layers/app_config/**
 
