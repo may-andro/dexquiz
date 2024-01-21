@@ -48,6 +48,9 @@ jobs:
           cache-key: flutter
           cache-path: ${{ runner.tool_cache }}/flutter
 
+      - name: Create directory
+        run: mkdir -p android/app/.signing
+
       - name: Create the key.properties
         run: |
           echo keyPassword=\${{ secrets.SIGNING_KEY_PASSWORD }} > ${{env.PROPERTIES_PATH}}
