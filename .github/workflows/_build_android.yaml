@@ -51,14 +51,15 @@ jobs:
       - name: Create directory
         run: mkdir -p android/app/.signing
 
-      - name: Create the key.properties
-        run: |
-          echo keyPassword=\${{ secrets.SIGNING_KEY_PASSWORD }} > ${{env.PROPERTIES_PATH}}
-          echo storePassword=\${{ secrets.SIGNING_STORE_PASSWORD }} >> ${{env.PROPERTIES_PATH}}
-          echo keyAlias=\${{ secrets.SIGNING_KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
-
       - name: Decoding base64 key into a file
         run: echo "${{ secrets.SIGNING_KEYSTORE }}" | base64 --decode > android/app/.signing/${{ inputs.flavor }}.jks
+
+      - name: Create the key.properties
+        run: |
+          echo "storeFile=android/app/.signing/${{ inputs.flavor }}.jks" > android/key.properties
+          echo "storePassword=${{ secrets.SIGNING_STORE_PASSWORD }}" >> ${{env.PROPERTIES_PATH}}
+          echo "keyPassword=${{ secrets.SIGNING_KEY_PASSWORD }}" >> ${{env.PROPERTIES_PATH}}
+          echo "keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}" >> ${{env.PROPERTIES_PATH}}
 
       - name: Setup Melos
         run: |
