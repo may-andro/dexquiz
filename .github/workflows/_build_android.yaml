@@ -9,6 +9,12 @@ on:
       target:
         type: string
         required: true
+      upload_to_github:
+        type: string
+        required: false
+      upload_to_firebase:
+        type: string
+        required: false
     secrets:
       SIGNING_KEYSTORE:
         required: true
@@ -17,6 +23,10 @@ on:
       SIGNING_KEY_PASSWORD:
         required: true
       SIGNING_STORE_PASSWORD:
+        required: true
+      FIREBASE_APP_ID:
+        required: true
+      FIREBASE_TOKEN:
         required: true
 
 env:
@@ -88,17 +98,28 @@ jobs:
       - name: Build aab file
         run: flutter build appbundle --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --dart-define=build_env=prod
 
-      - name: Upload APK artifact
+      - name: Upload APK artifact to Github
         uses: actions/upload-artifact@v3
+        if: inputs.upload_to_github == 'true'
         with:
           name: app-${{ inputs.flavor }}-release.apk
           path: build/app/outputs/flutter-apk/app-${{ inputs.flavor }}-release.apk
           retention-days: 7
 
-      - name: Upload AAB artifact
+      - name: Upload AAB artifact to Github
         uses: actions/upload-artifact@v3
+        if: inputs.upload_to_github == 'true'
         with:
           name: app-${{ inputs.flavor }}-release.aab
           path: build/app/outputs/bundle/${{ inputs.flavor }}Release/app-${{ inputs.flavor }}-release.aab
           retention-days: 7
+
+      - name: Upload APK to Firebase
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
+        if: inputs.upload_to_firebase == 'true'
+        with:
+          appId: ${{ secrets.FIREBASE_APP_ID }}
+          token: ${{ secrets.FIREBASE_TOKEN }}
+          groups: Testers
+          file: build/app/outputs/flutter-apk/app-${{ inputs.flavor }}-release.apk
 
