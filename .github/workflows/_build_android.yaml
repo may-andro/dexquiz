@@ -56,7 +56,7 @@ jobs:
 
       - name: Create the key.properties
         run: |
-          echo "storeFile=android/app/.signing/${{ inputs.flavor }}.jks" > android/key.properties
+          echo "storeFile=.signing/${{ inputs.flavor }}.jks" > android/key.properties
           echo "storePassword=${{ secrets.SIGNING_STORE_PASSWORD }}" >> ${{env.PROPERTIES_PATH}}
           echo "keyPassword=${{ secrets.SIGNING_KEY_PASSWORD }}" >> ${{env.PROPERTIES_PATH}}
           echo "keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}" >> ${{env.PROPERTIES_PATH}}
