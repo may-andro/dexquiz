@@ -62,3 +62,4 @@ test-results.json
 
 # ignore signing keystore files
 /android/app/.signing
+/android/app/.firebase_distribution

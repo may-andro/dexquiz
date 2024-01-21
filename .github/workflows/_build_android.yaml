@@ -26,7 +26,7 @@ on:
         required: true
       FIREBASE_APP_ID:
         required: true
-      FIREBASE_TOKEN:
+      CREDENTIAL_FILE_CONTENT:
         required: true
 
 env:
@@ -115,11 +115,11 @@ jobs:
           retention-days: 7
 
       - name: Upload APK to Firebase
-        uses: wzieba/Firebase-Distribution-Github-Action@v1.3.2
+        uses: wzieba/Firebase-Distribution-Github-Action@v1.7.0
         if: inputs.upload_to_firebase == 'true'
         with:
           appId: ${{ secrets.FIREBASE_APP_ID }}
-          token: ${{ secrets.FIREBASE_TOKEN }}
+          serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: Testers
           file: build/app/outputs/flutter-apk/app-${{ inputs.flavor }}-release.apk
 

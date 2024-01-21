@@ -24,7 +24,7 @@ jobs:
       SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
       SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
       FIREBASE_APP_ID: ${{ secrets.KANTO_ANDROID_FIREBASE_APP_ID }}
-      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      CREDENTIAL_FILE_CONTENT: ${{ secrets.KANTO_CREDENTIAL_FILE_CONTENT }}
 
   build_android_johto:
     uses: ./.github/workflows/_build_android.yaml
@@ -39,4 +39,4 @@ jobs:
       SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
       SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
       FIREBASE_APP_ID: ${{ secrets.JOHTO_ANDROID_FIREBASE_APP_ID }}
-      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      CREDENTIAL_FILE_CONTENT: ${{ secrets.JOHTO_CREDENTIAL_FILE_CONTENT }}
