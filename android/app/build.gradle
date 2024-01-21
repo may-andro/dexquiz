@@ -75,7 +75,7 @@ android {
 
     signingConfigs {
         kanto {
-            storeFile keystoreProperties['storeFileKanto'] ? file(keystoreProperties['storeFileKanto']) : null
+            storeFile keystoreProperties['kantoStoreFile'] ? file(keystoreProperties['kantoStoreFile']) : null
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
             storePassword keystoreProperties['storePassword']
@@ -83,7 +83,7 @@ android {
             v2SigningEnabled true
         }
         johto {
-            storeFile keystoreProperties['storeFileJohto'] ? file(keystoreProperties['storeFileJohto']) : null
+            storeFile keystoreProperties['johtoStoreFile'] ? file(keystoreProperties['johtoStoreFile']) : null
             keyAlias keystoreProperties['keyAlias']
             keyPassword keystoreProperties['keyPassword']
             storePassword keystoreProperties['storePassword']

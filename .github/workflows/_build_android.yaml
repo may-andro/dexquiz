@@ -56,7 +56,7 @@ jobs:
 
       - name: Create key.properties
         run: |
-          echo "storeFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
+          echo "{{ inputs.flavor }}StoreFile=${{ steps.android_keystore.outputs.filePath }}" > android/key.properties
           echo "storePassword=${{ secrets.SIGNING_KEY_PASSWORD }}" >> android/key.properties
           echo "keyPassword=${{ secrets.SIGNING_KEY_PASSWORD }}" >> android/key.properties
           echo "keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}" >> android/key.properties
