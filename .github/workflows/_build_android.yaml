@@ -58,7 +58,7 @@ jobs:
           echo keyAlias=\${{ secrets.SIGNING_KEY_ALIAS }} >> ${{env.PROPERTIES_PATH}}
 
       - name: Decoding base64 key into a file
-        run: echo "${{ secrets.SIGNING_KEYSTORE }}" | base64 --decode > android/app/.signing/{{ inputs.flavor }}.jks
+        run: echo "${{ secrets.SIGNING_KEYSTORE }}" | base64 --decode > android/app/.signing/${{ inputs.flavor }}.jks
 
       - name: Setup Melos
         run: |
