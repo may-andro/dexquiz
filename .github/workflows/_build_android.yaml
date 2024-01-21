@@ -9,6 +9,9 @@ on:
       target:
         type: string
         required: true
+      build_env:
+        type: string
+        required: true
       upload_to_github:
         type: string
         required: false
@@ -92,11 +95,11 @@ jobs:
           fi
 
       - name: Build apk file
-        run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --dart-define=build_env=prod
+        run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --dart-define=build_env=${{ inputs.build_env }}
         timeout-minutes: 20
 
       - name: Build aab file
-        run: flutter build appbundle --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --dart-define=build_env=prod
+        run: flutter build appbundle --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --dart-define=build_env=${{ inputs.build_env }}
 
       - name: Upload APK artifact to Github
         uses: actions/upload-artifact@v3

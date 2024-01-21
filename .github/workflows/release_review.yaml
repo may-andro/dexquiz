@@ -31,6 +31,7 @@ jobs:
     with:
       flavor: johto
       target: lib/flavors/johto/main_johto.dart
+      build_env: staging
       upload_to_github: 'false'
       upload_to_firebase: 'true'
     secrets:

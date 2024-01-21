@@ -2,6 +2,8 @@ name: Analyse and test Storybook
 
 on:
   push:
+    branches:
+      - staging
     paths:
       - 'tools/storybook/**'
 
