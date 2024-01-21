@@ -59,3 +59,6 @@ test-results.json
 
 # build_runner generated files
 **.g.dart
+
+# ignore signing keystore files
+/android/app/.signing

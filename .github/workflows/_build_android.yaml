@@ -1,0 +1,80 @@
+name: Build and upload android artifacts
+
+on:
+  workflow_call:
+    inputs:
+      flavor:
+        type: string
+        required: true
+      target:
+        type: string
+        required: true
+    secrets:
+      SIGNING_KEYSTORE:
+        required: true
+      SIGNING_KEY_ALIAS:
+        required: true
+      SIGNING_KEY_PASSWORD:
+        required: true
+      SIGNING_STORE_PASSWORD:
+        required: true
+
+env:
+  DART_SDK_VERSION: 3.2.3
+  FLUTTER_VERSION: "3.16.3"
+  JAVA_VERSION: "12.x"
+
+jobs:
+  create_release_artifact:
+    name: Create and upload apk and aab to github
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Java environment
+        uses: actions/setup-java@v1
+        with:
+          java-version: ${{env.JAVA_VERSION}}
+
+      - name: Setup the flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
+
+      - name: Generate icons
+        run: flutter pub run flutter_launcher_icons -f flutter_launcher_icons-${{ inputs.flavor }}.yaml
+
+      - name: Set version from tag
+        run: |
+          if [ "$GITHUB_REF_TYPE" != "tag" ]
+          then
+            echo "Ref name $GITHUB_REF_NAME is not a tag but a $GITHUB_REF_TYPE, not setting version number"
+          else
+            version=$(echo $GITHUB_REF_NAME | sed "s/-internal//" | sed "s/-prod//") && sed -i "s/^version: .*$/version: $version/g" pubspec.yaml
+          fi
+
+      - name: Build apk file
+        run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --dart-define=build_env=prod
+        timeout-minutes: 20
+
+      - name: Build aab file
+        run: flutter build appbundle --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --dart-define=build_env=prod
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-${{ inputs.flavor }}-release.apk
+          path: build/app/outputs/flutter-apk/app-${{ inputs.flavor }}-release.apk
+          retention-days: 7
+
+      - name: Upload AAB artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: app-${{ inputs.flavor }}-release.aab
+          path: build/app/outputs/bundle/${{ inputs.flavor }}Release/app-${{ inputs.flavor }}-release.aab
+          retention-days: 7
+
