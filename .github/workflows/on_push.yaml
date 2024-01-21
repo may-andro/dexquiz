@@ -9,17 +9,6 @@ on:
       - staging
 
 jobs:
-  build_android_kanto:
-    uses: ./.github/workflows/_build_android.yaml
-    with:
-      flavor: kanto
-      target: lib/flavors/kanto/main_kanto.dart
-    secrets:
-      SIGNING_KEYSTORE: ${{ secrets.KANTO_KEYSTORE }}
-      SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
-      SIGNING_KEY_PASSWORD: ${{ secrets.SIGNING_KEY_PASSWORD }}
-      SIGNING_STORE_PASSWORD: ${{ secrets.SIGNING_STORE_PASSWORD }}
-
   build_android_johto:
     uses: ./.github/workflows/_build_android.yaml
     with:
