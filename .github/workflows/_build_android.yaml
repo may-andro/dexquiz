@@ -45,6 +45,14 @@ jobs:
           cache-key: flutter
           cache-path: ${{ runner.tool_cache }}/flutter
 
+      - name: Setup Melos
+        run: |
+          dart pub global activate melos
+          melos bs
+
+      - name: Run code generator
+        run: melos gen --no-select
+
       - name: Generate icons
         run: flutter pub run flutter_launcher_icons -f flutter_launcher_icons-${{ inputs.flavor }}.yaml
 
