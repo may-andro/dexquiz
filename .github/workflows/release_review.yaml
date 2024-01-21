@@ -16,6 +16,7 @@ jobs:
     with:
       flavor: kanto
       target: lib/flavors/kanto/main_kanto.dart
+      build_env: staging
       upload_to_github: 'false'
       upload_to_firebase: 'true'
     secrets:
