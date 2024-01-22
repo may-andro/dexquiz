@@ -74,6 +74,15 @@ jobs:
           echo "keyPassword=${{ secrets.SIGNING_KEY_PASSWORD }}" >> ${{env.PROPERTIES_PATH}}
           echo "keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}" >> ${{env.PROPERTIES_PATH}}
 
+      - name: Set version from tag
+        run: |
+          if [ "$GITHUB_REF_TYPE" != "tag" ]
+          then
+            echo "Ref name $GITHUB_REF_NAME is not a tag but a $GITHUB_REF_TYPE, not setting version number"
+          else
+            version=$(echo $GITHUB_REF_NAME | sed "s/-review//" | sed "s/-prod//" | sed "s/+.*//") && sed -i "s/^version: .*$/version: $version/g" pubspec.yaml
+          fi
+
       - name: Setup Melos
         run: |
           dart pub global activate melos
@@ -84,15 +93,6 @@ jobs:
 
       - name: Generate icons
         run: flutter pub run flutter_launcher_icons -f flutter_launcher_icons-${{ inputs.flavor }}.yaml
-
-      - name: Set version from tag
-        run: |
-          if [ "$GITHUB_REF_TYPE" != "tag" ]
-          then
-            echo "Ref name $GITHUB_REF_NAME is not a tag but a $GITHUB_REF_TYPE, not setting version number"
-          else
-            version=$(echo $GITHUB_REF_NAME | sed "s/-internal//" | sed "s/-prod//") && sed -i "s/^version: .*$/version: $version/g" pubspec.yaml
-          fi
 
       - name: Build apk file
         run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --dart-define=build_env=${{ inputs.build_env }}
