@@ -11,8 +11,12 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  analyze_and_test:
+    uses: ./.github/workflows/_analyze_and_test_app.yaml
+
   build_android_kanto:
     uses: ./.github/workflows/_build_android.yaml
+    needs: analyze_and_test
     with:
       flavor: kanto
       target: lib/flavors/kanto/main_kanto.dart
@@ -29,6 +33,7 @@ jobs:
 
   build_android_johto:
     uses: ./.github/workflows/_build_android.yaml
+    needs: analyze_and_test
     with:
       flavor: johto
       target: lib/flavors/johto/main_johto.dart
