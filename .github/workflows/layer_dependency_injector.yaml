@@ -2,6 +2,8 @@ name: Run static code analysis and unit test for dependency_injector module
 
 on:
   push:
+    branches:
+      - staging
     paths:
       - layers/dependency_injector/**
 

@@ -2,6 +2,8 @@ name: Run static code analysis and unit test for cache module
 
 on:
   push:
+    branches:
+      - staging
     paths:
       - layers/cache/**
 

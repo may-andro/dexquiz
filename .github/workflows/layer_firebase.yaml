@@ -2,6 +2,8 @@ name: Run static code analysis and unit test for firebase module
 
 on:
   push:
+    branches:
+      - staging
     paths:
       - layers/firebase/**
 
