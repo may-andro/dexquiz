@@ -6,8 +6,6 @@ concurrency:
 
 on:
   push:
-    branches:
-      - staging
     paths:
       - layers/feature_flag/**
 

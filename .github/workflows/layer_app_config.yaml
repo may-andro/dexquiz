@@ -6,11 +6,6 @@ concurrency:
 
 on:
   push:
-    branches:
-      - staging
-    pull_request:
-      branches:
-        - staging
     paths:
       - layers/app_config/**
 

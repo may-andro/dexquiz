@@ -34,4 +34,3 @@ class NoFailure implements Failure {}
 class UnknownFailure extends BasicFailure {
   const UnknownFailure({super.message, super.cause});
 }
-
