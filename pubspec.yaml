@@ -39,6 +39,9 @@ dependencies:
   use_case:
     path: layers/use_case
 
+  settings:
+    path: features/settings
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
