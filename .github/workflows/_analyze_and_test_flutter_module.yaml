@@ -89,3 +89,16 @@ jobs:
           path: test-results-golden.json
           reporter: flutter-json
           working-directory: ${{ inputs.module_path }}
+
+      - name: Install lcov on ubuntu
+        run: |
+          sudo apt-get update
+          sudo apt-get install lcov
+
+      - name: Generate code coverage report from lcov.info
+        uses: dethereum/github-actions-report-lcov@v1.0.0
+        with:
+          coverage-files: coverage/lcov.info
+          minimum-coverage: 40
+          artifact-name: code-coverage-report
+          github-token: ${{ secrets.GITHUB_TOKEN }}

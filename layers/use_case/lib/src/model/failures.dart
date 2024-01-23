@@ -30,3 +30,8 @@ abstract class BasicFailure extends Equatable implements Failure {
 }
 
 class NoFailure implements Failure {}
+
+class UnknownFailure extends BasicFailure {
+  const UnknownFailure({super.message, super.cause});
+}
+

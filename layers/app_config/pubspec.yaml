@@ -12,6 +12,7 @@ dependencies:
 
   equatable: ^2.0.5
   json_annotation: ^4.8.1
+  in_app_review: ^2.0.8
 
   core:
     path: ../core
