@@ -1,10 +1,7 @@
 import 'dart:async';
 
 import 'package:app_config/src/data/data.dart';
-import 'package:app_config/src/data/repository/app_in_review_repository_impl.dart';
 import 'package:app_config/src/domain/domain.dart';
-import 'package:app_config/src/domain/repository/app_in_review_repository.dart';
-import 'package:app_config/src/domain/use_case/use_case.dart';
 import 'package:core/core.dart';
 import 'package:dependency_injector/dependency_injector.dart';
 import 'package:firebase/firebase.dart';
