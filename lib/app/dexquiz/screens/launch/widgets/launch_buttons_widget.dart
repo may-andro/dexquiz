@@ -2,6 +2,7 @@ import 'package:design_system/design_system.dart';
 import 'package:dexquiz/app/dexquiz/screens/launch/bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:settings/settings.dart';
 
 class LaunchButtonsWidget extends StatelessWidget {
   const LaunchButtonsWidget({super.key});
@@ -17,7 +18,12 @@ class LaunchButtonsWidget extends StatelessWidget {
             DSFabWidget(
               fabType: DSFabIcon(Icons.settings),
               color: context.colorPalette.brand.primary,
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SettingScreen()),
+                );
+              },
               elevation: context.dimens.elevationLevel2,
             ),
             state is Success

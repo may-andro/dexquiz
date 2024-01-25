@@ -22,6 +22,8 @@ dependencies:
     path: ../../layers/dependency_injector
   design_system:
     path: ../../layers/design_system
+  feature_flag:
+    path: ../../layers/feature_flag
 
 dev_dependencies:
   flutter_test:
