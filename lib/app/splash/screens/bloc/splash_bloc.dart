@@ -46,12 +46,12 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
       },
     );
 
-    if(!errorDuringDI) {
+    if (!errorDuringDI) {
       try {
         final appConfig = appServiceLocator.get<AppConfig>();
         final designSystem = DesignSystem.values.firstWhereOrNull(
               (designSystem) => designSystem.name == appConfig.themeCode,
-        ) ??
+            ) ??
             DesignSystem.grass;
         emit(SetUpCompeted(designSystem));
       } catch (e) {
