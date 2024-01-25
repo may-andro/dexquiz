@@ -10,7 +10,9 @@ This modules provides all the app configuration properties. These properties are
 
 The module exposes use cases for other app configurations like:
 
-- [x] `In App Review`: This allows app to request app reviews.
+- [x] `In App Review`: This provides app reviews feature.
+- [x] `Open External App`: This allows means to open external app for email and urls.
+- [x] `Package Info`: This provide package related info. 
 
 ## Usage
 
