@@ -41,7 +41,7 @@ void main() {
 
     group('getAppConfig', () {
       test('should return $AppConfig when there is data', () async {
-        final appConfig = AppConfig('test', 'test', 1, 1);
+        final appConfig = AppConfig.empty();
         mockGetDocumentUseCase.mockCall(appConfig.toJson());
 
         final result = await remoteAppConfigRepository.getAppConfig();

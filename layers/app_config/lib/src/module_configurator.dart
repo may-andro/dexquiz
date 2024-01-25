@@ -11,14 +11,21 @@ class AppConfigModuleConfigurator implements ModuleConfigurator {
   const AppConfigModuleConfigurator();
 
   @override
-  FutureOr<void> postDependenciesSetup(ServiceLocator serviceLocator) {}
+  FutureOr<void> postDependenciesSetup(ServiceLocator serviceLocator) async {
+    final getAppConfigUseCase = serviceLocator.get<GetAppConfigUseCase>();
+    final appConfig = await getAppConfigUseCase();
+    appConfig.fold(
+      (left) => throw PostRegisterDIException(left.message, left.cause),
+      (right) => serviceLocator.registerSingleton<AppConfig>(() => right),
+    );
+  }
 
   @override
   FutureOr<void> preDependenciesSetup(ServiceLocator serviceLocator) async {}
 
   @override
   FutureOr<void> registerDependencies(ServiceLocator serviceLocator) async {
-    serviceLocator.registerFactory<AppConfigRepository>(
+    serviceLocator.registerSingleton<AppConfigRepository>(
       () => RemoteAppConfigRepository(
         serviceLocator.get<GetDocumentUseCase>(),
         serviceLocator.get<BuildConfig>(),
@@ -32,7 +39,7 @@ class AppConfigModuleConfigurator implements ModuleConfigurator {
     );
 
     final InAppReview inAppReview = InAppReview.instance;
-    serviceLocator.registerFactory<AppInReviewRepository>(
+    serviceLocator.registerSingleton<AppInReviewRepository>(
       () => AppInReviewRepositoryImpl(inAppReview),
     );
 
@@ -45,6 +52,32 @@ class AppConfigModuleConfigurator implements ModuleConfigurator {
     serviceLocator.registerFactory<RequestReviewUseCase>(
       () => RequestReviewUseCase(
         serviceLocator.get<AppInReviewRepository>(),
+      ),
+    );
+
+    serviceLocator.registerSingleton<ExternalAppLauncherRepository>(
+      () => ExternalAppLauncherRepositoryImpl(),
+    );
+
+    serviceLocator.registerFactory<OpenEmailAppUseCase>(
+      () => OpenEmailAppUseCase(
+        serviceLocator.get<ExternalAppLauncherRepository>(),
+      ),
+    );
+
+    serviceLocator.registerFactory<OpenUrlUseCase>(
+      () => OpenUrlUseCase(
+        serviceLocator.get<ExternalAppLauncherRepository>(),
+      ),
+    );
+
+    serviceLocator.registerSingleton<PackageInfoRepository>(
+      () => PackageInfoRepositoryImpl(),
+    );
+
+    serviceLocator.registerFactory<GetAppInfoUseCase>(
+      () => GetAppInfoUseCase(
+        serviceLocator.get<PackageInfoRepository>(),
       ),
     );
   }

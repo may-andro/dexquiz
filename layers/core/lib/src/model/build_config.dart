@@ -9,6 +9,8 @@ enum BuildEnvironment {
   bool get isRemoteLoggingEnabled => this == BuildEnvironment.staging;
 
   bool get isSplashDescriptive => this == BuildEnvironment.staging;
+
+  bool get isDevMenuEnabled => this == BuildEnvironment.staging;
 }
 
 enum BuildFlavor { kanto, johto }

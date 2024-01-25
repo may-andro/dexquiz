@@ -29,7 +29,7 @@ void main() {
 
     group('call', () {
       test('should return $Right with $AppConfig', () async {
-        final appConfig = AppConfig('test', 'test', 1, 1);
+        final appConfig = AppConfig.empty();
         mockAppConfigRepository.mockGetAppConfig(appConfig);
 
         final result = await getAppConfigUseCase.call();

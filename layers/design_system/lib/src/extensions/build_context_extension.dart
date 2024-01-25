@@ -1,4 +1,4 @@
-import 'package:design_system/src/components/atoms/responsive_container/responsive_container.dart';
+import 'package:design_system/src/components/atoms/atoms.dart';
 import 'package:design_system/src/foundations/colors/colors.dart';
 import 'package:design_system/src/foundations/dimens/dimens.dart';
 import 'package:design_system/src/foundations/typographies/typographies.dart';
@@ -53,5 +53,28 @@ extension BuildContextExtension on BuildContext {
       default:
         return DeviceResolution.mobile;
     }
+  }
+
+  void showSnackBar(String message) {
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            DSTextWidget(
+              'Oops...',
+              style: typography.bodyLarge,
+              color: colorPalette.neutral.grey1,
+            ),
+            SizedBox(height: space(factor: 0.5)),
+            DSTextWidget(
+              message,
+              style: typography.bodyMedium,
+              color: colorPalette.neutral.grey2,
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
