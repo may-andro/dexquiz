@@ -15,6 +15,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:firebase/firebase.dart';
 import 'package:log_reporter/log_reporter.dart';
 import 'package:remote/remote.dart';
+import 'package:settings/settings.dart';
 import 'package:use_case/use_case.dart';
 
 Future<void> runFlavor({
@@ -48,6 +49,7 @@ Future<void> runFlavor({
       'https://pokeapi.co/api/v2/',
     ),
     const AppConfigModuleConfigurator(),
+    const FeatureSettingsModuleConfigurator(),
   ];
 
   FlutterNativeSplash.remove();

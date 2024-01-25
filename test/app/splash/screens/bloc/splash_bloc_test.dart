@@ -6,17 +6,10 @@ import 'package:dexquiz/module_configurator.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 import 'package:bloc_test/bloc_test.dart';
-import 'package:use_case/use_case.dart';
 
 class MockServiceLocator extends Mock implements ServiceLocator {
   void mockGet<T extends Object>(T expected) {
     when(() => get<T>()).thenReturn(expected);
-  }
-}
-
-class MockGetAppConfigUseCase extends Mock implements GetAppConfigUseCase {
-  void mockCallRight(AppConfig expected) {
-    when(() => call()).thenAnswer((_) async => Right(expected));
   }
 }
 
@@ -26,12 +19,11 @@ void main() {
   group(SplashBloc, () {
     late SplashBloc splashBloc;
 
-    late MockGetAppConfigUseCase mockGetAppConfigUseCase;
     late MockDIGraphService mockDIGraphService;
 
     bool isServiceLocatorInitialized = false;
+
     const designSystem = DesignSystem.fire;
-    final appConfig = AppConfig(designSystem.name, '', 1, 2);
 
     setUp(() {
       if (!isServiceLocatorInitialized) {
@@ -39,13 +31,7 @@ void main() {
         isServiceLocatorInitialized = true;
       }
 
-      mockGetAppConfigUseCase = MockGetAppConfigUseCase();
       mockDIGraphService = MockDIGraphService();
-
-      mockGetAppConfigUseCase.mockCallRight(appConfig);
-      when(() => appServiceLocator.get<GetAppConfigUseCase>()).thenReturn(
-        mockGetAppConfigUseCase,
-      );
 
       splashBloc = SplashBloc(mockDIGraphService, []);
     });
@@ -62,6 +48,10 @@ void main() {
           () => mockDIGraphService.setUpDIGraph(configurators: []),
         ).thenAnswer(
           (_) => Stream.fromIterable(SetUpStatus.values),
+        );
+
+        when(() => appServiceLocator.get<AppConfig>()).thenReturn(
+          AppConfig(designSystem.name, '1', 1, 1, ''),
         );
       },
       act: (bloc) => bloc.add(StartSetUp()),
@@ -81,21 +71,12 @@ void main() {
         when(
           () => mockDIGraphService.setUpDIGraph(configurators: []),
         ).thenAnswer(
-          (_) => Stream.fromIterable(SetUpStatus.values),
-        );
-        when(() => mockGetAppConfigUseCase()).thenAnswer(
-          (invocation) async => const Left(
-            UnknownAppConfigFailure(cause: 'test'),
-          ),
+          (_) => Stream.error(Exception()),
         );
       },
       act: (bloc) => bloc.add(StartSetUp()),
       expect: () => <SplashState>[
-        const SetUpProgress(SetUpStatus.values, 0.25),
-        const SetUpProgress(SetUpStatus.values, 0.5),
-        const SetUpProgress(SetUpStatus.values, 0.75),
-        const SetUpProgress(SetUpStatus.values, 1.0),
-        const SetUpError('test'),
+        const SetUpError(''),
       ],
     );
   });

@@ -23,6 +23,8 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
 
   final _receivedSetUpStatus = <SetUpStatus>[];
 
+  bool errorDuringDI = false;
+
   FutureOr<void> _onStartEvent(
     StartSetUp event,
     Emitter<SplashState> emit,
@@ -36,23 +38,25 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         emit(SetUpProgress(_receivedSetUpStatus, progress));
       },
       onError: (error, stackTrace) {
+        if (error is DIException) {
+          emit(SetUpError(error.message ?? error.cause ?? error));
+        }
         emit(SetUpError(error));
+        errorDuringDI = true;
       },
     );
 
-    final getAppConfigUseCase = appServiceLocator.get<GetAppConfigUseCase>();
-    final appConfig = await getAppConfigUseCase();
-    appConfig.fold(
-      (left) => emit(SetUpError(left.message ?? left.cause)),
-      (right) {
+    if (!errorDuringDI) {
+      try {
+        final appConfig = appServiceLocator.get<AppConfig>();
         final designSystem = DesignSystem.values.firstWhereOrNull(
-              (designSystem) {
-                return designSystem.name == appConfig.right.themeCode;
-              },
+              (designSystem) => designSystem.name == appConfig.themeCode,
             ) ??
             DesignSystem.grass;
         emit(SetUpCompeted(designSystem));
-      },
-    );
+      } catch (e) {
+        // Do nothing as we have caught the error in the stream earlier
+      }
+    }
   }
 }

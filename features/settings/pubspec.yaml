@@ -1,0 +1,33 @@
+name: settings
+description: "Provides app's setting features"
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.2.3 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  equatable: ^2.0.5
+  flutter_bloc: ^8.1.3
+  in_app_review: ^2.0.8
+
+  app_config:
+    path: ../../layers/app_config
+  core:
+    path: ../../layers/core
+  dependency_injector:
+    path: ../../layers/dependency_injector
+  design_system:
+    path: ../../layers/design_system
+  feature_flag:
+    path: ../../layers/feature_flag
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  bloc_test: ^9.1.5
+  build_runner: ^2.4.6
+  mocktail: ^1.0.2

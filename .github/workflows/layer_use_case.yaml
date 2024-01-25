@@ -1,9 +1,11 @@
 name: Analyze and test use case layer module
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
-    branches:
-      - staging
     paths:
       - layers/use_case/**
 

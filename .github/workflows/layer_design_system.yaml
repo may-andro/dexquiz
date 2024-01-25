@@ -1,9 +1,11 @@
 name: Run static code analysis and unit test for design system module
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
-    branches:
-      - staging
     paths:
       - layers/design_system/**
 

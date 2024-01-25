@@ -10,6 +10,8 @@ packages:
   - tools/*
   # Include all packages inside the `layers` directory that are direct children.
   - layers/*
+  # Include all packages inside the `features` directory that are direct children.
+  - features/*
 
 scripts:
   # Flutter packages scripts

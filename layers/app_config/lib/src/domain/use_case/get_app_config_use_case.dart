@@ -24,7 +24,7 @@ class GetAppConfigUseCase
       reportError(error, st);
       return Left(
         UnknownAppConfigFailure(
-          message: 'App failed to fetch the required configuration',
+          message: 'App failed to fetch the required app configuration',
           cause: error,
         ),
       );

@@ -10,7 +10,18 @@ class AppConfig extends Equatable {
     this.minimumRequiredAppVersion,
     this.pokedexStartEntry,
     this.pokedexEndEntry,
+    this.privacyPolicyUrl,
   );
+
+  factory AppConfig.empty() {
+    return AppConfig(
+      'fire',
+      '1.0.0',
+      0,
+      1,
+      'privacy_policy',
+    );
+  }
 
   @JsonKey(name: 'theme_code')
   final String themeCode;
@@ -20,6 +31,8 @@ class AppConfig extends Equatable {
   final int pokedexStartEntry;
   @JsonKey(name: 'pokedex_end_entry')
   final int pokedexEndEntry;
+  @JsonKey(name: 'privacy_policy_url')
+  final String privacyPolicyUrl;
 
   factory AppConfig.fromJson(Map<String, dynamic> json) =>
       _$AppConfigFromJson(json);
@@ -32,5 +45,6 @@ class AppConfig extends Equatable {
         minimumRequiredAppVersion,
         pokedexStartEntry,
         pokedexEndEntry,
+        privacyPolicyUrl,
       ];
 }
