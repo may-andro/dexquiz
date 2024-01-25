@@ -31,7 +31,7 @@ class OpenUrlUseCase extends BaseAsyncUseCase<void, String, OpenUrlFailure> {
     } catch (error, st) {
       reportError(error, st);
       return Left(
-        UnknownFailure(
+        UnknownUrlFailure(
           message: 'Failed to open url: $error',
           cause: error,
         ),
@@ -52,6 +52,6 @@ final class UrlLaunchFailure extends OpenUrlFailure {
   const UrlLaunchFailure({super.message, super.cause});
 }
 
-final class UnknownFailure extends OpenUrlFailure {
-  const UnknownFailure({super.message, super.cause});
+final class UnknownUrlFailure extends OpenUrlFailure {
+  const UnknownUrlFailure({super.message, super.cause});
 }

@@ -1,23 +1,18 @@
-class PreRegisterDIException implements Exception {
-  PreRegisterDIException(this.message, this.cause);
+sealed class DIException implements Exception {
+  DIException(this.message, this.cause);
 
   final String? message;
-
   final Object? cause;
 }
 
-class RegisterDIException implements Exception {
-  RegisterDIException(this.message, this.cause);
-
-  final String? message;
-
-  final Object? cause;
+class PreRegisterDIException extends DIException {
+  PreRegisterDIException(super.message, super.cause);
 }
 
-class PostRegisterDIException implements Exception {
-  PostRegisterDIException(this.message, this.cause);
+class RegisterDIException extends DIException {
+  RegisterDIException(super.message, super.cause);
+}
 
-  final String? message;
-
-  final Object? cause;
+class PostRegisterDIException extends DIException {
+  PostRegisterDIException(super.message, super.cause);
 }

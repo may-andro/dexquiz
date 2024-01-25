@@ -36,15 +36,22 @@ class SplashBloc extends Bloc<SplashEvent, SplashState> {
         emit(SetUpProgress(_receivedSetUpStatus, progress));
       },
       onError: (error, stackTrace) {
+        if (error is DIException) {
+          emit(SetUpError(error.message ?? error.cause ?? error));
+        }
         emit(SetUpError(error));
       },
     );
 
-    final appConfig = appServiceLocator.get<AppConfig>();
-    final designSystem = DesignSystem.values.firstWhereOrNull(
-          (designSystem) => designSystem.name == appConfig.themeCode,
-        ) ??
-        DesignSystem.grass;
-    emit(SetUpCompeted(designSystem));
+    try {
+      final appConfig = appServiceLocator.get<AppConfig>();
+      final designSystem = DesignSystem.values.firstWhereOrNull(
+            (designSystem) => designSystem.name == appConfig.themeCode,
+          ) ??
+          DesignSystem.grass;
+      emit(SetUpCompeted(designSystem));
+    } catch (e) {
+      // Do nothing as we have caught the error in the stream earlier
+    }
   }
 }

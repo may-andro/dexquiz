@@ -3,19 +3,19 @@ import 'package:feature_flag/src/domain/repository/feature_flag_repository.dart'
 import 'package:use_case/use_case.dart';
 
 class IsFeatureEnabledUseCase
-    extends BaseAsyncUseCase<bool, Feature, NoFailure> {
+    extends BaseAsyncUseCase<bool, Feature, UnknownFailure> {
   IsFeatureEnabledUseCase(this._featureFlagRepository);
 
   final FeatureFlagRepository _featureFlagRepository;
 
   @override
-  AsyncEither<NoFailure, bool> execute(Feature feature) async {
+  AsyncEither<UnknownFailure, bool> execute(Feature feature) async {
     try {
       final status = await _featureFlagRepository.getFeatureFlagStatus(feature);
       return Right(status);
     } on Exception catch (e, st) {
       reportError(e, st);
-      return Left(NoFailure());
+      return Left(UnknownFailure());
     }
   }
 }
