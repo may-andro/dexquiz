@@ -4,13 +4,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-on:
-  push:
-    paths:
-      - layers/app_config/**
 
-#on:
-#  push
+
+on:
+  push
 
 permissions:
   checks: write
