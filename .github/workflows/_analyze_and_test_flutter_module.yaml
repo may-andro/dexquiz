@@ -66,7 +66,7 @@ jobs:
         run: flutter analyze
 
       - name: Run unit tests
-        run: flutter test --exclude-tags golden --machine > test-results.json
+        run: flutter test --exclude-tags golden --coverage --machine > test-results.json
 
       - name: Generate test report
         uses: dorny/test-reporter@v1
