@@ -31,7 +31,7 @@ void main() {
 
     bool isServiceLocatorInitialized = false;
     const designSystem = DesignSystem.fire;
-    final appConfig = AppConfig(designSystem.name, '', 1, 2);
+    final appConfig = AppConfig.empty();
 
     setUp(() {
       if (!isServiceLocatorInitialized) {
