@@ -75,9 +75,10 @@ jobs:
             version=$(echo $GITHUB_REF_NAME | sed "s/-prod//" | sed "s/+.*//") && sed -i "s/^version: .*$/version: $version/g" pubspec.yaml
             branch_name="release-${version}"
             git branch -D $branch_name || true
+            git push origin --delete $branch_name || true
             git checkout -b $branch_name
             git diff
             git commit --all -m "Prepare release ${version}"
             git push origin $branch_name
-            
+            gh pr create --base main --head $branch_name --title "New Release ${version}" --body "Prepare the new release for ${version}"
           fi
