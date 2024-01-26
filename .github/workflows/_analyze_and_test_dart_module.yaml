@@ -47,7 +47,7 @@ jobs:
 
       - name: Get dart dependencies
         if: inputs.has_build_runner == 'false'
-        run: flutter pub get
+        run: dart pub get
 
       - name: Setup Melos and run code generators everywhere
         if: inputs.have_dependent_build_runner == 'true'
