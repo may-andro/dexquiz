@@ -1,16 +1,14 @@
-name: Test, build and upload artefacts on every push
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+name: Build release pr and upload prod to playstore
 
 on:
   push:
-    branches:
-      - staging
-  pull_request:
-    branches:
-      - staging
+    tags:
+      - '*-prod'
+
+concurrency:
+  # only one running workflow for a ref (branch, tag)
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   analyze_and_test:
@@ -22,9 +20,9 @@ jobs:
     with:
       flavor: kanto
       target: lib/flavors/kanto/main_kanto.dart
-      build_env: staging
-      upload_to_github: 'true'
-      upload_to_firebase: 'false'
+      build_env: prod
+      upload_to_github: 'false'
+      upload_to_firebase: 'true'
       upload_to_play_store: 'false'
     secrets:
       SIGNING_KEYSTORE: ${{ secrets.KANTO_KEYSTORE }}
@@ -42,8 +40,8 @@ jobs:
       flavor: johto
       target: lib/flavors/johto/main_johto.dart
       build_env: staging
-      upload_to_github: 'true'
-      upload_to_firebase: 'false'
+      upload_to_github: 'false'
+      upload_to_firebase: 'true'
       upload_to_play_store: 'false'
     secrets:
       SIGNING_KEYSTORE: ${{ secrets.JOHTO_KEYSTORE }}
@@ -54,3 +52,28 @@ jobs:
       CREDENTIAL_FILE_CONTENT: ${{ secrets.JOHTO_CREDENTIAL_FILE_CONTENT }}
       PLAYSTORE_SERVICE_ACCOUNT_JSON: ${{ secrets.JOHTO_PLAYSTORE_SERVICE_ACCOUNT_JSON }}
 
+  create_release_pull_request:
+    name: Create release branch and pull request to main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Git user config
+        run: |
+          git config --global user.email "mayank271993@gmail.com"
+          git config --global user.name "Continuous Integration"
+
+      - name: Set version from tag
+        run: |
+          if [ "$GITHUB_REF_TYPE" != "tag" ]
+          then
+            echo "Ref name $GITHUB_REF_NAME is not a tag but a $GITHUB_REF_TYPE, not setting version number"
+          else
+            version=$(echo $GITHUB_REF_NAME | sed "s/-prod//" | sed "s/+.*//") && sed -i "s/^version: .*$/version: $version/g" pubspec.yaml
+            branch_name="release-${version}"
+            git checkout -b $branch_name
+            git commit --all -m "Prepare release ${version}"
+            git push origin $branch_name
+            gh pr create --base main --head $branch_name --title "New Release ${version}" --body "Prepare the new release for ${version}"
+          fi

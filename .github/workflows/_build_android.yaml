@@ -14,10 +14,13 @@ on:
         required: true
       upload_to_github:
         type: string
-        required: false
+        required: true
       upload_to_firebase:
         type: string
-        required: false
+        required: true
+      upload_to_play_store:
+        type: string
+        required: true
     secrets:
       SIGNING_KEYSTORE:
         required: true
@@ -30,6 +33,8 @@ on:
       FIREBASE_APP_ID:
         required: true
       CREDENTIAL_FILE_CONTENT:
+        required: true
+      PLAYSTORE_SERVICE_ACCOUNT_JSON:
         required: true
 
 env:
@@ -125,4 +130,32 @@ jobs:
           serviceCredentialsFileContent: ${{ secrets.CREDENTIAL_FILE_CONTENT }}
           groups: Testers
           file: build/app/outputs/flutter-apk/app-${{ inputs.flavor }}-release.apk
+
+      - name: Determine Package Name
+        if: inputs.upload_to_play_store == 'true'
+        id: determine_package_name
+        run: |
+          if [ "${{ inputs.flavor }}" = "kanto" ]; then
+            echo "Setting package name for kanto"
+            echo "::set-output name=package_name::com.mayandro.dexquiz.kanto"
+          elif [ "${{ inputs.flavor }}" = "johto" ]; then
+            echo "Setting package name for johto"
+            echo "::set-output name=package_name::com.mayandro.dexquiz.johto"
+          else
+            echo "Unknown flavor"
+            exit 1
+          fi
+
+      - name: Upload AAB to Play Store
+        if: inputs.upload_to_play_store == 'true'
+        uses: r0adkll/upload-google-play@v1.1.2
+        with:
+          serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_SERVICE_ACCOUNT_JSON }}
+          packageName: ${{ steps.determine_package_name.outputs.package_name }}
+          releaseFiles: app/build/outputs/bundle/release/app-release.aab
+          track: alpha
+
+
+
+
 
