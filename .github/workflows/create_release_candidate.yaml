@@ -64,7 +64,7 @@ jobs:
           git config --global user.email "mayank271993@gmail.com"
           git config --global user.name "Continuous Integration"
 
-      - name: Set version from tag
+      - name: Create release PR
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -76,7 +76,8 @@ jobs:
             branch_name="release-${version}"
             git branch -D $branch_name || true
             git checkout -b $branch_name
+            git diff
             git commit --all -m "Prepare release ${version}"
             git push origin $branch_name
-            gh pr create --base main --head $branch_name --title "New Release ${version}" --body "Prepare the new release for ${version}"
+            
           fi
