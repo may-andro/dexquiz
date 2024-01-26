@@ -65,6 +65,8 @@ jobs:
           git config --global user.name "Continuous Integration"
 
       - name: Set version from tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           if [ "$GITHUB_REF_TYPE" != "tag" ]
           then
@@ -72,6 +74,7 @@ jobs:
           else
             version=$(echo $GITHUB_REF_NAME | sed "s/-prod//" | sed "s/+.*//") && sed -i "s/^version: .*$/version: $version/g" pubspec.yaml
             branch_name="release-${version}"
+            git branch -D $branch_name || true
             git checkout -b $branch_name
             git commit --all -m "Prepare release ${version}"
             git push origin $branch_name
