@@ -8,6 +8,8 @@ on:
   push:
     paths:
       - layers/app_config/**
+    tags:
+      - '*'
 
 #on:
 #  push

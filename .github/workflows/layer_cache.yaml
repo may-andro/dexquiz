@@ -8,6 +8,8 @@ on:
   push:
     paths:
       - layers/cache/**
+    tags:
+      - '*'
 
 #on:
 #  push

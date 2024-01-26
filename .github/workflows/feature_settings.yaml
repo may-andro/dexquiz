@@ -8,6 +8,8 @@ on:
   push:
     paths:
       - features/settings/**
+    tags:
+      - '*'
 
 #on:
 #  push

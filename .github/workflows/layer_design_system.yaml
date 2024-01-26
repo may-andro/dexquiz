@@ -8,6 +8,8 @@ on:
   push:
     paths:
       - layers/design_system/**
+    tags:
+      - '*'
 
 #on:
 #  push
