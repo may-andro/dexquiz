@@ -21,3 +21,5 @@ jobs:
     with:
       module_path: './layers/use_case'
       should_run_golden_test: 'false'
+      has_build_runner: 'false'
+      have_dependent_build_runner: 'false'

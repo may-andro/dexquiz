@@ -21,4 +21,6 @@ jobs:
     with:
       module_path: './layers/design_system'
       should_run_golden_test: 'true'
+      has_build_runner: 'true'
+      have_dependent_build_runner: 'false'
 

@@ -21,4 +21,6 @@ jobs:
     with:
       module_path: './layers/feature_flag'
       should_run_golden_test: 'false'
+      has_build_runner: 'true'
+      have_dependent_build_runner: 'true'
 
