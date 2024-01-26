@@ -79,13 +79,24 @@ jobs:
           echo "keyPassword=${{ secrets.SIGNING_KEY_PASSWORD }}" >> ${{env.PROPERTIES_PATH}}
           echo "keyAlias=${{ secrets.SIGNING_KEY_ALIAS }}" >> ${{env.PROPERTIES_PATH}}
 
-      - name: Set version from tag
+      - name: Extract version and build name from tag
         run: |
-          if [ "$GITHUB_REF_TYPE" != "tag" ]
-          then
-            echo "Ref name $GITHUB_REF_NAME is not a tag but a $GITHUB_REF_TYPE, not setting version number"
+          if [ "$GITHUB_REF_TYPE" != "tag" ]; then
+            echo "Ref name $GITHUB_REF_NAME is not a tag but a $GITHUB_REF_TYPE, not setting version and build name"
           else
-            version=$(echo $GITHUB_REF_NAME | sed "s/-review//" | sed "s/-prod//" | sed "s/+.*//") && sed -i "s/^version: .*$/version: $version/g" pubspec.yaml
+            version=$(echo $GITHUB_REF_NAME | sed "s/-review//" | sed "s/-prod//" | sed "s/+.*//")
+            build_name=$(echo $GITHUB_REF_NAME | sed "s/-review//" | sed "s/-prod//")
+            echo "Extracted version: $version"
+            echo "Extracted build name: $build_name"
+            echo "::set-output name=version::$version"
+            echo "::set-output name=build_name::$build_name"
+          fi
+        id: extract_version_and_build_name
+
+      - name: Update pubspec.yaml with extracted version
+        run: |
+          if [ -n "${{ steps.extract_version_and_build_name.outputs.version }}" ]; then
+          sed -i "s/^version: .*$/version: ${{ steps.extract_version_and_build_name.outputs.version }}/g" pubspec.yaml
           fi
 
       - name: Setup Melos
@@ -100,7 +111,7 @@ jobs:
         run: flutter pub run flutter_launcher_icons -f flutter_launcher_icons-${{ inputs.flavor }}.yaml
 
       - name: Build apk file
-        run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --dart-define=build_env=${{ inputs.build_env }}
+        run: flutter build apk --flavor ${{ inputs.flavor }} -t ${{ inputs.target }} --dart-define=build_env=${{ inputs.build_env }} --build-name=${{ steps.extract_version_and_build_name.outputs.build_name }}
         timeout-minutes: 20
 
       - name: Build aab file
@@ -131,28 +142,13 @@ jobs:
           groups: Testers
           file: build/app/outputs/flutter-apk/app-${{ inputs.flavor }}-release.apk
 
-      - name: Determine Package Name
-        if: inputs.upload_to_play_store == 'true'
-        id: determine_package_name
-        run: |
-          if [ "${{ inputs.flavor }}" = "kanto" ]; then
-            echo "Setting package name for kanto"
-            echo "::set-output name=package_name::com.mayandro.dexquiz.kanto"
-          elif [ "${{ inputs.flavor }}" = "johto" ]; then
-            echo "Setting package name for johto"
-            echo "::set-output name=package_name::com.mayandro.dexquiz.johto"
-          else
-            echo "Unknown flavor"
-            exit 1
-          fi
-
       - name: Upload AAB to Play Store
         if: inputs.upload_to_play_store == 'true'
         uses: r0adkll/upload-google-play@v1.1.2
         with:
           serviceAccountJsonPlainText: ${{ secrets.PLAYSTORE_SERVICE_ACCOUNT_JSON }}
-          packageName: ${{ steps.determine_package_name.outputs.package_name }}
-          releaseFiles: app/build/outputs/bundle/release/app-release.aab
+          packageName: com.mayandro.dexquiz.${{ inputs.flavor }}
+          releaseFiles: build/app/outputs/bundle/${{ inputs.flavor }}Release/app-${{ inputs.flavor }}-release.aab
           track: alpha
 
 
