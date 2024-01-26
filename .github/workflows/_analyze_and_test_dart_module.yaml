@@ -6,6 +6,12 @@ on:
       module_path:
         type: string
         required: true
+      has_build_runner:
+        type: string
+        required: true
+      have_dependent_build_runner:
+        type: string
+        required: true
 
 env:
   DART_SDK_VERSION: 3.2.3
@@ -36,7 +42,19 @@ jobs:
         run: dart format . --set-exit-if-changed lib test
 
       - name: Run code generators
+        if: inputs.has_build_runner == 'true'
         run: dart run build_runner build --delete-conflicting-outputs
+
+      - name: Get dart dependencies
+        if: inputs.has_build_runner == 'false'
+        run: flutter pub get
+
+      - name: Setup Melos and run code generators everywhere
+        if: inputs.have_dependent_build_runner == 'true'
+        run: |
+          dart pub global activate melos
+          melos bs
+          melos gen --no-select
 
       - name: Statically analyze the Dart code
         run: dart analyze lib test
