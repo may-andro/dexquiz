@@ -42,12 +42,12 @@ class DBCache<T extends BoxEntity> extends Cache {
     return entity;
   }
 
-  Future put(T entity) async {
+  Future<void> put(T entity) async {
     entity.cachedTimestamp = DateTime.now().millisecondsSinceEpoch;
     return _box.put(entity.key, entity);
   }
 
-  Future putAll(List<T> entities) async {
+  Future<void> putAll(List<T> entities) async {
     Map<String, T> map = {};
     for (var entity in entities) {
       entity.cachedTimestamp = DateTime.now().millisecondsSinceEpoch;
@@ -56,11 +56,11 @@ class DBCache<T extends BoxEntity> extends Cache {
     return _box.putAll(map);
   }
 
-  Future delete(dynamic key) => _box.delete(key);
+  Future<void> delete(dynamic key) => _box.delete(key);
 
-  Future deleteAll() => _box.clear();
+  Future<void> deleteAll() => _box.clear();
 
-  Future close() => _box.close();
+  Future<void> close() => _box.close();
 
   @override
   int get lastCachedTimestamp => _cacheTimestamp;

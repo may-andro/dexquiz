@@ -18,7 +18,7 @@ class BaseButtonWidget extends StatelessWidget {
 
   final ContentDTO content;
 
-  final LoadingDTO? loading;
+  final LoadingDTO<dynamic>? loading;
 
   final VariantDTO variant;
 
@@ -71,7 +71,7 @@ class _ButtonChildWidget extends StatelessWidget {
 
   final ContentDTO content;
 
-  final LoadingDTO? loading;
+  final LoadingDTO<dynamic>? loading;
 
   final VariantDTO variant;
 
@@ -91,7 +91,7 @@ class _ButtonChildWidget extends StatelessWidget {
     final tempLoading = loading;
     if (tempLoading == null) return const SizedBox.shrink();
 
-    if (tempLoading is LinearLoading<dynamic>) {
+    if (tempLoading is LinearLoading) {
       return Stack(
         children: [
           if (!isDisabled) ...[
@@ -102,7 +102,7 @@ class _ButtonChildWidget extends StatelessWidget {
       );
     }
 
-    if (tempLoading is CircularLoading<dynamic>) {
+    if (tempLoading is CircularLoading) {
       return Center(
         child: tempLoading.getContentWidget(
           isDisabled
@@ -160,7 +160,7 @@ extension _VariantDTOExtension on VariantDTO {
   MaterialStateProperty<BorderSide?> getSide(
     BuildContext context,
     bool isDisabled,
-    LoadingDTO? loading,
+    LoadingDTO<dynamic>? loading,
   ) {
     return MaterialStateProperty.resolveWith<BorderSide?>((states) {
       var color = getDefaultBorderColor(context);

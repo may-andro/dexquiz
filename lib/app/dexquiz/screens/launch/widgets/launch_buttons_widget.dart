@@ -35,7 +35,8 @@ class LaunchButtonsWidget extends StatelessWidget {
                       context.showBottomSheet(
                         bottomSheet: DSClosableBottomSheet(
                           title: 'Coming soon...',
-                          description: 'This feature is under development. We will release this feature in the upcoming versions. Keep a look out 🎯',
+                          description:
+                              'This feature is under development. We will release this feature in the upcoming versions. Keep a look out 🎯',
                         ),
                       );
                     },
@@ -50,7 +51,8 @@ class LaunchButtonsWidget extends StatelessWidget {
                       context.showBottomSheet(
                         bottomSheet: DSClosableBottomSheet(
                           title: 'Coming soon...',
-                          description: 'This feature is under development. We will release this feature in the upcoming versions. Keep a look out 🎯',
+                          description:
+                              'This feature is under development. We will release this feature in the upcoming versions. Keep a look out 🎯',
                         ),
                       );
                     },
