@@ -1,0 +1,30 @@
+name: Run static code analysis and unit test for cache module
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    branches:
+      - staging
+    paths:
+      - layers/cache/**
+    tags:
+      - '*'
+
+#on:
+#  push
+
+permissions:
+  checks: write
+
+jobs:
+  layer_cache:
+    uses: ./.github/workflows/_analyze_and_test_flutter_module.yaml
+    with:
+      module_path: './layers/cache'
+      should_run_golden_test: 'false'
+      has_build_runner: 'true'
+      have_dependent_build_runner: 'false'
+

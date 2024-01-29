@@ -1,0 +1,191 @@
+name: dexquiz
+
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+
+packages:
+  # Include the package in the workspace root.
+  - .
+  # Include all packages inside the `tools` directory that are direct children.
+  - tools/*
+  # Include all packages inside the `layers` directory that are direct children.
+  - layers/*
+  # Include all packages inside the `features` directory that are direct children.
+  - features/*
+
+scripts:
+  # Flutter packages scripts
+  flutter_version:
+    run: flutter --version
+    description: Run `flutter version` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      flutter: true
+
+  get:
+    run: flutter pub get
+    description: Run `flutter pub get` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      flutter: true
+
+  analyze:
+    run: flutter analyze
+    description: Run `flutter analyze` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      flutter: true
+
+  clean:
+    run: flutter clean
+    description: Run `flutter clean` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      flutter: true
+
+  format:
+    run: dart format lib test --set-exit-if-changed
+    description: Run `flutter format` in all packages.
+    exec:
+      concurrency: 1
+
+  gen:
+    run: dart run build_runner build --delete-conflicting-outputs
+    description: Run `build_runner` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: build_runner
+
+  test:
+    run: flutter test --exclude-tags 'golden'
+    description: Run `flutter test` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      flutter: true
+
+  update_golden_test:
+    run: flutter test --tags golden --update-goldens
+    description: Update `golden` test files in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: alchemist
+
+  golden_test:
+    run: flutter test --tags golden
+    description: Run `golden` tests in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: alchemist
+
+  gen_flutter:
+    run: dart run build_runner build
+    description: Run `flutter_gen` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: flutter_gen_runner
+
+  gen_sb:
+    run: dart run build_runner build --delete-conflicting-outputs && dart run build_runner build
+    description: Run file generator in Storybook.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: widgetbook_generator
+
+  splash_gen:
+    run: |
+      flutter clean
+      flutter pub get
+      dart run flutter_native_splash:create --flavors kanto,johto
+    description: Generate splash screen for all flavors.
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: flutter_native_splash
+
+  gen_db:
+    run: |
+      flutter clean
+      dart run build_runner build --delete-conflicting-outputs
+    description: Generate db models files
+    exec:
+      concurrency: 1
+    packageFilters:
+      dependsOn: hive_generator
+
+  # Dart CLI scripts
+  dart_get:
+    run: dart pub get
+    description: Run `dart pub get` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      noDependsOn: flutter
+
+  dart_analyze:
+    run: dart analyze
+    description: Run `dart analyze` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      noDependsOn: flutter
+
+  dart_test:
+    run: dart test
+    description: Run `dart test` in all packages.
+    exec:
+      concurrency: 1
+    packageFilters:
+      noDependsOn: flutter
+
+  # Helper commands
+  get_all:
+    run: |
+      melos dart_get --no-select
+      melos get --no-select
+    description: Get dependencies in all packages.
+
+  pre_push:
+    run: |
+      melos format --no-select
+      melos dart_analyze --no-select
+      melos analyze --no-select
+      melos gen --no-select
+      melos dart_test --no-select
+      melos test --no-select
+    description: Format, analyse and test all packages.
+
+  update_all:
+    run: |
+      flutter pub outdated
+      flutter pub upgrade --major-versions
+
+  # CI Jobs
+  flutter_package_quality:
+    run: |
+      melos format --no-select
+      melos gen --no-select
+      melos get --no-select
+      melos analyze --no-select
+      melos test --no-select
+    description: Format, analyse and test all packages.
+
+  cli_tool_quality:
+    run: |
+      melos format --no-select
+      melos gen --no-select
+      melos dart_get --no-select
+      melos dart_analyze --no-select
+      melos dart_test --no-select
+    description: Format, analyse and test all packages.
+
+

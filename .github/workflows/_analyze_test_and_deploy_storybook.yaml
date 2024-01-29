@@ -1,0 +1,69 @@
+name: Analyze, Test and Deploy Storybook
+
+on:
+  workflow_call:
+    inputs:
+      should_deploy:
+        type: string
+        required: true
+
+env:
+  DART_SDK_VERSION: 3.2.3
+  FLUTTER_VERSION: "3.16.3"
+  PATH_STORYBOOK: ./tools/storybook
+
+jobs:
+  analyze-test-deploy-storybook:
+    name: Analyze, Test and Deploy storybook
+    permissions: write-all
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.PATH_STORYBOOK }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup dart environment
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ env.DART_SDK_VERSION }}
+
+      - name: Setup the flutter environment
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{env.FLUTTER_VERSION}}
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
+
+      - name: Get dart dependencies
+        run: flutter pub get
+
+      - name: Format the Dart code
+        run: dart format . --set-exit-if-changed
+
+      - name: Run code generators
+        run: dart run build_runner build --delete-conflicting-outputs && dart run build_runner build
+
+      - name: Statically analyze the Dart code
+        run: flutter analyze
+
+      - name: Run unit tests
+        run: flutter test --exclude-tags golden --machine > test-results.json
+
+      - name: Generate test report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Test Results
+          path: test-results.json
+          reporter: flutter-json
+          working-directory: ${{ env.PATH_STORYBOOK }}
+
+      - name: Deply to github pages
+        uses: bluefireteam/flutter-gh-pages@v7
+        if: inputs.should_deploy == 'true'
+        with:
+          workingDir: ${{ env.PATH_STORYBOOK }}
+          baseHref: /dexquiz/

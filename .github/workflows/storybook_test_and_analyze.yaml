@@ -1,0 +1,17 @@
+name: Analyse and test Storybook
+
+on:
+  push:
+    branches:
+      - staging
+    paths:
+      - 'tools/storybook/**'
+
+#on:
+#  push
+
+jobs:
+  analyze-and-test-storybook:
+    uses: ./.github/workflows/_analyze_test_and_deploy_storybook.yaml
+    with:
+      should_deploy: 'false'

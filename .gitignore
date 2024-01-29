@@ -42,3 +42,25 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Melos
+pubspec_overrides.yaml
+
+# Mason
+/.mason/
+/mason-lock.json
+
+# Unit and UI tests related
+/test_results/
+/failed-*.png
+/index.html
+widget_tests.xml
+test-results.json
+
+# build_runner generated files
+**.g.dart
+
+# ignore signing keystore files
+/android/app/.signing
+/android/app/.firebase_distribution
+/android/app/.playstore
