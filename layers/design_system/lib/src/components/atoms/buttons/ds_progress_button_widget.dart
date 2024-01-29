@@ -11,6 +11,7 @@ class DSProgressButtonWidget extends StatelessWidget {
     this.iconDirection = DSProgressButtonIconDirection.left,
     this.icon,
     this.loadingPercentage,
+    this.size = DSProgressButtonSize.large,
     super.key,
   });
 
@@ -28,6 +29,8 @@ class DSProgressButtonWidget extends StatelessWidget {
 
   final double? loadingPercentage;
 
+  final DSProgressButtonSize size;
+
   @override
   Widget build(BuildContext context) {
     return BaseButtonWidget(
@@ -39,6 +42,7 @@ class DSProgressButtonWidget extends StatelessWidget {
       loading: loadingPercentage != null && loadingPercentage! < 1
           ? LinearLoading(loadingPercentage!)
           : null,
+      heightFactor: size.heightFactor,
     );
   }
 
@@ -69,3 +73,13 @@ enum DSProgressButtonBorder {
 }
 
 enum DSProgressButtonIconDirection { left, right }
+
+enum DSProgressButtonSize {
+  small(4),
+  medium(5),
+  large(6);
+
+  final double heightFactor;
+
+  const DSProgressButtonSize(this.heightFactor);
+}

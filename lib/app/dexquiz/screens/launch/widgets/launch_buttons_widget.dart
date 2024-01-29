@@ -31,7 +31,14 @@ class LaunchButtonsWidget extends StatelessWidget {
                     fabType: DSFabImage(state.imageFab),
                     fabSize: DSFabSize.large,
                     color: context.colorPalette.brand.primary,
-                    onPressed: () {},
+                    onPressed: () {
+                      context.showBottomSheet(
+                        bottomSheet: DSClosableBottomSheet(
+                          title: 'Coming soon...',
+                          description: 'This feature is under development. We will release this feature in the upcoming versions. Keep a look out 🎯',
+                        ),
+                      );
+                    },
                     elevation: context.dimens.elevationLevel3,
                   )
                 : const CircularProgressIndicator(),
@@ -39,7 +46,14 @@ class LaunchButtonsWidget extends StatelessWidget {
                 ? DSFabWidget(
                     fabType: DSFabImage(state.imagePokedex),
                     color: context.colorPalette.brand.primary,
-                    onPressed: () {},
+                    onPressed: () {
+                      context.showBottomSheet(
+                        bottomSheet: DSClosableBottomSheet(
+                          title: 'Coming soon...',
+                          description: 'This feature is under development. We will release this feature in the upcoming versions. Keep a look out 🎯',
+                        ),
+                      );
+                    },
                     elevation: context.dimens.elevationLevel2,
                   )
                 : const CircularProgressIndicator(),

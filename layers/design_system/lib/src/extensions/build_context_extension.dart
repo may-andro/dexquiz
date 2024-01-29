@@ -1,4 +1,4 @@
-import 'package:design_system/src/components/atoms/atoms.dart';
+import 'package:design_system/src/components/components.dart';
 import 'package:design_system/src/foundations/colors/colors.dart';
 import 'package:design_system/src/foundations/dimens/dimens.dart';
 import 'package:design_system/src/foundations/typographies/typographies.dart';
@@ -75,6 +75,29 @@ extension BuildContextExtension on BuildContext {
           ],
         ),
       ),
+    );
+  }
+
+  void showBottomSheet({
+    required DSBottomSheet bottomSheet,
+  }) {
+    showModalBottomSheet(
+      context: this,
+      backgroundColor: colorPalette.background.primary.color,
+      elevation: dimens.elevationLevel2.value,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(
+          top: Radius.circular(dimens.radiusLevel3.value),
+        ),
+      ),
+      builder: (BuildContext context) {
+        return SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(context.space(factor: 2)),
+            child: bottomSheet.buildContent(context),
+          ),
+        );
+      },
     );
   }
 }

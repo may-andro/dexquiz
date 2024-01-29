@@ -1,4 +1,4 @@
-name: Build release pr and upload prod to playstore
+name: Build release pr and upload prod to firebase
 
 on:
   push:
