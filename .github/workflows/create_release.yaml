@@ -1,16 +1,15 @@
-name: Test, build and upload artefacts on every push
-
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
+name: Upload release build to playstore
 
 on:
   push:
-    branches:
-      - staging
-  pull_request:
-    branches:
-      - staging
+    tags:
+      - '*-release'
+
+concurrency:
+  # only one running workflow for a ref (branch, tag)
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 
 jobs:
   analyze_and_test:
@@ -22,10 +21,10 @@ jobs:
     with:
       flavor: kanto
       target: lib/flavors/kanto/main_kanto.dart
-      build_env: staging
-      upload_to_github: 'true'
+      build_env: prod
+      upload_to_github: 'false'
       upload_to_firebase: 'false'
-      upload_to_play_store: 'false'
+      upload_to_play_store: 'true'
     secrets:
       SIGNING_KEYSTORE: ${{ secrets.KANTO_KEYSTORE }}
       SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
@@ -42,9 +41,9 @@ jobs:
       flavor: johto
       target: lib/flavors/johto/main_johto.dart
       build_env: staging
-      upload_to_github: 'true'
+      upload_to_github: 'false'
       upload_to_firebase: 'false'
-      upload_to_play_store: 'false'
+      upload_to_play_store: 'true'
     secrets:
       SIGNING_KEYSTORE: ${{ secrets.JOHTO_KEYSTORE }}
       SIGNING_KEY_ALIAS: ${{ secrets.SIGNING_KEY_ALIAS }}
@@ -53,4 +52,3 @@ jobs:
       FIREBASE_APP_ID: ${{ secrets.JOHTO_ANDROID_FIREBASE_APP_ID }}
       CREDENTIAL_FILE_CONTENT: ${{ secrets.JOHTO_CREDENTIAL_FILE_CONTENT }}
       PLAYSTORE_SERVICE_ACCOUNT_JSON: ${{ secrets.JOHTO_PLAYSTORE_SERVICE_ACCOUNT_JSON }}
-

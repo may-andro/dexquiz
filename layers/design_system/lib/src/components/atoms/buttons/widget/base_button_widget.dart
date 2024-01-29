@@ -12,6 +12,7 @@ class BaseButtonWidget extends StatelessWidget {
     required this.border,
     required this.onPressed,
     required this.isDisabled,
+    required this.heightFactor,
     super.key,
   });
 
@@ -27,12 +28,14 @@ class BaseButtonWidget extends StatelessWidget {
 
   final bool isDisabled;
 
+  final double heightFactor;
+
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
         fixedSize: MaterialStateProperty.all(
-          Size(double.infinity, context.space(factor: 6)),
+          Size(double.infinity, context.space(factor: heightFactor)),
         ),
         overlayColor: variant.getOverlayColor(context),
         foregroundColor: variant.getForegroundColor(context, isDisabled),

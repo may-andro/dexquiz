@@ -11,6 +11,7 @@ class DSButtonWidget extends StatelessWidget {
     this.isDisabled = false,
     this.isLoading = false,
     this.iconDirection = DSButtonIconDirection.left,
+    this.size = DSButtonSize.large,
     this.icon,
     super.key,
   });
@@ -31,6 +32,8 @@ class DSButtonWidget extends StatelessWidget {
 
   final IconData? icon;
 
+  final DSButtonSize size;
+
   @override
   Widget build(BuildContext context) {
     return BaseButtonWidget(
@@ -40,6 +43,7 @@ class DSButtonWidget extends StatelessWidget {
       border: border.border,
       isDisabled: isDisabled,
       loading: isLoading ? CircularLoading() : null,
+      heightFactor: size.heightFactor,
     );
   }
 
@@ -90,3 +94,13 @@ enum DSButtonBorder {
 }
 
 enum DSButtonIconDirection { left, right }
+
+enum DSButtonSize {
+  small(4),
+  medium(5),
+  large(6);
+
+  final double heightFactor;
+
+  const DSButtonSize(this.heightFactor);
+}

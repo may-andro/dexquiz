@@ -6,8 +6,12 @@ concurrency:
 
 on:
   push:
+    branches:
+      - staging
     paths:
       - layers/log_reporter/**
+    tags:
+      - '*'
 
 #on:
 #  push
@@ -21,4 +25,6 @@ jobs:
     with:
       module_path: './layers/log_reporter'
       should_run_golden_test: 'false'
+      has_build_runner: 'false'
+      have_dependent_build_runner: 'false'
 

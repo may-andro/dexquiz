@@ -6,8 +6,12 @@ concurrency:
 
 on:
   push:
+    branches:
+      - staging
     paths:
       - layers/firebase/**
+    tags:
+      - '*'
 
 #on:
 #  push
@@ -21,4 +25,6 @@ jobs:
     with:
       module_path: './layers/firebase'
       should_run_golden_test: 'false'
+      has_build_runner: 'false'
+      have_dependent_build_runner: 'false'
 
