@@ -19,7 +19,7 @@ class ButtonProgressWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseScaffoldWidget(
-      title: 'DSProgressButtonWidget',
+      title: 'DSIconButtonWidget',
       child: Center(
         child: Padding(
           padding: EdgeInsets.all(context.space(factor: 2)),
@@ -49,13 +49,35 @@ class ButtonProgressWidget extends StatelessWidget {
                 )
                 .value,
             onPressed: () {},
-            color: context.knobs
+            buttonColor: context.knobs
                 .list<Option<DSColor>>(
-                  label: 'Color',
+                  label: 'Button Color',
                   options: [
                     Option(context.colorPalette.brand.primary, 'Primary'),
                     Option(context.colorPalette.brand.secondary, 'Secondary'),
                     Option(context.colorPalette.semantic.error, 'Error'),
+                  ],
+                  labelBuilder: (option) => option.label,
+                )
+                .value,
+            iconColor: context.knobs
+                .list<Option<DSColor>>(
+                  label: 'Icon Color',
+                  options: [
+                    Option(context.colorPalette.brand.primary, 'Primary'),
+                    Option(context.colorPalette.brand.secondary, 'Secondary'),
+                    Option(context.colorPalette.semantic.error, 'Error'),
+                  ],
+                  labelBuilder: (option) => option.label,
+                )
+                .value,
+            size: context.knobs
+                .list<Option<DSIconButtonSize>>(
+                  label: 'Size',
+                  options: [
+                    Option(DSIconButtonSize.small, 'Small'),
+                    Option(DSIconButtonSize.medium, 'Medium'),
+                    Option(DSIconButtonSize.large, 'Large'),
                   ],
                   labelBuilder: (option) => option.label,
                 )

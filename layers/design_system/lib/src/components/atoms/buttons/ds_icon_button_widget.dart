@@ -5,15 +5,19 @@ import 'package:design_system/src/foundations/foundations.dart';
 class DSIconButtonWidget extends StatelessWidget {
   const DSIconButtonWidget(
     this.icon, {
-    required this.color,
+    required this.iconColor,
+    required this.buttonColor,
     required this.onPressed,
+    this.size = DSIconButtonSize.small,
     this.elevation,
     super.key,
   });
 
   final IconData icon;
-  final DSColor color;
+  final DSColor iconColor;
+  final DSColor buttonColor;
   final VoidCallback onPressed;
+  final DSIconButtonSize size;
   final DSElevation? elevation;
 
   @override
@@ -21,20 +25,34 @@ class DSIconButtonWidget extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(context.space(factor: 6), context.space(factor: 6)),
+        fixedSize: Size(
+          context.space(factor: size.heightFactor),
+          context.space(factor: size.heightFactor),
+        ),
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         minimumSize: Size.zero,
         shadowColor: context.colorPalette.background.shadow.color,
-        backgroundColor: context.colorPalette.background.primary.color,
+        backgroundColor: buttonColor.color,
         shape: const CircleBorder(),
         padding: EdgeInsets.zero,
         elevation: elevation?.value ?? context.dimens.elevationNone.value,
       ),
       child: Icon(
         icon,
-        size: context.space(factor: 3),
-        color: color.color,
+        size: context.space(factor: size.iconSizeFactor),
+        color: iconColor.color,
       ),
     );
   }
+}
+
+enum DSIconButtonSize {
+  small(4, 2.5),
+  medium(5, 2.8),
+  large(6, 3);
+
+  final double heightFactor;
+  final double iconSizeFactor;
+
+  const DSIconButtonSize(this.heightFactor, this.iconSizeFactor);
 }

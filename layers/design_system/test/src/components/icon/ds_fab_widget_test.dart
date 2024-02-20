@@ -11,7 +11,7 @@ void main() {
 }
 
 List<TestCase> _getConfigs(DSTheme dsTheme) {
-  final imageType = DSFabImage('assets/images/type_bug.png');
+  final imageType = DSFabImage('assets/images/pokeball.png');
   final iconType = DSFabIcon(Icons.add);
 
   final list = <TestCase>[];
