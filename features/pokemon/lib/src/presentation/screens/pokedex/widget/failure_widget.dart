@@ -60,8 +60,7 @@ class FailureWidget extends StatelessWidget {
           ),
           SizedBox(height: context.space(factor: 4)),
           if (onRetry != null) ...[
-            SizedBox(
-              width: context.space(factor: 12),
+            IntrinsicWidth(
               child: DSButtonWidget(
                 label: 'Retry',
                 icon: Icons.refresh_rounded,

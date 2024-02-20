@@ -24,7 +24,7 @@ class PokedexScreen extends StatelessWidget {
             bottomFactor: -0.35,
           ),
           ViewModelProviderWidget<PokedexViewModel>(
-            onViewModelProvided: (viewModel) => viewModel.onInit(),
+            onViewModelProvided: (viewModel) async => await viewModel.onInit(),
             builder: (context, viewModel, widget) {
               return _buildPokedex(context);
             },
@@ -45,7 +45,9 @@ class PokedexScreen extends StatelessWidget {
 
     return Column(
       children: [
-        const TitleWidget(),
+        const TitleWidget(
+          key: Key('pokedex_title_widget'),
+        ),
         Expanded(
           child: ViewStateBuilderWidget(
             viewState: viewModel.viewState,
@@ -60,6 +62,7 @@ class PokedexScreen extends StatelessWidget {
 
   Widget _buildLoadingState(BuildContext context) {
     return DSLoadingWidget(
+      key: Key('loading_state_widget'),
       height: context.shortestSide * 0.2,
       width: context.shortestSide * 0.2,
     );
@@ -70,13 +73,25 @@ class PokedexScreen extends StatelessWidget {
     final errorMessage = viewModel.errorMessage;
 
     return FailureWidget(
-      error: '${errorMessage.split(':')[0]}',
-      cause: '${errorMessage.split(':')[1]}',
+      key: Key('error_state_widget'),
+      error: '${errorMessage?.split(':')[0]}',
+      cause: '${errorMessage?.split(':')[1]}',
       onRetry: viewModel.fetchPokedex,
     );
   }
 
   Widget _buildSuccessState(BuildContext context) {
-    return const PokedexWidget();
+    final viewModel = context.read<PokedexViewModel>();
+    if (viewModel.pokemons.isEmpty) {
+      return DSTextWidget(
+        key: Key('empty_success_state_widget'),
+        'The pokedex is empty',
+        color: context.colorPalette.neutral.grey9,
+        style: context.typography.titleLarge,
+      );
+    }
+    return const PokedexWidget(
+      key: Key('success_state_widget'),
+    );
   }
 }

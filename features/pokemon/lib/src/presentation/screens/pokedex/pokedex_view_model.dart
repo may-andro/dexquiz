@@ -12,23 +12,23 @@ class PokedexViewModel extends BaseViewModel {
   final FetchPokedexUseCase _fetchPokedexUseCase;
   final BuildConfig _buildConfig;
 
-  late List<Pokemon> _pokemons;
+  List<Pokemon> _pokemons = [];
 
-  late String _errorMessage;
+  String? _errorMessage;
 
   List<Pokemon> get pokemons => _pokemons;
 
-  String get errorMessage => _errorMessage;
+  String? get errorMessage => _errorMessage;
 
-  Future<void> onInit() async {
-    await fetchPokedex();
-  }
+  Future<void> onInit() => fetchPokedex();
 
   Future<void> fetchPokedex() async {
+    _errorMessage = null;
+    _pokemons = [];
     setLoadingState();
-    final pokemons = await _fetchPokedexUseCase(_buildConfig.buildFlavor.name);
+    final pokedexEither = await _fetchPokedexUseCase(_buildConfig.buildFlavor.name);
 
-    pokemons.fold((left) {
+    pokedexEither.fold((left) {
       _errorMessage = 'Failed to fetch pokedex due to: ${left.cause}';
       setErrorState();
     }, (right) {
