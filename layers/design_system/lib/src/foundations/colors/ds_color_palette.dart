@@ -8,4 +8,6 @@ abstract interface class DSColorPalette {
   NeutralColorScheme get neutral;
 
   BackgroundColorScheme get background;
+
+  ElementalColorScheme get elemental;
 }

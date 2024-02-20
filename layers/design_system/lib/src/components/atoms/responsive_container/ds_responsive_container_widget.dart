@@ -16,21 +16,19 @@ class DSResponsiveContainerWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          switch (context.deviceResolution) {
-            case DeviceResolution.mobile:
-              return mobileBuilder(context);
-            case DeviceResolution.tablet:
-              return tabletBuilder(context);
-            case DeviceResolution.desktop:
-              return desktopBuilder(context);
-            default:
-              return mobileBuilder(context);
-          }
-        },
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        switch (context.deviceResolution) {
+          case DeviceResolution.mobile:
+            return mobileBuilder(context);
+          case DeviceResolution.tablet:
+            return tabletBuilder(context);
+          case DeviceResolution.desktop:
+            return desktopBuilder(context);
+          default:
+            return mobileBuilder(context);
+        }
+      },
     );
   }
 }

@@ -8,10 +8,12 @@ class DSTextWidget extends StatelessWidget {
     required this.style,
     this.decoration = TextDecoration.none,
     this.textAlign = TextAlign.left,
+    this.package = 'design_system',
     this.maxLines,
     this.softWrap,
     this.textOverflow,
     this.textHeightBehavior,
+    this.fontFamily,
     super.key,
   });
 
@@ -24,6 +26,8 @@ class DSTextWidget extends StatelessWidget {
   final bool? softWrap;
   final TextOverflow? textOverflow;
   final TextHeightBehavior? textHeightBehavior;
+  final String? fontFamily;
+  final String package;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +36,8 @@ class DSTextWidget extends StatelessWidget {
       style: style.textStyle.copyWith(
         color: color.color,
         decoration: decoration,
+        fontFamily: fontFamily,
+        package: package,
       ),
       textAlign: textAlign,
       maxLines: maxLines,

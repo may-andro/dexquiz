@@ -5,3 +5,4 @@ export 'src/design_systems/design_systems.dart';
 export 'src/extensions/build_context_extension.dart';
 export 'src/foundations/foundations.dart';
 export 'src/theme/theme.dart';
+export 'package:design_system/assets/fonts.gen.dart';

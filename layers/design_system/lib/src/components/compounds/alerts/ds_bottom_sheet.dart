@@ -42,45 +42,46 @@ class DSMessageBottomSheet extends DSBottomSheet {
 class DSClosableBottomSheet extends DSBottomSheet {
   DSClosableBottomSheet({
     required this.title,
-    required this.description,
+    required this.descriptions,
+    this.titleColor,
   });
 
   final String title;
-  final String description;
+  final List<DSTextSpan> descriptions;
+  final DSColor? titleColor;
 
   @override
   Widget buildContent(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          children: [
-            DSTextWidget(
-              title,
-              color: context.colorPalette.neutral.grey8,
-              style: context.typography.titleLarge,
-              textAlign: TextAlign.start,
-            ),
-            const Spacer(),
-            IconButton(
-              onPressed: () => Navigator.pop(context),
-              icon: Icon(
-                Icons.close,
-                color: context.colorPalette.neutral.grey8.color,
+    return SafeArea(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              DSTextWidget(
+                title,
+                color: titleColor ?? context.colorPalette.neutral.grey8,
+                style: context.typography.titleLarge,
+                textAlign: TextAlign.start,
               ),
-            ),
-          ],
-        ),
-        SizedBox(height: context.space(factor: 0.5)),
-        const DSDividerWidget(variant: DSDividerVariant.level3),
-        SizedBox(height: context.space(factor: 0.5)),
-        DSTextWidget(
-          description,
-          color: context.colorPalette.neutral.grey7,
-          style: context.typography.titleMedium,
-        ),
-      ],
+              const Spacer(),
+              IconButton(
+                onPressed: () => Navigator.pop(context),
+                icon: Icon(
+                  Icons.close,
+                  color: titleColor?.color ??
+                      context.colorPalette.neutral.grey8.color,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: context.space(factor: 0.5)),
+          const DSDividerWidget(variant: DSDividerVariant.level3),
+          SizedBox(height: context.space(factor: 0.5)),
+          DSRichTextWidget(children: descriptions),
+        ],
+      ),
     );
   }
 }
