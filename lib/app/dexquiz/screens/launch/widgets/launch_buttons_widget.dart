@@ -2,6 +2,7 @@ import 'package:design_system/design_system.dart';
 import 'package:dexquiz/app/dexquiz/screens/launch/bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pokemon/pokemon.dart';
 import 'package:settings/settings.dart';
 
 class LaunchButtonsWidget extends StatelessWidget {
@@ -32,12 +33,9 @@ class LaunchButtonsWidget extends StatelessWidget {
                     fabSize: DSFabSize.large,
                     color: context.colorPalette.brand.primary,
                     onPressed: () {
-                      context.showBottomSheet(
-                        bottomSheet: DSClosableBottomSheet(
-                          title: 'Coming soon...',
-                          description:
-                              'This feature is under development. We will release this feature in the upcoming versions. Keep a look out 🎯',
-                        ),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const QuizScreen()),
                       );
                     },
                     elevation: context.dimens.elevationLevel3,
@@ -48,12 +46,10 @@ class LaunchButtonsWidget extends StatelessWidget {
                     fabType: DSFabImage(state.imagePokedex),
                     color: context.colorPalette.brand.primary,
                     onPressed: () {
-                      context.showBottomSheet(
-                        bottomSheet: DSClosableBottomSheet(
-                          title: 'Coming soon...',
-                          description:
-                              'This feature is under development. We will release this feature in the upcoming versions. Keep a look out 🎯',
-                        ),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const PokedexScreen()),
                       );
                     },
                     elevation: context.dimens.elevationLevel2,
