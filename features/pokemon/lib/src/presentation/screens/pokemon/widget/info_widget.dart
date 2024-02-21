@@ -19,6 +19,7 @@ class InfoWidget extends StatelessWidget {
     final color = viewModel.pokemon.types.first.getColor(context);
 
     return Container(
+      key: const Key('pokemon_info_card'),
       color: context.colorPalette.neutral.grey2.color.withOpacity(0.5),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -87,36 +88,31 @@ class _DescriptionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedCrossFade(
-      crossFadeState: description == null
-          ? CrossFadeState.showFirst
-          : CrossFadeState.showSecond,
-      duration: Duration(milliseconds: 300),
-      firstChild: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.space(factor: 2)),
-        child: Shimmer.fromColors(
-          baseColor: context.colorPalette.neutral.grey2.color.withOpacity(0.5),
-          highlightColor:
-              context.colorPalette.neutral.grey2.color.withOpacity(0.8),
-          enabled: true,
-          child: Container(
-            width: double.infinity,
-            height: context.space(factor: 12),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(
-                context.dimens.radiusLevel2.value,
-              ),
-              color: context.colorPalette.neutral.grey2.color,
-            ),
+    Widget child = Shimmer.fromColors(
+      key: const Key('shimmer_widget'),
+      baseColor: context.colorPalette.neutral.grey2.color.withOpacity(0.5),
+      highlightColor: context.colorPalette.neutral.grey2.color.withOpacity(0.8),
+      enabled: true,
+      child: Container(
+        width: double.infinity,
+        height: context.space(factor: 12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(
+            context.dimens.radiusLevel2.value,
           ),
+          color: context.colorPalette.neutral.grey2.color,
         ),
       ),
-      secondChild: Padding(
-        padding: EdgeInsets.symmetric(horizontal: context.space(factor: 2)),
-        child: DescriptionWidget(
-          description ?? '',
+    );
 
-        ),
+    if (description != null) {
+      child = DescriptionWidget(description ?? '');
+    }
+    return AnimatedSwitcher(
+      duration: Duration(milliseconds: 500),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: context.space(factor: 2)),
+        child: child,
       ),
     );
   }

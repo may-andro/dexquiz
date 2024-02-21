@@ -70,6 +70,7 @@ extension BuildContextExtension on BuildContext {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         content: Column(
+          key: const Key('snack_bar_widget'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DSTextWidget(

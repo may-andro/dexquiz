@@ -26,7 +26,8 @@ class PokedexViewModel extends BaseViewModel {
     _errorMessage = null;
     _pokemons = [];
     setLoadingState();
-    final pokedexEither = await _fetchPokedexUseCase(_buildConfig.buildFlavor.name);
+    final pokedexEither =
+        await _fetchPokedexUseCase(_buildConfig.buildFlavor.name);
 
     pokedexEither.fold((left) {
       _errorMessage = 'Failed to fetch pokedex due to: ${left.cause}';

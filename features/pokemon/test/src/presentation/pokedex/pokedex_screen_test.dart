@@ -11,11 +11,7 @@ import '../../../mock/domain/model/test_pokemon.dart';
 import '../../../mock/presentation/pokedex/mock_pokedex_view_model.dart';
 import '../../../utils/test_widget_wrapper.dart';
 
-class MockServiceLocator extends Mock implements ServiceLocator {
-  void mockGet<T extends Object>(T expected) {
-    when(() => get<T>()).thenReturn(expected);
-  }
-}
+class MockServiceLocator extends Mock implements ServiceLocator {}
 
 void main() {
   group(PokedexScreen, () {

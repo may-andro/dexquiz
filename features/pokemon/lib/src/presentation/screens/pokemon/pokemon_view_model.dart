@@ -18,18 +18,59 @@ class PokemonViewModel extends BaseViewModel {
 
   String? _description;
 
+  String? _errorMessage;
+
   Pokemon get pokemon => _pokemon;
 
   String? get description => _description;
 
-  void onInit(Pokemon pokemon) async {
+  String? get errorMessage => _errorMessage;
+
+  Future<void> onInit(Pokemon pokemon) async {
     _pokemon = pokemon;
-    (await _isFavoriteUseCase(pokemon.id)).fold((left) {
-      // do nothing
+    await _getFavouriteStatus();
+    await _getDescription();
+    notifyListeners();
+  }
+
+  Future<void> updateFavouriteStatus() async {
+    if (_pokemon.isFavorite) {
+      final either = await _removeFavoritesUseCase(pokemon.id);
+      either.fold((left) {
+        _errorMessage =
+            'Failed to update the favorite status of the ${_pokemon.name}';
+      }, (right) {
+        _errorMessage = null;
+        _pokemon = _pokemon.copyWith(isFavorite: false);
+      });
+    } else {
+      final either = await _addToFavoritesUseCase(pokemon.id);
+      either.fold((left) {
+        _errorMessage =
+            'Failed to update the favorite status of the ${_pokemon.name}';
+      }, (right) {
+        _errorMessage = null;
+        _pokemon = _pokemon.copyWith(isFavorite: true);
+      });
+    }
+    _errorMessage = 'test';
+    notifyListeners();
+  }
+
+  Future<void> _getFavouriteStatus() async {
+    final favoriteEither = await _isFavoriteUseCase(pokemon.id);
+    favoriteEither.fold((left) {
+      _errorMessage =
+          'Failed to get the favorite status of the ${_pokemon.name}';
     }, (right) {
-      _pokemon = _pokemon = _pokemon.copyWith(isFavorite: right);
+      _errorMessage = null;
+      _pokemon = _pokemon.copyWith(isFavorite: right);
     });
-    (await _fetchDescriptionUseCase(pokemon.id)).fold((left) {
+  }
+
+  Future<void> _getDescription() async {
+    final either = await _fetchDescriptionUseCase(pokemon.id);
+    either.fold((left) {
       if (left is NullDescriptionFailure) {
         _description = 'No description found!';
       } else {
@@ -39,17 +80,5 @@ class PokemonViewModel extends BaseViewModel {
     }, (right) {
       _description = right;
     });
-    notifyListeners();
-  }
-
-  Future<void> updateFavouriteStatus() async {
-    if (_pokemon.isFavorite) {
-      await _removeFavoritesUseCase(pokemon.id);
-      _pokemon = _pokemon.copyWith(isFavorite: false);
-    } else {
-      _pokemon = _pokemon.copyWith(isFavorite: true);
-      await _addToFavoritesUseCase(pokemon.id);
-    }
-    notifyListeners();
   }
 }

@@ -10,5 +10,5 @@ final testPokemon = Pokemon(
   [],
   'image',
   [],
-  [],
+  ['bug'],
 );

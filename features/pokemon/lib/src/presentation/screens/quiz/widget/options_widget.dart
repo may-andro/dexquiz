@@ -32,7 +32,7 @@ class OptionsWidget extends StatelessWidget {
           width: double.maxFinite,
           padding: EdgeInsets.only(
             top: context.space(factor: 1),
-            bottom:  MediaQuery.paddingOf(context).bottom,
+            bottom: MediaQuery.paddingOf(context).bottom,
           ),
           color: context.colorPalette.neutral.grey4.color.withOpacity(0.5),
           child: Wrap(

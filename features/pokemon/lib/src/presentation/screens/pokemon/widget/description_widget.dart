@@ -59,6 +59,9 @@ class DescriptionWidget extends StatelessWidget {
         ),
       );
     }
-    return DSRichTextWidget(children: children);
+    return DSRichTextWidget(
+      key: const Key('description_widget'),
+      children: children,
+    );
   }
 }

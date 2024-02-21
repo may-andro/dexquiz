@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-class ChoiceDTO extends Equatable{
+class ChoiceDTO extends Equatable {
   ChoiceDTO(this.index, this.char);
 
   final int index;

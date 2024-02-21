@@ -15,14 +15,23 @@ class PokemonScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ViewModelProviderWidget<PokemonViewModel>(
-          onViewModelProvided: (viewModel) => viewModel.onInit(pokemon),
-          builder: (context, viewModel, widget) {
-            return DSResponsiveContainerWidget(
-              mobileBuilder: (_) => MobileWidget(),
-              tabletBuilder: (_) => TabletWidget(),
-              desktopBuilder: (_) => TabletWidget(),
+        onViewModelProvided: (viewModel) async {
+          await viewModel.onInit(pokemon);
+        },
+        builder: (context, viewModel, widget) {
+          if (viewModel.errorMessage != null) {
+            WidgetsBinding.instance.addPostFrameCallback(
+              (_) => context.showSnackBar(viewModel.errorMessage ?? ''),
             );
-          }),
+          }
+
+          return DSResponsiveContainerWidget(
+            mobileBuilder: (_) => MobileWidget(key: Key('mobile_widget')),
+            tabletBuilder: (_) => TabletWidget(key: Key('tablet_widget')),
+            desktopBuilder: (_) => TabletWidget(key: Key('desktop_widget')),
+          );
+        },
+      ),
     );
   }
 }

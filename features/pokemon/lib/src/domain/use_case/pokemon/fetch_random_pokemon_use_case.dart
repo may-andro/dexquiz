@@ -30,7 +30,8 @@ class FetchRandomPokemonUseCase
         } else {
           return Left(
             UnknownFailure(
-              message: 'Failed to fetch pokemon due to unknown reason: ${left.cause}',
+              message:
+                  'Failed to fetch pokemon due to unknown reason: ${left.cause}',
             ),
           );
         }

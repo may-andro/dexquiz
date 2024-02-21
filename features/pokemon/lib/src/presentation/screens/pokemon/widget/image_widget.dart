@@ -13,6 +13,7 @@ class ImageWidget extends StatelessWidget {
     return Hero(
       tag: url,
       child: DSColorFilteredImageWidget(
+        key: const Key('pokemon_image_widget'),
         imageUrl: url,
         boxFit: BoxFit.contain,
       ),

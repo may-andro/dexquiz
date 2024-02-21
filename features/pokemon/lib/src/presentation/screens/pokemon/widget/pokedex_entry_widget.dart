@@ -12,6 +12,7 @@ class PokedexEntryWidget extends StatelessWidget {
     final viewModel = context.watch<PokemonViewModel>();
     final color = viewModel.pokemon.types.first.getColor(context);
     return Container(
+      key: const Key('pokemon_index_widget'),
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         border: Border.all(color: color.color, width: 2),

@@ -6,10 +6,10 @@ part 'ability_entity.g.dart';
 @JsonSerializable()
 class AbilityEntity {
   AbilityEntity(
-      this.ability,
-      this.isHidden,
-      this.slot,
-      );
+    this.ability,
+    this.isHidden,
+    this.slot,
+  );
 
   factory AbilityEntity.fromJson(Map<String, dynamic> json) =>
       _$AbilityEntityFromJson(json);

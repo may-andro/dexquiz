@@ -20,7 +20,7 @@ class GenerateQuizOptionUseCase
       final result = <int, String>{};
       nameChars.addAll(randomChars.split(''));
       nameChars.shuffle();
-      for(int i = 0; i< nameChars.length; i++) {
+      for (int i = 0; i < nameChars.length; i++) {
         result[i] = nameChars[i];
       }
       return Right(result);
