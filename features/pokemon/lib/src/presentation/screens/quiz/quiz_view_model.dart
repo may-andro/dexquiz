@@ -1,4 +1,5 @@
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:pokemon/assets/assets.gen.dart';
 import 'package:pokemon/src/domain/domain.dart';
 import 'package:pokemon/src/presentation/base/base.dart';
 import 'package:pokemon/src/presentation/screens/quiz/dto/answer_dto.dart';
@@ -32,7 +33,6 @@ class QuizViewModel extends BaseViewModel {
   String? get errorMessage => _errorMessage;
 
   Future<void> onInit() async {
-    _audioPlayer = AssetsAudioPlayer();
     await loadPokemon();
   }
 
@@ -45,27 +45,33 @@ class QuizViewModel extends BaseViewModel {
     final eitherPokemon = await _fetchRandomPokemonUseCase();
     eitherPokemon.fold(
       (left) {
-        _errorMessage = left.message;
+        if (left is RandomNullPokemonFailure) {
+          _errorMessage =
+              'Failed to fetch any pokemon at the moment, please try later';
+        } else {
+          _errorMessage =
+              'Failed to fetch any pokemon at the moment due to: ${left.cause}';
+        }
         setErrorState();
       },
       _getQuizOptions,
     );
   }
 
-  void submitChoice(int index, ChoiceDTO choice) async {
+  Future<void> submitChoice(int index, ChoiceDTO choice) async {
     _answerDTO?.answers[index] = choice;
-    await _captureOrEscapedPokemon();
-    _audioPlayer?.open(
-      Audio("assets/audio/drag_success.mp3", package: 'pokemon'),
-    );
-    _audioPlayer?.play();
     notifyListeners();
+    await _captureOrEscapedPokemon();
   }
 
   Future<void> _getQuizOptions(Pokemon pokemon) async {
     final result = await _generateQuizOptionUseCase(pokemon.name);
     result.fold((left) {
-      _errorMessage = left.message;
+      if (left is InvalidNameFailure) {
+        _errorMessage = 'Failed to generate options due to invalid name';
+      } else {
+        _errorMessage = 'Failed to generate options due to: ${left.cause}';
+      }
       setErrorState();
     }, (right) {
       final choices = <ChoiceDTO>[];
@@ -74,6 +80,7 @@ class QuizViewModel extends BaseViewModel {
       });
       _questionDTO = QuestionDTO(pokemon, choices);
       _answerDTO = AnswerDTO.empty();
+      _playFeedbackTone(Assets.audio.appear);
       setSuccessState();
     });
   }
@@ -85,7 +92,10 @@ class QuizViewModel extends BaseViewModel {
 
     final answers = answerDTO.answers;
     final pokemon = questionDTO.pokemon;
-    if (answers.keys.length != pokemon.name.length) return;
+    if (answers.keys.length != pokemon.name.length) {
+      _playFeedbackTone(Assets.audio.drag);
+      return;
+    }
 
     var sortedAnswers = Map.fromEntries(
       answers.entries.toList()..sort((e1, e2) => e1.key.compareTo(e2.key)),
@@ -95,11 +105,25 @@ class QuizViewModel extends BaseViewModel {
       final isCapturedEither = await _addToCapturedUseCase(pokemon.id);
       isCapturedEither.fold((left) {
         _errorMessage = 'Pokemon escaped due to error: ${left.cause}';
+        setErrorState();
       }, (right) {
         _answerDTO = answerDTO.copyWith(status: CaptureStatus.caught);
+        _playFeedbackTone(Assets.audio.gotcha, speed: 2.0);
+        notifyListeners();
       });
     } else {
       _answerDTO = answerDTO.copyWith(status: CaptureStatus.escaped);
+      _playFeedbackTone(Assets.audio.flee);
+      notifyListeners();
     }
+  }
+
+  void _playFeedbackTone(String path, {double speed = 1.0}) {
+    _audioPlayer = AssetsAudioPlayer();
+    _audioPlayer?.open(
+      Audio(path, package: 'pokemon'),
+    );
+    _audioPlayer?.setPlaySpeed(speed);
+    _audioPlayer?.play();
   }
 }

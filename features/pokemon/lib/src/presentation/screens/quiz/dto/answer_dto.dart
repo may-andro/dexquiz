@@ -1,7 +1,8 @@
+import 'package:equatable/equatable.dart';
 import 'package:pokemon/src/presentation/screens/quiz/dto/capture_status.dart';
 import 'package:pokemon/src/presentation/screens/quiz/dto/choice_dto.dart';
 
-class AnswerDTO {
+class AnswerDTO extends Equatable {
   AnswerDTO._({
     required this.answers,
     required this.status,
@@ -27,4 +28,10 @@ class AnswerDTO {
       status: status ?? this.status,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        answers,
+        status,
+      ];
 }

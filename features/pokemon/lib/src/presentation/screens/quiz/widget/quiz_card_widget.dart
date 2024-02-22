@@ -4,7 +4,7 @@ import 'package:pokemon/src/presentation/screens/quiz/widget/answer_widget.dart'
 import 'package:pokemon/src/presentation/screens/quiz/widget/options_widget.dart';
 
 class QuizCardWidget extends StatelessWidget {
-  const QuizCardWidget(this.height);
+  const QuizCardWidget(this.height, {super.key});
 
   final double height;
 

@@ -1,4 +1,6 @@
-class Pokemon {
+import 'package:equatable/equatable.dart';
+
+class Pokemon extends Equatable {
   Pokemon(
     this.id,
     this.name,
@@ -57,9 +59,25 @@ class Pokemon {
       isFavorite: isFavorite ?? this.isFavorite,
     );
   }
+
+  @override
+  List<Object?> get props => [
+        id,
+        name,
+        baseExperience,
+        height,
+        weight,
+        abilities,
+        moves,
+        image,
+        stats,
+        types,
+        isCaptured,
+        isFavorite,
+      ];
 }
 
-class Stat {
+class Stat extends Equatable {
   const Stat({
     required this.baseStat,
     required this.effort,
@@ -71,4 +89,7 @@ class Stat {
   final int effort;
 
   final String name;
+
+  @override
+  List<Object?> get props => [baseStat, effort, name];
 }

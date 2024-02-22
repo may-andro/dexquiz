@@ -6,7 +6,7 @@ import 'package:use_case/use_case.dart';
 import 'package:app_config/app_config.dart';
 
 class FetchRandomPokemonUseCase
-    extends BaseNoParamAsyncUseCase<Pokemon, UnknownFailure> {
+    extends BaseNoParamAsyncUseCase<Pokemon, FetchRandomPokemonFailure> {
   FetchRandomPokemonUseCase(
     this._appConfig,
     this._fetchPokemonUseCase,
@@ -16,20 +16,19 @@ class FetchRandomPokemonUseCase
   final FetchPokemonUseCase _fetchPokemonUseCase;
 
   @override
-  AsyncEither<UnknownFailure, Pokemon> execute() async {
+  AsyncEither<FetchRandomPokemonFailure, Pokemon> execute() async {
     try {
       final index = _randomIndex;
       final either = await _fetchPokemonUseCase(index);
       return either.fold((left) {
         if (left is NullPokemonFailure) {
           return Left(
-            UnknownFailure(
-              message: 'No pokemon found due to null response',
-            ),
+            RandomNullPokemonFailure(cause: left.cause, message: left.message),
           );
         } else {
           return Left(
-            UnknownFailure(
+            UnknownFetchRandomPokemonFailure(
+              cause: left.cause,
               message:
                   'Failed to fetch pokemon due to unknown reason: ${left.cause}',
             ),
@@ -40,7 +39,7 @@ class FetchRandomPokemonUseCase
       });
     } catch (error, st) {
       reportError(error, st);
-      return Left(UnknownFailure(
+      return Left(UnknownFetchRandomPokemonFailure(
         message: 'Failed to fetch pokemon due to: $error',
         cause: error,
       ));
@@ -53,4 +52,16 @@ class FetchRandomPokemonUseCase
           _appConfig.pokedexEndEntry - _appConfig.pokedexStartEntry,
         );
   }
+}
+
+sealed class FetchRandomPokemonFailure extends BasicFailure {
+  const FetchRandomPokemonFailure({super.message, super.cause});
+}
+
+final class RandomNullPokemonFailure extends FetchRandomPokemonFailure {
+  const RandomNullPokemonFailure({super.message, super.cause});
+}
+
+final class UnknownFetchRandomPokemonFailure extends FetchRandomPokemonFailure {
+  const UnknownFetchRandomPokemonFailure({super.message, super.cause});
 }

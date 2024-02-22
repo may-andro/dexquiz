@@ -12,11 +12,20 @@ import 'package:flutter/widgets.dart';
 class $AssetsAudioGen {
   const $AssetsAudioGen();
 
-  /// File path: assets/audio/drag_success.mp3
-  String get dragSuccess => 'assets/audio/drag_success.mp3';
+  /// File path: assets/audio/appear.mp3
+  String get appear => 'assets/audio/appear.mp3';
+
+  /// File path: assets/audio/drag.mp3
+  String get drag => 'assets/audio/drag.mp3';
+
+  /// File path: assets/audio/flee.mp3
+  String get flee => 'assets/audio/flee.mp3';
+
+  /// File path: assets/audio/gotcha.mp3
+  String get gotcha => 'assets/audio/gotcha.mp3';
 
   /// List of all assets
-  List<String> get values => [dragSuccess];
+  List<String> get values => [appear, drag, flee, gotcha];
 }
 
 class $AssetsImagesGen {
