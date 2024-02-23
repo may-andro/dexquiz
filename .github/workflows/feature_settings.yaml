@@ -6,12 +6,8 @@ concurrency:
 
 on:
   push:
-    branches:
-      - staging
     paths:
       - features/settings/**
-    tags:
-      - '*'
 
 #on:
 #  push

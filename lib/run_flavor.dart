@@ -14,6 +14,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:firebase/firebase.dart';
 import 'package:log_reporter/log_reporter.dart';
+import 'package:pokemon/pokemon.dart';
 import 'package:remote/remote.dart';
 import 'package:settings/settings.dart';
 import 'package:use_case/use_case.dart';
@@ -50,6 +51,7 @@ Future<void> runFlavor({
     ),
     const AppConfigModuleConfigurator(),
     const FeatureSettingsModuleConfigurator(),
+    const FeaturePokemonModuleConfigurator(),
   ];
 
   FlutterNativeSplash.remove();

@@ -50,7 +50,7 @@ class MockedSharedPreferences extends Mock implements SharedPreferences {
 
 void main() {
   group(KeyValueCache, () {
-    late KeyValueCache keyValueCache;
+    late KeyValueCache<String> keyValueCache;
     late MockedSharedPreferences mockedSharedPreferences;
     setUp(() {
       mockedSharedPreferences = MockedSharedPreferences();

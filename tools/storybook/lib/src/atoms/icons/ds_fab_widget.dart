@@ -19,7 +19,7 @@ class FabWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BaseScaffoldWidget(
-      title: 'DSProgressButtonWidget',
+      title: 'DSFabWidget',
       child: Center(
         child: Padding(
           padding: EdgeInsets.all(context.space(factor: 2)),
@@ -29,7 +29,7 @@ class FabWidget extends StatelessWidget {
                   label: 'Fab Type',
                   options: [
                     Option(
-                      DSFabImage(Assets.images.badgeLugia.path),
+                      DSFabImage(Assets.images.badge.badgeLugia.path),
                       'Image',
                     ),
                     Option(DSFabIcon(Icons.ice_skating), 'Icon'),

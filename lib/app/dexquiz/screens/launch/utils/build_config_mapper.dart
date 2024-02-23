@@ -23,18 +23,18 @@ extension BuildConfigExtension on BuildConfig {
   String get imageFab {
     switch (buildFlavor) {
       case BuildFlavor.kanto:
-        return Assets.images.badgeRyhorn.path;
+        return Assets.images.badge.badgeRyhorn.path;
       case BuildFlavor.johto:
-        return Assets.images.badgeLugia.path;
+        return Assets.images.badge.badgeLugia.path;
     }
   }
 
   String get imagePokedex {
     switch (buildFlavor) {
       case BuildFlavor.kanto:
-        return Assets.images.badgeKantodex.path;
+        return Assets.images.badge.badgeKantodex.path;
       case BuildFlavor.johto:
-        return Assets.images.badgeJohtodex.path;
+        return Assets.images.badge.badgeJohtodex.path;
     }
   }
 }

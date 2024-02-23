@@ -10,7 +10,7 @@ abstract interface class LoadingDTO<T> {
 }
 
 @internal
-class CircularLoading<Color> extends LoadingDTO {
+class CircularLoading extends LoadingDTO<Color> {
   @override
   bool get blockClicks => true;
 
@@ -19,7 +19,7 @@ class CircularLoading<Color> extends LoadingDTO {
 }
 
 @internal
-class LinearLoading<BorderRadiusGeometry> extends LoadingDTO {
+class LinearLoading extends LoadingDTO<BorderRadiusGeometry> {
   LinearLoading(this.progressPercentage);
 
   final double progressPercentage;

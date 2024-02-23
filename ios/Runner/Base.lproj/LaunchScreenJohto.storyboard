@@ -38,7 +38,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="LaunchImageJohto" width="256" height="240"/>
+        <image name="LaunchImageJohto" width="192" height="192"/>
         <image name="LaunchBackgroundJohto" width="1" height="1"/>
     </resources>
 </document>

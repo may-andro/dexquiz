@@ -175,3 +175,62 @@ class BrandColorScheme {
 
   final DSColor onTertiaryContainer;
 }
+
+class ElementalColorScheme {
+  const ElementalColorScheme({
+    required this.bug,
+    required this.dark,
+    required this.dragon,
+    required this.electric,
+    required this.fairy,
+    required this.fighting,
+    required this.fire,
+    required this.flying,
+    required this.ghost,
+    required this.grass,
+    required this.ground,
+    required this.ice,
+    required this.normal,
+    required this.poison,
+    required this.psychic,
+    required this.rock,
+    required this.steel,
+    required this.water,
+  });
+
+  final DSColor bug;
+
+  final DSColor dark;
+
+  final DSColor dragon;
+
+  final DSColor electric;
+
+  final DSColor fairy;
+
+  final DSColor fighting;
+
+  final DSColor fire;
+
+  final DSColor flying;
+
+  final DSColor ghost;
+
+  final DSColor grass;
+
+  final DSColor ground;
+
+  final DSColor ice;
+
+  final DSColor normal;
+
+  final DSColor poison;
+
+  final DSColor psychic;
+
+  final DSColor rock;
+
+  final DSColor steel;
+
+  final DSColor water;
+}

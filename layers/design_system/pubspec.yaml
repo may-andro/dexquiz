@@ -27,13 +27,14 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^3.0.1
   flutter_gen_runner: ^5.4.0
-  mocktail: ^1.0.2
-  build_runner: ^2.4.7
+  mocktail: ^1.0.3
+  build_runner: ^2.4.8
 
 flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/images/badge/
     - assets/lottieFiles/
     - assets/gifs/
   fonts:

@@ -19,10 +19,10 @@ This modules provides setting feature of the app. Below are the screen shots for
 ## Usage
 
 ```yaml
-app_config:
+settings:
   path: feature/settings
 ```
 
 ## CI
 
-The layer has CI/CD for github action: `layer_app_config.yaml`.
+The layer has CI/CD for github action: `feature_settings.yaml`.

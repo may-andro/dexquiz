@@ -13,6 +13,7 @@ final class Loading extends LaunchState {
 
 final class Success extends LaunchState {
   const Success({
+    required this.isQuizEnabled,
     required this.isPokedexEnabled,
     required this.imageHeader,
     required this.imageLaunch,
@@ -20,6 +21,7 @@ final class Success extends LaunchState {
     required this.imageFab,
   });
 
+  final bool isQuizEnabled;
   final bool isPokedexEnabled;
   final String imageHeader;
   final String imageLaunch;
@@ -28,6 +30,7 @@ final class Success extends LaunchState {
 
   @override
   List<Object> get props => [
+        isQuizEnabled,
         isPokedexEnabled,
         imageHeader,
         imageLaunch,

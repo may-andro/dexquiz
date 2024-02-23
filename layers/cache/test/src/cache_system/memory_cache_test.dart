@@ -8,7 +8,7 @@ class TestMemoryCache extends MemoryCache<String> {
 
 void main() {
   group(MemoryCache, () {
-    late MemoryCache memoryCache;
+    late MemoryCache<String> memoryCache;
 
     setUp(() {
       memoryCache = TestMemoryCache();

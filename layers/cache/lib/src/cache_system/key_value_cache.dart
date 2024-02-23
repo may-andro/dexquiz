@@ -26,7 +26,7 @@ abstract class KeyValueCache<V> extends Cache {
       await delete();
       return null;
     }
-    return deserializeValue(jsonDecode(value));
+    return deserializeValue(jsonDecode(value) as Map<String, dynamic>);
   }
 
   Future<bool> put(V value) {
