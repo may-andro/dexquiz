@@ -1,0 +1,1814 @@
+{
+  "1": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#37cba8"
+        },
+        "secondary": {
+          "stringValue": "#a1fa82"
+        }
+      }
+    }
+  },
+  "2": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#37cba8"
+        },
+        "secondary": {
+          "stringValue": "#a1fa82"
+        }
+      }
+    }
+  },
+  "3": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#37cba8"
+        },
+        "secondary": {
+          "stringValue": "#a1fa82"
+        }
+      }
+    }
+  },
+  "4": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f69730"
+        },
+        "secondary": {
+          "stringValue": "#ffe699"
+        }
+      }
+    }
+  },
+  "5": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f69730"
+        },
+        "secondary": {
+          "stringValue": "#ffe699"
+        }
+      }
+    }
+  },
+  "6": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f69730"
+        },
+        "secondary": {
+          "stringValue": "#ffe699"
+        }
+      }
+    }
+  },
+  "7": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#8acbde"
+        },
+        "secondary": {
+          "stringValue": "#f2e8be"
+        }
+      }
+    }
+  },
+  "8": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#8acbde"
+        },
+        "secondary": {
+          "stringValue": "#f2e8be"
+        }
+      }
+    }
+  },
+  "9": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#8acbde"
+        },
+        "secondary": {
+          "stringValue": "#f2e8be"
+        }
+      }
+    }
+  },
+  "10": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#add48d"
+        },
+        "secondary": {
+          "stringValue": "#ffe3b2"
+        }
+      }
+    }
+  },
+  "11": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#add48d"
+        },
+        "secondary": {
+          "stringValue": "#ffe3b2"
+        }
+      }
+    }
+  },
+  "12": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#add48d"
+        },
+        "secondary": {
+          "stringValue": "#ffe3b2"
+        }
+      }
+    }
+  },
+  "13": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f0c488"
+        },
+        "secondary": {
+          "stringValue": "#db76ad"
+        }
+      }
+    }
+  },
+  "14": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f0c488"
+        },
+        "secondary": {
+          "stringValue": "#db76ad"
+        }
+      }
+    }
+  },
+  "15": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f0c488"
+        },
+        "secondary": {
+          "stringValue": "#db76ad"
+        }
+      }
+    }
+  },
+  "16": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f2e8be"
+        },
+        "secondary": {
+          "stringValue": "#d29d65"
+        }
+      }
+    }
+  },
+  "17": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f2e8be"
+        },
+        "secondary": {
+          "stringValue": "#d29d65"
+        }
+      }
+    }
+  },
+  "18": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f2e8be"
+        },
+        "secondary": {
+          "stringValue": "#d29d65"
+        }
+      }
+    }
+  },
+  "19": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#b190c1"
+        },
+        "secondary": {
+          "stringValue": "#dad7be"
+        }
+      }
+    }
+  },
+  "20": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#b190c1"
+        },
+        "secondary": {
+          "stringValue": "#dad7be"
+        }
+      }
+    }
+  },
+  "21": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f1bea3"
+        },
+        "secondary": {
+          "stringValue": "#ff5c6b"
+        }
+      }
+    }
+  },
+  "22": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f1bea3"
+        },
+        "secondary": {
+          "stringValue": "#ff5c6b"
+        }
+      }
+    }
+  },
+  "23": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d2aed0"
+        },
+        "secondary": {
+          "stringValue": "#f1e090"
+        }
+      }
+    }
+  },
+  "24": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d2aed0"
+        },
+        "secondary": {
+          "stringValue": "#f1e090"
+        }
+      }
+    }
+  },
+  "25": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ffdc6c"
+        },
+        "secondary": {
+          "stringValue": "#e1a75c"
+        }
+      }
+    }
+  },
+  "26": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ffdc6c"
+        },
+        "secondary": {
+          "stringValue": "#e1a75c"
+        }
+      }
+    }
+  },
+  "27": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ecdfab"
+        },
+        "secondary": {
+          "stringValue": "#cbb57a"
+        }
+      }
+    }
+  },
+  "28": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ecdfab"
+        },
+        "secondary": {
+          "stringValue": "#cbb57a"
+        }
+      }
+    }
+  },
+  "29": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d0e0f3"
+        },
+        "secondary": {
+          "stringValue": "#9a9bcb"
+        }
+      }
+    }
+  },
+  "30": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d0e0f3"
+        },
+        "secondary": {
+          "stringValue": "#9a9bcb"
+        }
+      }
+    }
+  },
+  "31": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d0e0f3"
+        },
+        "secondary": {
+          "stringValue": "#9a9bcb"
+        }
+      }
+    }
+  },
+  "32": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#deabcd"
+        },
+        "secondary": {
+          "stringValue": "#c0759d"
+        }
+      }
+    }
+  },
+  "33": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#deabcd"
+        },
+        "secondary": {
+          "stringValue": "#c0759d"
+        }
+      }
+    }
+  },
+  "34": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#deabcd"
+        },
+        "secondary": {
+          "stringValue": "#c0759d"
+        }
+      }
+    }
+  },
+  "35": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#fbdcda"
+        },
+        "secondary": {
+          "stringValue": "#f0bec0"
+        }
+      }
+    }
+  },
+  "36": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#fbdcda"
+        },
+        "secondary": {
+          "stringValue": "#f0bec0"
+        }
+      }
+    }
+  },
+  "37": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f59062"
+        },
+        "secondary": {
+          "stringValue": "#f7d79b"
+        }
+      }
+    }
+  },
+  "38": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f59062"
+        },
+        "secondary": {
+          "stringValue": "#f7d79b"
+        }
+      }
+    }
+  },
+  "39": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#fad9e8"
+        },
+        "secondary": {
+          "stringValue": "#eab8ce"
+        }
+      }
+    }
+  },
+  "40": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#fad9e8"
+        },
+        "secondary": {
+          "stringValue": "#eab8ce"
+        }
+      }
+    }
+  },
+  "41": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#4a8fc6"
+        },
+        "secondary": {
+          "stringValue": "#dc8dd7"
+        }
+      }
+    }
+  },
+  "42": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#4a8fc6"
+        },
+        "secondary": {
+          "stringValue": "#dc8dd7"
+        }
+      }
+    }
+  },
+  "43": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#749ac4"
+        },
+        "secondary": {
+          "stringValue": "#75c06a"
+        }
+      }
+    }
+  },
+  "44": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#749ac4"
+        },
+        "secondary": {
+          "stringValue": "#75c06a"
+        }
+      }
+    }
+  },
+  "45": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#749ac4"
+        },
+        "secondary": {
+          "stringValue": "#75c06a"
+        }
+      }
+    }
+  },
+  "46": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f4883e"
+        },
+        "secondary": {
+          "stringValue": "#ffd15a"
+        }
+      }
+    }
+  },
+  "47": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f4883e"
+        },
+        "secondary": {
+          "stringValue": "#ffd15a"
+        }
+      }
+    }
+  },
+  "48": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#9b91d9"
+        },
+        "secondary": {
+          "stringValue": "#e14476"
+        }
+      }
+    }
+  },
+  "49": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#9b91d9"
+        },
+        "secondary": {
+          "stringValue": "#e14476"
+        }
+      }
+    }
+  },
+  "50": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#b78b75"
+        },
+        "secondary": {
+          "stringValue": "#eec5dc"
+        }
+      }
+    }
+  },
+  "51": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#b78b75"
+        },
+        "secondary": {
+          "stringValue": "#eec5dc"
+        }
+      }
+    }
+  },
+  "52": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f0e4c7"
+        },
+        "secondary": {
+          "stringValue": "#ffe28a"
+        }
+      }
+    }
+  },
+  "53": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f0e4c7"
+        },
+        "secondary": {
+          "stringValue": "#ffe28a"
+        }
+      }
+    }
+  },
+  "54": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#fdce87"
+        },
+        "secondary": {
+          "stringValue": "#f1f0da"
+        }
+      }
+    }
+  },
+  "55": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#fdce87"
+        },
+        "secondary": {
+          "stringValue": "#f1f0da"
+        }
+      }
+    }
+  },
+  "56": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#eedfd3"
+        },
+        "secondary": {
+          "stringValue": "#c3927f"
+        }
+      }
+    }
+  },
+  "57": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#eedfd3"
+        },
+        "secondary": {
+          "stringValue": "#c3927f"
+        }
+      }
+    }
+  },
+  "58": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f7a358"
+        },
+        "secondary": {
+          "stringValue": "#3f3d2a"
+        }
+      }
+    }
+  },
+  "59": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f7a358"
+        },
+        "secondary": {
+          "stringValue": "#3f3d2a"
+        }
+      }
+    }
+  },
+  "60": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#8ca5d3"
+        },
+        "secondary": {
+          "stringValue": "#ebecf6"
+        }
+      }
+    }
+  },
+  "61": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#8ca5d3"
+        },
+        "secondary": {
+          "stringValue": "#ebecf6"
+        }
+      }
+    }
+  },
+  "62": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#8ca5d3"
+        },
+        "secondary": {
+          "stringValue": "#ebecf6"
+        }
+      }
+    }
+  },
+  "63": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#efd760"
+        },
+        "secondary": {
+          "stringValue": "#8e7994"
+        }
+      }
+    }
+  },
+  "64": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#efd760"
+        },
+        "secondary": {
+          "stringValue": "#8e7994"
+        }
+      }
+    }
+  },
+  "65": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#efd760"
+        },
+        "secondary": {
+          "stringValue": "#8e7994"
+        }
+      }
+    }
+  },
+  "66": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#a1c4d9"
+        },
+        "secondary": {
+          "stringValue": "#d8d0c1"
+        }
+      }
+    }
+  },
+  "67": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#a1c4d9"
+        },
+        "secondary": {
+          "stringValue": "#d8d0c1"
+        }
+      }
+    }
+  },
+  "68": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#a1c4d9"
+        },
+        "secondary": {
+          "stringValue": "#d8d0c1"
+        }
+      }
+    }
+  },
+  "69": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ebe86f"
+        },
+        "secondary": {
+          "stringValue": "#b4d68f"
+        }
+      }
+    }
+  },
+  "70": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ebe86f"
+        },
+        "secondary": {
+          "stringValue": "#b4d68f"
+        }
+      }
+    }
+  },
+  "71": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ebe86f"
+        },
+        "secondary": {
+          "stringValue": "#b4d68f"
+        }
+      }
+    }
+  },
+  "72": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#7bbee6"
+        },
+        "secondary": {
+          "stringValue": "#c54c77"
+        }
+      }
+    }
+  },
+  "73": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#7bbee6"
+        },
+        "secondary": {
+          "stringValue": "#c54c77"
+        }
+      }
+    }
+  },
+  "74": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#b2a980"
+        },
+        "secondary": {
+          "stringValue": "#766002"
+        }
+      }
+    }
+  },
+  "75": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#b2a980"
+        },
+        "secondary": {
+          "stringValue": "#766002"
+        }
+      }
+    }
+  },
+  "76": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#b2a980"
+        },
+        "secondary": {
+          "stringValue": "#766002"
+        }
+      }
+    }
+  },
+  "77": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f6f0cf"
+        },
+        "secondary": {
+          "stringValue": "#f59062"
+        }
+      }
+    }
+  },
+  "78": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f6f0cf"
+        },
+        "secondary": {
+          "stringValue": "#f59062"
+        }
+      }
+    }
+  },
+  "79": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#e8a8c1"
+        },
+        "secondary": {
+          "stringValue": "#eee1c7"
+        }
+      }
+    }
+  },
+  "80": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#e8a8c1"
+        },
+        "secondary": {
+          "stringValue": "#eee1c7"
+        }
+      }
+    }
+  },
+  "81": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d9e3e9"
+        },
+        "secondary": {
+          "stringValue": "#92b6c6"
+        }
+      }
+    }
+  },
+  "82": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d9e3e9"
+        },
+        "secondary": {
+          "stringValue": "#92b6c6"
+        }
+      }
+    }
+  },
+  "83": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#b3a59f"
+        },
+        "secondary": {
+          "stringValue": "#9bff97"
+        }
+      }
+    }
+  },
+  "84": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d29d65"
+        },
+        "secondary": {
+          "stringValue": "#ae7662"
+        }
+      }
+    }
+  },
+  "85": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d29d65"
+        },
+        "secondary": {
+          "stringValue": "#ae7662"
+        }
+      }
+    }
+  },
+  "86": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#cfe7f1"
+        },
+        "secondary": {
+          "stringValue": "#b6caed"
+        }
+      }
+    }
+  },
+  "87": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#cfe7f1"
+        },
+        "secondary": {
+          "stringValue": "#b6caed"
+        }
+      }
+    }
+  },
+  "88": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#c7aacf"
+        },
+        "secondary": {
+          "stringValue": "#5f5370"
+        }
+      }
+    }
+  },
+  "89": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#c7aacf"
+        },
+        "secondary": {
+          "stringValue": "#5f5370"
+        }
+      }
+    }
+  },
+  "90": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#b2a2cd"
+        },
+        "secondary": {
+          "stringValue": "#e0b5b3"
+        }
+      }
+    }
+  },
+  "91": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#b2a2cd"
+        },
+        "secondary": {
+          "stringValue": "#e0b5b3"
+        }
+      }
+    }
+  },
+  "92": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#252324"
+        },
+        "secondary": {
+          "stringValue": "#9b7fb7"
+        }
+      }
+    }
+  },
+  "93": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#252324"
+        },
+        "secondary": {
+          "stringValue": "#9b7fb7"
+        }
+      }
+    }
+  },
+  "94": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#252324"
+        },
+        "secondary": {
+          "stringValue": "#9b7fb7"
+        }
+      }
+    }
+  },
+  "95": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#bec0c2"
+        },
+        "secondary": {
+          "stringValue": "#69696c"
+        }
+      }
+    }
+  },
+  "96": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ffd15a"
+        },
+        "secondary": {
+          "stringValue": "#ae7662"
+        }
+      }
+    }
+  },
+  "97": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ffd15a"
+        },
+        "secondary": {
+          "stringValue": "#ae7662"
+        }
+      }
+    }
+  },
+  "98": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f59767"
+        },
+        "secondary": {
+          "stringValue": "#eed9cd"
+        }
+      }
+    }
+  },
+  "99": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f59767"
+        },
+        "secondary": {
+          "stringValue": "#eed9cd"
+        }
+      }
+    }
+  },
+  "100": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#c54b5e"
+        },
+        "secondary": {
+          "stringValue": "#efeff0"
+        }
+      }
+    }
+  },
+  "101": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#c54b5e"
+        },
+        "secondary": {
+          "stringValue": "#efeff0"
+        }
+      }
+    }
+  },
+  "102": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#fbe3ee"
+        },
+        "secondary": {
+          "stringValue": "#fac9c0"
+        }
+      }
+    }
+  },
+  "103": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#fbe3ee"
+        },
+        "secondary": {
+          "stringValue": "#fac9c0"
+        }
+      }
+    }
+  },
+  "104": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#dcddde"
+        },
+        "secondary": {
+          "stringValue": "#cbb57a"
+        }
+      }
+    }
+  },
+  "105": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#dcddde"
+        },
+        "secondary": {
+          "stringValue": "#cbb57a"
+        }
+      }
+    }
+  },
+  "106": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#c5a58e"
+        },
+        "secondary": {
+          "stringValue": "#eee1c7"
+        }
+      }
+    }
+  },
+  "107": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d0b1c1"
+        },
+        "secondary": {
+          "stringValue": "#e4643b"
+        }
+      }
+    }
+  },
+  "108": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ecb5c0"
+        },
+        "secondary": {
+          "stringValue": "#f0e5ca"
+        }
+      }
+    }
+  },
+  "109": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#9195b5"
+        },
+        "secondary": {
+          "stringValue": "#dee0be"
+        }
+      }
+    }
+  },
+  "110": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#9195b5"
+        },
+        "secondary": {
+          "stringValue": "#dee0be"
+        }
+      }
+    }
+  },
+  "111": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#c5c6c8"
+        },
+        "secondary": {
+          "stringValue": "#949ba1"
+        }
+      }
+    }
+  },
+  "112": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#c5c6c8"
+        },
+        "secondary": {
+          "stringValue": "#949ba1"
+        }
+      }
+    }
+  },
+  "113": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#e9b5b9"
+        },
+        "secondary": {
+          "stringValue": "#c68d87"
+        }
+      }
+    }
+  },
+  "114": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#6a70a3"
+        },
+        "secondary": {
+          "stringValue": "#e46e8c"
+        }
+      }
+    }
+  },
+  "115": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#9d8d86"
+        },
+        "secondary": {
+          "stringValue": "#e3ddb8"
+        }
+      }
+    }
+  },
+  "116": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#a5d7f3"
+        },
+        "secondary": {
+          "stringValue": "#fcf7d7"
+        }
+      }
+    }
+  },
+  "117": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#a5d7f3"
+        },
+        "secondary": {
+          "stringValue": "#fcf7d7"
+        }
+      }
+    }
+  },
+  "118": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#efeff0"
+        },
+        "secondary": {
+          "stringValue": "#f38469"
+        }
+      }
+    }
+  },
+  "119": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#efeff0"
+        },
+        "secondary": {
+          "stringValue": "#f38469"
+        }
+      }
+    }
+  },
+  "120": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#bb9b6d"
+        },
+        "secondary": {
+          "stringValue": "#f5e688"
+        }
+      }
+    }
+  },
+  "121": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#bb9b6d"
+        },
+        "secondary": {
+          "stringValue": "#f5e688"
+        }
+      }
+    }
+  },
+  "122": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ee678d"
+        },
+        "secondary": {
+          "stringValue": "#ffced4"
+        }
+      }
+    }
+  },
+  "123": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#98cd8d"
+        },
+        "secondary": {
+          "stringValue": "#f6f0cf"
+        }
+      }
+    }
+  },
+  "124": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#cc4855"
+        },
+        "secondary": {
+          "stringValue": "#643187"
+        }
+      }
+    }
+  },
+  "125": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ffe47c"
+        },
+        "secondary": {
+          "stringValue": "#14175e"
+        }
+      }
+    }
+  },
+  "126": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ffdd7c"
+        },
+        "secondary": {
+          "stringValue": "#f0664e"
+        }
+      }
+    }
+  },
+  "127": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#c4b8b2"
+        },
+        "secondary": {
+          "stringValue": "#cfd4d8"
+        }
+      }
+    }
+  },
+  "128": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#e1a75c"
+        },
+        "secondary": {
+          "stringValue": "#887e6f"
+        }
+      }
+    }
+  },
+  "129": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f27d3b"
+        },
+        "secondary": {
+          "stringValue": "#f6f0cf"
+        }
+      }
+    }
+  },
+  "130": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f27d3b"
+        },
+        "secondary": {
+          "stringValue": "#f6f0cf"
+        }
+      }
+    }
+  },
+  "131": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#6faedd"
+        },
+        "secondary": {
+          "stringValue": "#fff0da"
+        }
+      }
+    }
+  },
+  "132": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f6aec3"
+        },
+        "secondary": {
+          "stringValue": "#db76ad"
+        }
+      }
+    }
+  },
+  "133": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d29d65"
+        },
+        "secondary": {
+          "stringValue": "#7e5521"
+        }
+      }
+    }
+  },
+  "134": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d29d65"
+        },
+        "secondary": {
+          "stringValue": "#7e5521"
+        }
+      }
+    }
+  },
+  "135": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d29d65"
+        },
+        "secondary": {
+          "stringValue": "#7e5521"
+        }
+      }
+    }
+  },
+  "136": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#d29d65"
+        },
+        "secondary": {
+          "stringValue": "#7e5521"
+        }
+      }
+    }
+  },
+  "137": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f17a81"
+        },
+        "secondary": {
+          "stringValue": "#6bc7c5"
+        }
+      }
+    }
+  },
+  "138": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#e6e5d4"
+        },
+        "secondary": {
+          "stringValue": "#73cee2"
+        }
+      }
+    }
+  },
+  "139": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#e6e5d4"
+        },
+        "secondary": {
+          "stringValue": "#73cee2"
+        }
+      }
+    }
+  },
+  "140": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#c78824"
+        },
+        "secondary": {
+          "stringValue": "#53534a"
+        }
+      }
+    }
+  },
+  "141": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#c78824"
+        },
+        "secondary": {
+          "stringValue": "#53534a"
+        }
+      }
+    }
+  },
+  "142": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ddc2dc"
+        },
+        "secondary": {
+          "stringValue": "#b196c5"
+        }
+      }
+    }
+  },
+  "143": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#3d6f8e"
+        },
+        "secondary": {
+          "stringValue": "#e6ded0"
+        }
+      }
+    }
+  },
+  "144": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#91c3e8"
+        },
+        "secondary": {
+          "stringValue": "#599bbb"
+        }
+      }
+    }
+  },
+  "145": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ffe28a"
+        },
+        "secondary": {
+          "stringValue": "#b3975e"
+        }
+      }
+    }
+  },
+  "146": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#ffd37e"
+        },
+        "secondary": {
+          "stringValue": "#f38469"
+        }
+      }
+    }
+  },
+  "147": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#96b5dd"
+        },
+        "secondary": {
+          "stringValue": "#efeae6"
+        }
+      }
+    }
+  },
+  "148": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#96b5dd"
+        },
+        "secondary": {
+          "stringValue": "#efeae6"
+        }
+      }
+    }
+  },
+  "149": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#96b5dd"
+        },
+        "secondary": {
+          "stringValue": "#efeae6"
+        }
+      }
+    }
+  },
+  "150": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#cad9ee"
+        },
+        "secondary": {
+          "stringValue": "#9195b5"
+        }
+      }
+    }
+  },
+  "151": {
+    "mapValue": {
+      "fields": {
+        "primary": {
+          "stringValue": "#f4e1ed"
+        },
+        "secondary": {
+          "stringValue": "#eab8ce"
+        }
+      }
+    }
+  }
+}
