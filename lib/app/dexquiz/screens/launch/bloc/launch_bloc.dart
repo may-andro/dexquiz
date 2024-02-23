@@ -21,17 +21,23 @@ class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
     OnStart event,
     Emitter<LaunchState> emit,
   ) async {
-    final isQuizEnabledEither =
-        await _isFeatureEnabledUseCase.call(Feature.isQuizEnabled);
     bool isQuizEnabled = false;
+    bool isPokedexEnabled = false;
+
+    final isQuizEnabledEither = await _isFeatureEnabledUseCase(
+      Feature.isQuizEnabled,
+    );
+    final isPokedexEnabledEither = await _isFeatureEnabledUseCase(
+      Feature.isPokedexEnabled,
+    );
+
+
     isQuizEnabledEither.fold(
       (left) => isQuizEnabled = false,
       (right) => isQuizEnabled = right,
     );
 
-    final isPokedexEnabledEither =
-        await _isFeatureEnabledUseCase.call(Feature.isPokedexEnabled);
-    bool isPokedexEnabled = false;
+
     isPokedexEnabledEither.fold(
       (left) => isPokedexEnabled = false,
       (right) => isPokedexEnabled = right,

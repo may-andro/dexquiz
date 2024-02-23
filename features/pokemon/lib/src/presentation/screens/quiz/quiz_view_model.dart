@@ -32,7 +32,14 @@ class QuizViewModel extends BaseViewModel {
 
   String? get errorMessage => _errorMessage;
 
+  @override
+  void dispose() {
+    _audioPlayer?.dispose();
+    super.dispose();
+  }
+
   Future<void> onInit() async {
+    _audioPlayer = AssetsAudioPlayer.newPlayer();
     await loadPokemon();
   }
 
@@ -73,15 +80,15 @@ class QuizViewModel extends BaseViewModel {
         _errorMessage = 'Failed to generate options due to: ${left.cause}';
       }
       setErrorState();
-    }, (right) {
+    }, (right) async {
       final choices = <ChoiceDTO>[];
       right.forEach((key, value) {
         choices.add(ChoiceDTO(key, value));
       });
       _questionDTO = QuestionDTO(pokemon, choices);
       _answerDTO = AnswerDTO.empty();
-      _playFeedbackTone(Assets.audio.appear);
       setSuccessState();
+      _playAudioFeedback(Assets.audio.appear);
     });
   }
 
@@ -93,7 +100,7 @@ class QuizViewModel extends BaseViewModel {
     final answers = answerDTO.answers;
     final pokemon = questionDTO.pokemon;
     if (answers.keys.length != pokemon.name.length) {
-      _playFeedbackTone(Assets.audio.drag);
+      _playAudioFeedback(Assets.audio.drag);
       return;
     }
 
@@ -106,24 +113,25 @@ class QuizViewModel extends BaseViewModel {
       isCapturedEither.fold((left) {
         _errorMessage = 'Pokemon escaped due to error: ${left.cause}';
         setErrorState();
-      }, (right) {
+      }, (right) async {
         _answerDTO = answerDTO.copyWith(status: CaptureStatus.caught);
-        _playFeedbackTone(Assets.audio.gotcha, speed: 2.0);
         notifyListeners();
+        _playAudioFeedback(Assets.audio.gotcha);
       });
     } else {
       _answerDTO = answerDTO.copyWith(status: CaptureStatus.escaped);
-      _playFeedbackTone(Assets.audio.flee);
       notifyListeners();
+      _playAudioFeedback(Assets.audio.flee);
     }
   }
 
-  void _playFeedbackTone(String path, {double speed = 1.0}) {
-    _audioPlayer = AssetsAudioPlayer();
-    _audioPlayer?.open(
+  void _playAudioFeedback(String path) async {
+    _audioPlayer?.stop();
+    await _audioPlayer?.open(
       Audio(path, package: 'pokemon'),
+      showNotification: false,
+      autoStart: false,
     );
-    _audioPlayer?.setPlaySpeed(speed);
     _audioPlayer?.play();
   }
 }

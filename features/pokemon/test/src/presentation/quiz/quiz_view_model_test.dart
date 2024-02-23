@@ -38,6 +38,10 @@ void main() {
     late MockGenerateQuizOptionUseCase mockGenerateQuizOptionUseCase;
     late MockAddToCapturedUseCase mockAddToCapturedUseCase;
 
+    setUpAll(() {
+      TestWidgetsFlutterBinding.ensureInitialized();
+    });
+
     setUp(() {
       mockFetchRandomPokemonUseCase = MockFetchRandomPokemonUseCase();
       mockGenerateQuizOptionUseCase = MockGenerateQuizOptionUseCase();

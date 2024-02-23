@@ -36,7 +36,10 @@ void main() {
       build: () => launchBloc,
       setUp: () {
         when(
-          () => mockIsFeatureEnabledUseCase.call(Feature.inAppReview),
+          () => mockIsFeatureEnabledUseCase(Feature.isPokedexEnabled),
+        ).thenAnswer((_) async => const Right(true));
+        when(
+          () => mockIsFeatureEnabledUseCase(Feature.isQuizEnabled),
         ).thenAnswer((_) async => const Right(true));
       },
       act: (bloc) => bloc.add(OnStart()),
