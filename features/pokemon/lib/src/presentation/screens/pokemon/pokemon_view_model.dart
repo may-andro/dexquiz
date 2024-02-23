@@ -61,7 +61,6 @@ class PokemonViewModel extends BaseViewModel {
         _pokemon = _pokemon.copyWith(isFavorite: true);
       });
     }
-    _errorMessage = 'test';
     notifyListeners();
   }
 
