@@ -42,6 +42,7 @@ void main() {
       act: (bloc) => bloc.add(OnStart()),
       expect: () => <Success>[
         Success(
+          isQuizEnabled: true,
           isPokedexEnabled: true,
           imagePokedex: buildConfig.imagePokedex,
           imageHeader: buildConfig.imageHeader,

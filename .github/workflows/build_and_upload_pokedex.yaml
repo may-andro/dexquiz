@@ -1,8 +1,11 @@
 name: Build and Upload all Pokedex every night
 
+#on:
+#  schedule:
+#    - cron: '0 0 * * *'
+
 on:
-  schedule:
-    - cron: '0 0 * * *'
+  push
 
 jobs:
   build_kanto_pokedex:

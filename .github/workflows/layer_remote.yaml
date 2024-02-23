@@ -6,12 +6,8 @@ concurrency:
 
 on:
   push:
-    branches:
-      - staging
     paths:
       - layers/remote/**
-    tags:
-      - '*'
 
 #on:
 #  push
