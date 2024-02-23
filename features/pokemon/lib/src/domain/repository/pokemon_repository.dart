@@ -1,4 +1,5 @@
 import 'package:pokemon/src/domain/model/pokemon.dart';
+import 'package:pokemon/src/domain/model/pokemon_color.dart';
 
 class PokemonFetchException implements Exception {}
 
@@ -12,4 +13,6 @@ abstract interface class PokemonRepository {
   Future<Pokemon?> fetchPokemon(int index);
 
   Future<String?> fetchPokemonDescription(int index);
+
+  Future<PokemonColor?> fetchPokemonColor(int index);
 }

@@ -7,6 +7,7 @@ import 'package:dependency_injector/dependency_injector.dart';
 import 'package:firebase/firebase.dart';
 import 'package:pokemon/src/data/data.dart';
 import 'package:pokemon/src/data/entity/local/captured_cache_entity.dart';
+import 'package:pokemon/src/data/entity/local/color_cache_entity.dart';
 import 'package:pokemon/src/data/entity/local/description_cache_entity.dart';
 import 'package:pokemon/src/data/entity/local/favorite_cache_entity.dart';
 import 'package:pokemon/src/data/entity/local/pokemon_cache_entity.dart';
@@ -61,6 +62,14 @@ class FeaturePokemonModuleConfigurator implements ModuleConfigurator {
       () => DescriptionCache(descriptionBox),
     );
 
+    hive.registerAdapter(ColorCacheEntityAdapter());
+    final colorBox = await hive.openBox<ColorCacheEntity>(
+      'color_box',
+    );
+    serviceLocator.registerSingleton(
+      () => ColorCache(colorBox),
+    );
+
     hive.registerAdapter(StatCacheEntityAdapter());
     hive.registerAdapter(PokemonCacheEntityAdapter());
     final pokemonBox = await hive.openBox<PokemonCacheEntity>(
@@ -80,6 +89,7 @@ class FeaturePokemonModuleConfigurator implements ModuleConfigurator {
     final cachedPokemonRepository = CachedPokemonRepository(
       serviceLocator.get<PokemonCache>(),
       serviceLocator.get<DescriptionCache>(),
+      serviceLocator.get<ColorCache>(),
     );
     final pokemonRepositoryImpl = PokemonRepositoryImpl(
       firebasePokemonRepository,
@@ -177,6 +187,12 @@ class FeaturePokemonModuleConfigurator implements ModuleConfigurator {
       ),
     );
 
+    serviceLocator.registerFactory<FetchColorUseCase>(
+      () => FetchColorUseCase(
+        serviceLocator.get<PokemonRepository>(),
+      ),
+    );
+
     /// View Model
     serviceLocator.registerFactory<PokedexViewModel>(
       () => PokedexViewModel(
@@ -191,6 +207,7 @@ class FeaturePokemonModuleConfigurator implements ModuleConfigurator {
         serviceLocator.get<RemoveFavoritesUseCase>(),
         serviceLocator.get<IsFavoriteUseCase>(),
         serviceLocator.get<FetchDescriptionUseCase>(),
+        serviceLocator.get<FetchColorUseCase>(),
       ),
     );
 

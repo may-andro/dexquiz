@@ -7,6 +7,7 @@ export 'pokemon/fetch_random_pokemon_use_case.dart';
 export 'pokemon/fetch_pokemon_use_case.dart';
 export 'pokemon/generate_quiz_options_use_case.dart';
 export 'pokemon/fetch_description_use_case.dart';
+export 'pokemon/fetch_color_use_case.dart';
 
 export 'favorite/add_to_favorites_use_case.dart';
 export 'favorite/is_favorite_use_case.dart';

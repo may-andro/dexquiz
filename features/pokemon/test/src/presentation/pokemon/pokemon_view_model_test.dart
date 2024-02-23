@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:pokemon/src/domain/domain.dart';
+import 'package:pokemon/src/domain/model/pokemon_color.dart';
 import 'package:pokemon/src/presentation/screens/pokemon/pokemon_view_model.dart';
 import 'package:use_case/use_case.dart';
 
@@ -7,7 +8,10 @@ import '../../../mock/domain/model/test_pokemon.dart';
 import '../../../mock/domain/use_case/favorite/mock_add_to_favorites_use_case.dart';
 import '../../../mock/domain/use_case/favorite/mock_is_favorite_use_case.dart';
 import '../../../mock/domain/use_case/favorite/mock_remove_favorites_use_case.dart';
+import '../../../mock/domain/use_case/pokemon/mock_fetch_color_use_case.dart';
 import '../../../mock/domain/use_case/pokemon/mock_fetch_description_use_case.dart';
+
+final _pokemonColor = PokemonColor('primary', 'secondary');
 
 void main() {
   group(PokemonViewModel, () {
@@ -17,24 +21,28 @@ void main() {
     late MockRemoveFavoritesUseCase mockRemoveFavoritesUseCase;
     late MockIsFavoriteUseCase mockIsFavoriteUseCase;
     late MockFetchDescriptionUseCase mockFetchDescriptionUseCase;
+    late MockFetchColorUseCase mockFetchColorUseCase;
 
     setUp(() {
       mockAddToFavoritesUseCase = MockAddToFavoritesUseCase();
       mockRemoveFavoritesUseCase = MockRemoveFavoritesUseCase();
       mockIsFavoriteUseCase = MockIsFavoriteUseCase();
       mockFetchDescriptionUseCase = MockFetchDescriptionUseCase();
+      mockFetchColorUseCase = MockFetchColorUseCase();
 
       pokemonViewModel = PokemonViewModel(
         mockAddToFavoritesUseCase,
         mockRemoveFavoritesUseCase,
         mockIsFavoriteUseCase,
         mockFetchDescriptionUseCase,
+        mockFetchColorUseCase,
       );
     });
 
     group('onInit', () {
       test('should get favorite status and update the pokemon', () async {
         mockIsFavoriteUseCase.mockRight(true);
+        mockFetchColorUseCase.mockRight(_pokemonColor);
         mockFetchDescriptionUseCase.mockRight('description');
 
         await pokemonViewModel.onInit(testPokemon);
@@ -47,6 +55,7 @@ void main() {
           'should ignore favorite status in case of failure in $IsFavoriteUseCase',
           () async {
         mockIsFavoriteUseCase.mockLeft();
+        mockFetchColorUseCase.mockRight(_pokemonColor);
         mockFetchDescriptionUseCase.mockRight('description');
 
         await pokemonViewModel.onInit(testPokemon);
@@ -59,6 +68,7 @@ void main() {
           'should set description when $FetchDescriptionUseCase return valid value',
           () async {
         mockIsFavoriteUseCase.mockRight(true);
+        mockFetchColorUseCase.mockRight(_pokemonColor);
         mockFetchDescriptionUseCase.mockRight('description');
 
         await pokemonViewModel.onInit(testPokemon);
@@ -71,6 +81,7 @@ void main() {
           'should set error message when $FetchDescriptionUseCase return $NullDescriptionFailure',
           () async {
         mockIsFavoriteUseCase.mockRight(true);
+        mockFetchColorUseCase.mockRight(_pokemonColor);
         mockFetchDescriptionUseCase.mockLeft(NullDescriptionFailure());
 
         await pokemonViewModel.onInit(testPokemon);
@@ -82,6 +93,7 @@ void main() {
           'should set error message when $FetchDescriptionUseCase return $UnknownDescriptionFailure',
           () async {
         mockIsFavoriteUseCase.mockRight(true);
+        mockFetchColorUseCase.mockRight(_pokemonColor);
         mockFetchDescriptionUseCase.mockLeft(UnknownDescriptionFailure());
 
         await pokemonViewModel.onInit(testPokemon);
@@ -89,14 +101,53 @@ void main() {
         expect(pokemonViewModel.description,
             'Failed to fetch the description due to unknown error: null');
       });
+
+      test('should set pokemon color when $FetchColorUseCase return $Right',
+          () async {
+        mockIsFavoriteUseCase.mockRight(true);
+        mockFetchDescriptionUseCase.mockRight('');
+        mockFetchColorUseCase.mockRight(_pokemonColor);
+
+        await pokemonViewModel.onInit(testPokemon);
+
+        expect(pokemonViewModel.pokemonColor, _pokemonColor);
+      });
+
+      test(
+          'should set null pokemon color when $FetchColorUseCase return $NullColorFailure',
+          () async {
+        mockIsFavoriteUseCase.mockRight(true);
+        mockFetchDescriptionUseCase.mockRight('');
+        mockFetchColorUseCase.mockLeft(NullColorFailure());
+
+        await pokemonViewModel.onInit(testPokemon);
+
+        expect(pokemonViewModel.pokemonColor, isNull);
+      });
+
+      test(
+          'should set null pokemon color when $FetchColorUseCase return $UnknownColorFailure',
+          () async {
+        mockIsFavoriteUseCase.mockRight(true);
+        mockFetchDescriptionUseCase.mockRight('');
+        mockFetchColorUseCase.mockLeft(UnknownColorFailure());
+
+        await pokemonViewModel.onInit(testPokemon);
+
+        expect(pokemonViewModel.pokemonColor, isNull);
+      });
     });
 
     group('updateFavouriteStatus', () {
+      setUp(() {
+        mockFetchDescriptionUseCase.mockRight('description');
+        mockFetchColorUseCase.mockRight(_pokemonColor);
+      });
+
       test(
           'should add to favorites when pokemon not favorite and $AddToFavoritesUseCase return $Right',
           () async {
         mockIsFavoriteUseCase.mockRight(false);
-        mockFetchDescriptionUseCase.mockRight('description');
         mockAddToFavoritesUseCase.mockRight();
         mockRemoveFavoritesUseCase.mockRight();
 
@@ -110,7 +161,6 @@ void main() {
           'should update error message when pokemon not favorite and $AddToFavoritesUseCase return $Left',
           () async {
         mockIsFavoriteUseCase.mockRight(false);
-        mockFetchDescriptionUseCase.mockRight('description');
         mockAddToFavoritesUseCase.mockLeft();
         mockRemoveFavoritesUseCase.mockRight();
 
@@ -125,7 +175,6 @@ void main() {
           'should remove from favorites when pokemon is favorite and $RemoveFavoritesUseCase return $Right',
           () async {
         mockIsFavoriteUseCase.mockRight(true);
-        mockFetchDescriptionUseCase.mockRight('description');
         mockAddToFavoritesUseCase.mockRight();
         mockRemoveFavoritesUseCase.mockRight();
 
@@ -139,7 +188,6 @@ void main() {
           'should update error message when pokemon is favorite and $RemoveFavoritesUseCase return $Left',
           () async {
         mockIsFavoriteUseCase.mockRight(true);
-        mockFetchDescriptionUseCase.mockRight('description');
         mockAddToFavoritesUseCase.mockRight();
         mockRemoveFavoritesUseCase.mockLeft();
 

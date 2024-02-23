@@ -1,7 +1,10 @@
 import 'package:firebase/firebase.dart';
+import 'package:pokemon/src/data/entity/firebase/color_entity.dart';
 import 'package:pokemon/src/data/entity/firebase/pokemon_entity.dart';
+import 'package:pokemon/src/data/mapper/color_entity_mapper.dart';
 import 'package:pokemon/src/data/mapper/fb_pokemon_entity_mapper.dart';
 import 'package:pokemon/src/domain/model/pokemon.dart';
+import 'package:pokemon/src/domain/model/pokemon_color.dart';
 import 'package:pokemon/src/domain/repository/pokemon_repository.dart';
 
 final class FirebasePokemonRepository implements PokemonRepository {
@@ -36,5 +39,15 @@ final class FirebasePokemonRepository implements PokemonRepository {
       return null;
     }
     return json['description'] as String;
+  }
+
+  @override
+  Future<PokemonColor?> fetchPokemonColor(int index) async {
+    final getDocumentParam = GetDocumentParam('colors', '$index');
+    final json = await _getDocumentUseCase(getDocumentParam);
+    if (json == null) {
+      return null;
+    }
+    return ColorEntity.fromJson(json).toPokemonColor();
   }
 }

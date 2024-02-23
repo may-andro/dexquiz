@@ -1,4 +1,5 @@
 import 'package:pokemon/src/domain/domain.dart';
+import 'package:pokemon/src/domain/model/pokemon_color.dart';
 import 'package:pokemon/src/presentation/base/base.dart';
 
 class PokemonViewModel extends BaseViewModel {
@@ -7,16 +8,20 @@ class PokemonViewModel extends BaseViewModel {
     this._removeFavoritesUseCase,
     this._isFavoriteUseCase,
     this._fetchDescriptionUseCase,
+    this._fetchColorUseCase,
   );
 
   final AddToFavoritesUseCase _addToFavoritesUseCase;
   final RemoveFavoritesUseCase _removeFavoritesUseCase;
   final IsFavoriteUseCase _isFavoriteUseCase;
   final FetchDescriptionUseCase _fetchDescriptionUseCase;
+  final FetchColorUseCase _fetchColorUseCase;
 
   late Pokemon _pokemon;
 
   String? _description;
+
+  PokemonColor? _pokemonColor;
 
   String? _errorMessage;
 
@@ -24,12 +29,15 @@ class PokemonViewModel extends BaseViewModel {
 
   String? get description => _description;
 
+  PokemonColor? get pokemonColor => _pokemonColor;
+
   String? get errorMessage => _errorMessage;
 
   Future<void> onInit(Pokemon pokemon) async {
     _pokemon = pokemon;
     await _getFavouriteStatus();
     await _getDescription();
+    await _getColor();
     notifyListeners();
   }
 
@@ -79,6 +87,19 @@ class PokemonViewModel extends BaseViewModel {
       }
     }, (right) {
       _description = right;
+    });
+  }
+
+  Future<void> _getColor() async {
+    final either = await _fetchColorUseCase(pokemon.id);
+    either.fold((left) {
+      if (left is NullColorFailure) {
+        _pokemonColor = null;
+      } else {
+        _pokemonColor = null;
+      }
+    }, (right) {
+      _pokemonColor = right;
     });
   }
 }

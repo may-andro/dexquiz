@@ -1,6 +1,7 @@
 import 'package:pokemon/src/data/entity/remote/pokemon_entity.dart';
 import 'package:pokemon/src/data/mapper/pokemon_entity_mapper.dart';
 import 'package:pokemon/src/domain/model/pokemon.dart';
+import 'package:pokemon/src/domain/model/pokemon_color.dart';
 import 'package:pokemon/src/domain/repository/pokemon_repository.dart';
 import 'package:remote/remote.dart';
 
@@ -27,6 +28,11 @@ final class RemotePokemonRepository implements PokemonRepository {
 
   @override
   Future<String?> fetchPokemonDescription(int index) async {
+    return null;
+  }
+
+  @override
+  Future<PokemonColor?> fetchPokemonColor(int index) async {
     return null;
   }
 }

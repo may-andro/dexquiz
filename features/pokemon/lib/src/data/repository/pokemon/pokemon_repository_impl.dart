@@ -2,6 +2,7 @@ import 'package:pokemon/src/data/repository/pokemon/cached_pokemon_repository.da
 import 'package:pokemon/src/data/repository/pokemon/firebase_pokemon_repository.dart';
 import 'package:pokemon/src/data/repository/pokemon/remote_pokemon_repository.dart';
 import 'package:pokemon/src/domain/model/pokemon.dart';
+import 'package:pokemon/src/domain/model/pokemon_color.dart';
 import 'package:pokemon/src/domain/repository/pokemon_repository.dart';
 
 class PokemonRepositoryImpl implements PokemonRepository {
@@ -55,5 +56,17 @@ class PokemonRepositoryImpl implements PokemonRepository {
       }
     }
     return description;
+  }
+
+  @override
+  Future<PokemonColor?> fetchPokemonColor(int index) async {
+    var pokemonColor = await _cachedDelegate.fetchPokemonColor(index);
+    if (pokemonColor == null) {
+      pokemonColor = await _firebaseDelegate.fetchPokemonColor(index);
+      if (pokemonColor != null) {
+        _cachedDelegate.setColorCache(index, pokemonColor);
+      }
+    }
+    return pokemonColor;
   }
 }
