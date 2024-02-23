@@ -674,7 +674,7 @@ packages:
     source: hosted
     version: "6.7.1"
   log_reporter:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       path: "../../layers/log_reporter"
       relative: true

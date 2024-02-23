@@ -1,5 +1,4 @@
 import 'package:pokemon/src/data/cache/cache.dart';
-import 'package:pokemon/src/data/cache/color_cache.dart';
 import 'package:pokemon/src/data/entity/local/description_cache_entity.dart';
 import 'package:pokemon/src/data/mapper/pokemon_cache_entity_mapper.dart';
 import 'package:pokemon/src/data/mapper/pokemon_mapper.dart';

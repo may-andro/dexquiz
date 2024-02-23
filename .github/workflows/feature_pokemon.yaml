@@ -8,8 +8,6 @@ on:
   push:
     paths:
       - features/pokemon/**
-    tags:
-      - '*'
 
 #on:
 #  push

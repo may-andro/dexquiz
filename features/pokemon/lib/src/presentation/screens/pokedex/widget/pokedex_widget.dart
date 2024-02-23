@@ -76,7 +76,7 @@ class _PokemonItem extends StatelessWidget {
               ),
             ),
             /// disabling this feature for now
-            if (pokemon.isFavorite && false) ...[
+            /*if (pokemon.isFavorite) ...[
               /// disabling this feature for now
               Positioned(
                 top: context.space(factor: 0.4),
@@ -86,7 +86,7 @@ class _PokemonItem extends StatelessWidget {
                   color: context.colorPalette.semantic.error.color,
                 ),
               ),
-            ]
+            ]*/
           ],
         ),
       ),

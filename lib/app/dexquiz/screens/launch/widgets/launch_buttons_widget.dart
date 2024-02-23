@@ -29,7 +29,8 @@ class LaunchButtonsWidget extends StatelessWidget {
             ),
             state is Success
                 ? DSFabWidget(
-                    fabType: DSFabImage(state.imageFab),
+                    //fabType: DSFabImage(state.imageFab),
+                    fabType: DSFabIcon(Icons.catching_pokemon_rounded),
                     fabSize: DSFabSize.large,
                     color: context.colorPalette.brand.primary,
                     onPressed: () {
