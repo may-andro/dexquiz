@@ -12,119 +12,33 @@ import 'package:flutter/widgets.dart';
 class $AssetsGifsGen {
   const $AssetsGifsGen();
 
+  /// File path: assets/gifs/eeve.gif
+  AssetGenImage get eeve => const AssetGenImage('assets/gifs/eeve.gif');
+
+  /// File path: assets/gifs/error.gif
+  AssetGenImage get error => const AssetGenImage('assets/gifs/error.gif');
+
+  /// File path: assets/gifs/intro.gif
+  AssetGenImage get intro => const AssetGenImage('assets/gifs/intro.gif');
+
+  /// File path: assets/gifs/loading.gif
+  AssetGenImage get loading => const AssetGenImage('assets/gifs/loading.gif');
+
   /// File path: assets/gifs/pokemon.gif
   AssetGenImage get pokemon => const AssetGenImage('assets/gifs/pokemon.gif');
 
+  /// File path: assets/gifs/suicune.gif
+  AssetGenImage get suicune => const AssetGenImage('assets/gifs/suicune.gif');
+
   /// List of all assets
-  List<AssetGenImage> get values => [pokemon];
+  List<AssetGenImage> get values =>
+      [eeve, error, intro, loading, pokemon, suicune];
 }
 
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
-  /// File path: assets/images/badge_bug.png
-  AssetGenImage get badgeBug =>
-      const AssetGenImage('assets/images/badge_bug.png');
-
-  /// File path: assets/images/badge_dark.png
-  AssetGenImage get badgeDark =>
-      const AssetGenImage('assets/images/badge_dark.png');
-
-  /// File path: assets/images/badge_dragon.png
-  AssetGenImage get badgeDragon =>
-      const AssetGenImage('assets/images/badge_dragon.png');
-
-  /// File path: assets/images/badge_electric.png
-  AssetGenImage get badgeElectric =>
-      const AssetGenImage('assets/images/badge_electric.png');
-
-  /// File path: assets/images/badge_fairy.png
-  AssetGenImage get badgeFairy =>
-      const AssetGenImage('assets/images/badge_fairy.png');
-
-  /// File path: assets/images/badge_fight.png
-  AssetGenImage get badgeFight =>
-      const AssetGenImage('assets/images/badge_fight.png');
-
-  /// File path: assets/images/badge_fire.png
-  AssetGenImage get badgeFire =>
-      const AssetGenImage('assets/images/badge_fire.png');
-
-  /// File path: assets/images/badge_flying.png
-  AssetGenImage get badgeFlying =>
-      const AssetGenImage('assets/images/badge_flying.png');
-
-  /// File path: assets/images/badge_ghost.png
-  AssetGenImage get badgeGhost =>
-      const AssetGenImage('assets/images/badge_ghost.png');
-
-  /// File path: assets/images/badge_grass.png
-  AssetGenImage get badgeGrass =>
-      const AssetGenImage('assets/images/badge_grass.png');
-
-  /// File path: assets/images/badge_ice.png
-  AssetGenImage get badgeIce =>
-      const AssetGenImage('assets/images/badge_ice.png');
-
-  /// File path: assets/images/badge_johtodex.png
-  AssetGenImage get badgeJohtodex =>
-      const AssetGenImage('assets/images/badge_johtodex.png');
-
-  /// File path: assets/images/badge_kantodex.png
-  AssetGenImage get badgeKantodex =>
-      const AssetGenImage('assets/images/badge_kantodex.png');
-
-  /// File path: assets/images/badge_lugia.png
-  AssetGenImage get badgeLugia =>
-      const AssetGenImage('assets/images/badge_lugia.png');
-
-  /// File path: assets/images/badge_magikarp.png
-  AssetGenImage get badgeMagikarp =>
-      const AssetGenImage('assets/images/badge_magikarp.png');
-
-  /// File path: assets/images/badge_normal.png
-  AssetGenImage get badgeNormal =>
-      const AssetGenImage('assets/images/badge_normal.png');
-
-  /// File path: assets/images/badge_pikachu.png
-  AssetGenImage get badgePikachu =>
-      const AssetGenImage('assets/images/badge_pikachu.png');
-
-  /// File path: assets/images/badge_poison.png
-  AssetGenImage get badgePoison =>
-      const AssetGenImage('assets/images/badge_poison.png');
-
-  /// File path: assets/images/badge_pokemon.png
-  AssetGenImage get badgePokemon =>
-      const AssetGenImage('assets/images/badge_pokemon.png');
-
-  /// File path: assets/images/badge_pokemons.png
-  AssetGenImage get badgePokemons =>
-      const AssetGenImage('assets/images/badge_pokemons.png');
-
-  /// File path: assets/images/badge_psychic.png
-  AssetGenImage get badgePsychic =>
-      const AssetGenImage('assets/images/badge_psychic.png');
-
-  /// File path: assets/images/badge_rock.png
-  AssetGenImage get badgeRock =>
-      const AssetGenImage('assets/images/badge_rock.png');
-
-  /// File path: assets/images/badge_ryhorn.png
-  AssetGenImage get badgeRyhorn =>
-      const AssetGenImage('assets/images/badge_ryhorn.png');
-
-  /// File path: assets/images/badge_steel.png
-  AssetGenImage get badgeSteel =>
-      const AssetGenImage('assets/images/badge_steel.png');
-
-  /// File path: assets/images/badge_victory.png
-  AssetGenImage get badgeVictory =>
-      const AssetGenImage('assets/images/badge_victory.png');
-
-  /// File path: assets/images/badge_water.png
-  AssetGenImage get badgeWater =>
-      const AssetGenImage('assets/images/badge_water.png');
+  $AssetsImagesBadgeGen get badge => const $AssetsImagesBadgeGen();
 
   /// File path: assets/images/poke_badge.png
   AssetGenImage get pokeBadge =>
@@ -158,109 +72,11 @@ class $AssetsImagesGen {
   AssetGenImage get pokemonMaster =>
       const AssetGenImage('assets/images/pokemon_master.png');
 
-  /// File path: assets/images/type_bug.png
-  AssetGenImage get typeBug =>
-      const AssetGenImage('assets/images/type_bug.png');
-
-  /// File path: assets/images/type_dark.png
-  AssetGenImage get typeDark =>
-      const AssetGenImage('assets/images/type_dark.png');
-
-  /// File path: assets/images/type_dragon.png
-  AssetGenImage get typeDragon =>
-      const AssetGenImage('assets/images/type_dragon.png');
-
-  /// File path: assets/images/type_electric.png
-  AssetGenImage get typeElectric =>
-      const AssetGenImage('assets/images/type_electric.png');
-
-  /// File path: assets/images/type_fairy.png
-  AssetGenImage get typeFairy =>
-      const AssetGenImage('assets/images/type_fairy.png');
-
-  /// File path: assets/images/type_fighting.png
-  AssetGenImage get typeFighting =>
-      const AssetGenImage('assets/images/type_fighting.png');
-
-  /// File path: assets/images/type_fire.png
-  AssetGenImage get typeFire =>
-      const AssetGenImage('assets/images/type_fire.png');
-
-  /// File path: assets/images/type_flying.png
-  AssetGenImage get typeFlying =>
-      const AssetGenImage('assets/images/type_flying.png');
-
-  /// File path: assets/images/type_ghost.png
-  AssetGenImage get typeGhost =>
-      const AssetGenImage('assets/images/type_ghost.png');
-
-  /// File path: assets/images/type_grass.png
-  AssetGenImage get typeGrass =>
-      const AssetGenImage('assets/images/type_grass.png');
-
-  /// File path: assets/images/type_ground.png
-  AssetGenImage get typeGround =>
-      const AssetGenImage('assets/images/type_ground.png');
-
-  /// File path: assets/images/type_ice.png
-  AssetGenImage get typeIce =>
-      const AssetGenImage('assets/images/type_ice.png');
-
-  /// File path: assets/images/type_normal.png
-  AssetGenImage get typeNormal =>
-      const AssetGenImage('assets/images/type_normal.png');
-
-  /// File path: assets/images/type_poison.png
-  AssetGenImage get typePoison =>
-      const AssetGenImage('assets/images/type_poison.png');
-
-  /// File path: assets/images/type_psychic.png
-  AssetGenImage get typePsychic =>
-      const AssetGenImage('assets/images/type_psychic.png');
-
-  /// File path: assets/images/type_rock.png
-  AssetGenImage get typeRock =>
-      const AssetGenImage('assets/images/type_rock.png');
-
-  /// File path: assets/images/type_steel.png
-  AssetGenImage get typeSteel =>
-      const AssetGenImage('assets/images/type_steel.png');
-
-  /// File path: assets/images/type_water.png
-  AssetGenImage get typeWater =>
-      const AssetGenImage('assets/images/type_water.png');
-
   /// File path: assets/images/warning.png
   AssetGenImage get warning => const AssetGenImage('assets/images/warning.png');
 
   /// List of all assets
   List<AssetGenImage> get values => [
-        badgeBug,
-        badgeDark,
-        badgeDragon,
-        badgeElectric,
-        badgeFairy,
-        badgeFight,
-        badgeFire,
-        badgeFlying,
-        badgeGhost,
-        badgeGrass,
-        badgeIce,
-        badgeJohtodex,
-        badgeKantodex,
-        badgeLugia,
-        badgeMagikarp,
-        badgeNormal,
-        badgePikachu,
-        badgePoison,
-        badgePokemon,
-        badgePokemons,
-        badgePsychic,
-        badgeRock,
-        badgeRyhorn,
-        badgeSteel,
-        badgeVictory,
-        badgeWater,
         pokeBadge,
         pokeball,
         pokeballGreat,
@@ -269,24 +85,6 @@ class $AssetsImagesGen {
         pokemonJhoto,
         pokemonLogo,
         pokemonMaster,
-        typeBug,
-        typeDark,
-        typeDragon,
-        typeElectric,
-        typeFairy,
-        typeFighting,
-        typeFire,
-        typeFlying,
-        typeGhost,
-        typeGrass,
-        typeGround,
-        typeIce,
-        typeNormal,
-        typePoison,
-        typePsychic,
-        typeRock,
-        typeSteel,
-        typeWater,
         warning
       ];
 }
@@ -308,6 +106,59 @@ class $AssetsLottieFilesGen {
 
   /// List of all assets
   List<String> get values => [error, jhoto, kanto, pokeball];
+}
+
+class $AssetsImagesBadgeGen {
+  const $AssetsImagesBadgeGen();
+
+  /// File path: assets/images/badge/badge_johtodex.png
+  AssetGenImage get badgeJohtodex =>
+      const AssetGenImage('assets/images/badge/badge_johtodex.png');
+
+  /// File path: assets/images/badge/badge_kantodex.png
+  AssetGenImage get badgeKantodex =>
+      const AssetGenImage('assets/images/badge/badge_kantodex.png');
+
+  /// File path: assets/images/badge/badge_lugia.png
+  AssetGenImage get badgeLugia =>
+      const AssetGenImage('assets/images/badge/badge_lugia.png');
+
+  /// File path: assets/images/badge/badge_magikarp.png
+  AssetGenImage get badgeMagikarp =>
+      const AssetGenImage('assets/images/badge/badge_magikarp.png');
+
+  /// File path: assets/images/badge/badge_pikachu.png
+  AssetGenImage get badgePikachu =>
+      const AssetGenImage('assets/images/badge/badge_pikachu.png');
+
+  /// File path: assets/images/badge/badge_pokemon.png
+  AssetGenImage get badgePokemon =>
+      const AssetGenImage('assets/images/badge/badge_pokemon.png');
+
+  /// File path: assets/images/badge/badge_pokemons.png
+  AssetGenImage get badgePokemons =>
+      const AssetGenImage('assets/images/badge/badge_pokemons.png');
+
+  /// File path: assets/images/badge/badge_ryhorn.png
+  AssetGenImage get badgeRyhorn =>
+      const AssetGenImage('assets/images/badge/badge_ryhorn.png');
+
+  /// File path: assets/images/badge/badge_victory.png
+  AssetGenImage get badgeVictory =>
+      const AssetGenImage('assets/images/badge/badge_victory.png');
+
+  /// List of all assets
+  List<AssetGenImage> get values => [
+        badgeJohtodex,
+        badgeKantodex,
+        badgeLugia,
+        badgeMagikarp,
+        badgePikachu,
+        badgePokemon,
+        badgePokemons,
+        badgeRyhorn,
+        badgeVictory
+      ];
 }
 
 class Assets {

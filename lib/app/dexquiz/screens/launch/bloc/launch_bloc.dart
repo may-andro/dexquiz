@@ -21,17 +21,29 @@ class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
     OnStart event,
     Emitter<LaunchState> emit,
   ) async {
-    final isAppReviewEnabled =
-        await _isFeatureEnabledUseCase.call(Feature.inAppReview);
-
+    bool isQuizEnabled = false;
     bool isPokedexEnabled = false;
 
-    isAppReviewEnabled.fold(
+    final isQuizEnabledEither = await _isFeatureEnabledUseCase(
+      Feature.isQuizEnabled,
+    );
+    final isPokedexEnabledEither = await _isFeatureEnabledUseCase(
+      Feature.isPokedexEnabled,
+    );
+
+    isQuizEnabledEither.fold(
+      (left) => isQuizEnabled = false,
+      (right) => isQuizEnabled = right,
+    );
+
+    isPokedexEnabledEither.fold(
       (left) => isPokedexEnabled = false,
       (right) => isPokedexEnabled = right,
     );
+
     emit(
       Success(
+        isQuizEnabled: isQuizEnabled,
         isPokedexEnabled: isPokedexEnabled,
         imageHeader: _buildConfig.imageHeader,
         imageLaunch: _buildConfig.imageLaunch,

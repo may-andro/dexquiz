@@ -1,7 +1,7 @@
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/launchers/johto.png
+  image: assets/launchers/johto_launcher.png
   color_dark: "#121212"
-  image_dark: assets/launchers/johto.png
+  image_dark: assets/launchers/johto_launcher.png
 
   web: false

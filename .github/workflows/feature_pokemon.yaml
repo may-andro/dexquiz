@@ -1,0 +1,26 @@
+name: Run static code analysis and unit test for pokemon feature module
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  push:
+    paths:
+      - features/pokemon/**
+
+#on:
+#  push
+
+permissions:
+  checks: write
+
+jobs:
+  feature_settings:
+    uses: ./.github/workflows/_analyze_and_test_flutter_module.yaml
+    with:
+      module_path: './features/pokemon'
+      should_run_golden_test: 'false'
+      has_build_runner: 'true'
+      have_dependent_build_runner: 'true'
+

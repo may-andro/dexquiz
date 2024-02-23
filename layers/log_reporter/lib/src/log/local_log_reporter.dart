@@ -13,7 +13,7 @@ class LocalLogReporter implements LogReporter {
     error,
     StackTrace? stacktrace,
   }) {
-    _logger.d(message, error: error, stackTrace: stacktrace);
+    _logger.d('$tag: $message', error: error, stackTrace: stacktrace);
   }
 
   @override
@@ -23,6 +23,6 @@ class LocalLogReporter implements LogReporter {
     error,
     StackTrace? stacktrace,
   }) {
-    _logger.e(message, error: error, stackTrace: stacktrace);
+    _logger.e('$tag: $message', error: error, stackTrace: stacktrace);
   }
 }

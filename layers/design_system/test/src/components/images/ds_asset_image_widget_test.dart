@@ -23,7 +23,7 @@ List<TestCase> _getConfigs(DSTheme dsTheme) {
         TestCase(
           'width:$width height:$height',
           DSAssetImageWidget(
-            'assets/images/type_bug.png',
+            'assets/images/pokeball.png',
             width: width,
             height: height,
           ),

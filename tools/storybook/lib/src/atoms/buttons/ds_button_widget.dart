@@ -76,6 +76,17 @@ class ButtonWidget extends StatelessWidget {
                   labelBuilder: (option) => option.label,
                 )
                 .value,
+            size: context.knobs
+                .list<Option<DSButtonSize>>(
+                  label: 'Size',
+                  options: [
+                    Option(DSButtonSize.small, 'Small'),
+                    Option(DSButtonSize.medium, 'Medium'),
+                    Option(DSButtonSize.large, 'Large'),
+                  ],
+                  labelBuilder: (option) => option.label,
+                )
+                .value,
           ),
         ),
       ),

@@ -6,7 +6,6 @@ import 'package:pokedex_builder/src/exception/exceptions.dart';
 import 'package:test/test.dart';
 
 import '../../../mock/src/data/service/mock_remote_client_service.dart';
-import '../../../mock/utility/mock_request_option.dart';
 
 void main() {
   group(PokemonDataSourceImpl, () {
@@ -37,7 +36,7 @@ void main() {
 
         final response = Response<Map<String, dynamic>>(
           data: responseMap,
-          requestOptions: MockedRequestOptions(),
+          requestOptions: RequestOptions(data: responseMap),
         );
 
         mockRemoteClientService.mockGetApiCall(response);
@@ -72,7 +71,7 @@ void main() {
         };
         final response = Response<Map<String, dynamic>>(
           data: responseMap,
-          requestOptions: MockedRequestOptions(),
+          requestOptions: RequestOptions(data: responseMap),
         );
         mockRemoteClientService.mockGetApiCall(response);
 

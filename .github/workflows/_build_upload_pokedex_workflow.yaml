@@ -36,17 +36,26 @@ jobs:
           cache-key: flutter
           cache-path: ${{ runner.tool_cache }}/flutter
 
-      - name: Setup Melos
-        run: |
-          dart pub global activate melos
-          melos bs
 
-      - name: Test, analyse and format all CLI tools
-        run: melos cli_tool_quality
+      - name: Setup pokedex builder
+        run: |
+          dart format lib test --set-exit-if-changed
+          dart run build_runner build --delete-conflicting-outputs
+          flutter analyze
+          flutter test
+        working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
 
       - name: Fetch, build and create firestore collection json
         run: dart bin/pokedex_builder.dart build --flavor ${{ inputs.flavor }} --path ../data/firestore/pokedex.json
         working-directory: ${{ env.PATH_POKEDEX_BUILDER }}
+
+      - name: Setup firestore uploader
+        run: |
+          dart format lib test --set-exit-if-changed
+          dart run build_runner build --delete-conflicting-outputs
+          flutter analyze
+          flutter test
+        working-directory: ${{ env.PATH_POKEDEX_UPLOADER }}
 
       - name: Create credential json File
         run: dart bin/firestore_file_uploader.dart credential_builder --credentials ${{ secrets.FIREBASE_CREDENTIALS }} --path ../data/firebase/service_account.json

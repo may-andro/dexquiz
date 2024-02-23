@@ -1,3 +1,4 @@
+import 'package:design_system/src/extensions/build_context_extension.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:design_system/src/components/atoms/atoms.dart';
@@ -6,7 +7,7 @@ class DSLoadingWidget extends StatefulWidget {
   const DSLoadingWidget({
     this.height,
     this.width,
-    this.seconds = 3,
+    this.seconds = 1,
     super.key,
   });
 
@@ -49,9 +50,10 @@ class _DSLoadingWidgetState extends State<DSLoadingWidget>
         );
       },
       child: DSAssetImageWidget(
-        Assets.images.badgePokemon.path,
+        Assets.images.badge.badgePokemon.path,
         height: widget.height,
         width: widget.width,
+        color: context.colorPalette.brand.secondary,
       ),
     );
   }

@@ -2,7 +2,7 @@ import 'package:design_system/src/foundations/colors/colors.dart';
 import 'package:meta/meta.dart';
 
 @internal
-class LightColorPalette implements DSColorPalette {
+final class LightColorPalette implements DSColorPalette {
   const LightColorPalette();
 
   @override
@@ -78,6 +78,30 @@ class LightColorPalette implements DSColorPalette {
       onInverseSurface: DSColor(0xFFEFF1EE),
       shadow: DSColor(0xFF000000),
       scrim: DSColor(0xFF000000),
+    );
+  }
+
+  @override
+  ElementalColorScheme get elemental {
+    return const ElementalColorScheme(
+      bug: DSColor(0xFFA6B91A),
+      dark: DSColor(0xFF705746),
+      dragon: DSColor(0xFF6F35FC),
+      electric: DSColor(0xFFF7D02C),
+      fairy: DSColor(0xFFD685AD),
+      fighting: DSColor(0xFFC22E28),
+      fire: DSColor(0xFFEE8130),
+      flying: DSColor(0xFFA98FF3),
+      ghost: DSColor(0xFF735797),
+      grass: DSColor(0xFF7AC74C),
+      ground: DSColor(0xFFE2BF65),
+      ice: DSColor(0xFF96D9D6),
+      normal: DSColor(0xFFA8A77A),
+      poison: DSColor(0xFFA33EA1),
+      psychic: DSColor(0xFFF95587),
+      rock: DSColor(0xFFB6A136),
+      steel: DSColor(0xFFB7B7CE),
+      water: DSColor(0xFF6390F0),
     );
   }
 }

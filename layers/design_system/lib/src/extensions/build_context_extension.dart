@@ -17,7 +17,16 @@ extension BuildContextExtension on BuildContext {
   DSDimens get dimens => theme.dimens;
 
   double space({double factor = 1}) {
-    return factor * theme.dimens.grid.value * textScaleFactor;
+    double deviceFactor = 0;
+    switch (deviceResolution) {
+      case DeviceResolution.mobile:
+        deviceFactor = 0;
+      case DeviceResolution.tablet:
+        deviceFactor = 4;
+      case DeviceResolution.desktop:
+        deviceFactor = 8;
+    }
+    return factor * (theme.dimens.grid.value + deviceFactor) * textScaleFactor;
   }
 
   double get screenHeight => MediaQuery.of(this).size.height;
@@ -29,6 +38,8 @@ extension BuildContextExtension on BuildContext {
   double get width => size.width;
 
   double get height => size.height;
+
+  EdgeInsets get viewPadding => MediaQuery.of(this).viewPadding;
 
   double get shortestSide => size.shortestSide;
 
@@ -59,6 +70,7 @@ extension BuildContextExtension on BuildContext {
     ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         content: Column(
+          key: const Key('snack_bar_widget'),
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             DSTextWidget(
