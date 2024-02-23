@@ -75,6 +75,7 @@ class _PokemonItem extends StatelessWidget {
                 sizeFactor: 0.1,
               ),
             ),
+
             /// disabling this feature for now
             /*if (pokemon.isFavorite) ...[
               /// disabling this feature for now

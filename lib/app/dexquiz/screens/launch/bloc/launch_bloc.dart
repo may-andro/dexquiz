@@ -31,12 +31,10 @@ class LaunchBloc extends Bloc<LaunchEvent, LaunchState> {
       Feature.isPokedexEnabled,
     );
 
-
     isQuizEnabledEither.fold(
       (left) => isQuizEnabled = false,
       (right) => isQuizEnabled = right,
     );
-
 
     isPokedexEnabledEither.fold(
       (left) => isPokedexEnabled = false,
