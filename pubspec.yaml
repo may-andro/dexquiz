@@ -39,6 +39,8 @@ dependencies:
   use_case:
     path: layers/use_case
 
+  dev_menu:
+    path: features/dev_menu
   pokemon:
     path: features/pokemon
   settings:

@@ -388,6 +388,13 @@ packages:
       relative: true
     source: path
     version: "0.0.0"
+  dev_menu:
+    dependency: "direct main"
+    description:
+      path: "features/dev_menu"
+      relative: true
+    source: path
+    version: "0.0.0"
   diff_match_patch:
     dependency: transitive
     description:
@@ -1585,5 +1592,5 @@ packages:
     source: hosted
     version: "2.1.1"
 sdks:
-  dart: ">=3.2.3 <4.0.0"
+  dart: ">=3.2.6 <4.0.0"
   flutter: ">=3.16.0"
