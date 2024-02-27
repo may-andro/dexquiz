@@ -4,6 +4,7 @@ import 'package:app_config/app_config.dart';
 import 'package:cache/cache.dart';
 import 'package:core/core.dart';
 import 'package:design_system/design_system.dart';
+import 'package:dev_menu/dev_menu.dart';
 import 'package:dexquiz/app/dexquiz/dexquiz_app.dart';
 import 'package:dexquiz/app/splash/splash_app.dart';
 import 'package:dexquiz/module_configurator.dart';
@@ -52,6 +53,7 @@ Future<void> runFlavor({
     const AppConfigModuleConfigurator(),
     const FeatureSettingsModuleConfigurator(),
     const FeaturePokemonModuleConfigurator(),
+    const DevMenuModuleConfigurator(),
   ];
 
   FlutterNativeSplash.remove();
