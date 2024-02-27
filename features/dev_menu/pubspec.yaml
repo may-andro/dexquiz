@@ -1,0 +1,34 @@
+name: dev_menu
+description: "Feature of the dev menu for the app"
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.2.6 <4.0.0'
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  app_config:
+    path: ../../layers/app_config
+  cache:
+    path: ../../layers/cache
+  core:
+    path: ../../layers/core
+  dependency_injector:
+    path: ../../layers/dependency_injector
+  design_system:
+    path: ../../layers/design_system
+  feature_flag:
+    path: ../../layers/feature_flag
+  firebase:
+    path: ../../layers/firebase
+  use_case:
+    path: ../../layers/use_case
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
