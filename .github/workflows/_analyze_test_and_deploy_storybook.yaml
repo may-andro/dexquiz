@@ -22,7 +22,7 @@ jobs:
         working-directory: ${{ env.PATH_STORYBOOK }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup dart environment
         uses: dart-lang/setup-dart@v1
@@ -33,6 +33,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           flutter-version: ${{env.FLUTTER_VERSION}}
+          channel: stable
           cache: true
           cache-key: flutter
           cache-path: ${{ runner.tool_cache }}/flutter
