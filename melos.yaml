@@ -188,4 +188,23 @@ scripts:
       melos dart_test --no-select
     description: Format, analyse and test all packages.
 
+  # Run commands
+  run_kanto_prod:
+    run: flutter run lib/flavors/kanto/main_kanto.dart --flavor kanto  --dart-define=build_env=prod
+    description: Run Kanto app in prod env.
+
+  run_kanto_staging:
+    run: flutter run lib/flavors/kanto/main_kanto.dart --flavor kanto  --dart-define=build_env=staging
+    description: Run Kanto app in prod env.
+
+  run_johto_prod:
+    run: flutter run lib/flavors/johto/main_johto.dart --flavor johto  --dart-define=build_env=prod
+    description: Run Johto app in prod env.
+
+  run_johto_staging:
+    run: flutter run lib/flavors/johto/main_johto.dart --flavor johto  --dart-define=build_env=staging
+    description: Run Johto app in prod env.
+
+
+
 
