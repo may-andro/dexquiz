@@ -3,8 +3,8 @@ description: "Flutter package for caches."
 publish_to: 'none'
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
-  flutter: ">=1.17.0"
+  sdk: 3.3.3
+  flutter: 3.19.5
 
 dependencies:
   flutter:
