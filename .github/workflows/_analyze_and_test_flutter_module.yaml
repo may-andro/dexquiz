@@ -57,8 +57,6 @@ jobs:
           flutter-version: ${{env.FLUTTER_VERSION}}
           channel: stable
           cache: true
-          cache-key: flutter
-          cache-path: ${{ runner.tool_cache }}/flutter
 
       - name: Get dart dependencies
         run: flutter pub get
