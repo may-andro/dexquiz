@@ -6,11 +6,14 @@ concurrency:
 
 on:
   push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*-review'
+      - '*-prod'
     paths:
-      - layers/app_config/**
-
-#on:
-#  push
+      - 'layers/app_config/**'
+      - '.github/workflows/layer_app_config.yaml'
 
 permissions:
   checks: write

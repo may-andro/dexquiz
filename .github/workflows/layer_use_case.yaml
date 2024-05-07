@@ -6,11 +6,14 @@ concurrency:
 
 on:
   push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*-review'
+      - '*-prod'
     paths:
-      - layers/use_case/**
-
-#on:
-#  push
+      - 'layers/use_case/**'
+      - '.github/workflows/layer_use_case.yaml'
 
 permissions:
   checks: write

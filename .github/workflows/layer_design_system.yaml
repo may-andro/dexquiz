@@ -6,11 +6,15 @@ concurrency:
 
 on:
   push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*-review'
+      - '*-prod'
     paths:
-      - layers/design_system/**
+      - 'layers/design_system/**'
+      - '.github/workflows/layer_design_system.yaml'
 
-#on:
-#  push
 
 permissions:
   checks: write
