@@ -30,7 +30,7 @@ jobs:
           sdk: ${{ env.DART_SDK_VERSION }}
 
       - name: Setup the flutter environment
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@v2.16.0
         with:
           flutter-version: ${{env.FLUTTER_VERSION}}
           channel: stable
