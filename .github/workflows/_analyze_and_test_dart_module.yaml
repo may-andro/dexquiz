@@ -14,7 +14,7 @@ on:
         required: true
 
 env:
-  DART_SDK_VERSION: 3.3.3
+  DART_SDK_VERSION: 3.3.4
 
 permissions:
   checks: write

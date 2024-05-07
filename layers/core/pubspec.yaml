@@ -3,7 +3,7 @@ description: Provides the core functionality of the app.
 publish_to: 'none'
 
 environment:
-  sdk: 3.3.3
+  sdk: 3.3.4
   flutter: 3.19.5
 
 dependencies:

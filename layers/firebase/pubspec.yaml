@@ -3,8 +3,7 @@ description: Provides all firebase related features.
 publish_to: 'none'
 
 environment:
-  sdk: 3.3.3
-  flutter: 3.19.5
+  sdk: 3.3.4
 
 dependencies:
   flutter:

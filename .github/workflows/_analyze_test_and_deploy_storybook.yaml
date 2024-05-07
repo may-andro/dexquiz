@@ -8,8 +8,8 @@ on:
         required: true
 
 env:
-  DART_SDK_VERSION: 3.3.3
-  FLUTTER_VERSION: "3.19.5"
+  DART_SDK_VERSION: 3.3.4
+  FLUTTER_VERSION: 3.19.6
   PATH_STORYBOOK: ./tools/storybook
 
 jobs:

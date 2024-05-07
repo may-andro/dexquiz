@@ -38,8 +38,8 @@ on:
         required: true
 
 env:
-  DART_SDK_VERSION: 3.3.3
-  FLUTTER_VERSION: "3.19.5"
+  DART_SDK_VERSION: 3.3.4
+  FLUTTER_VERSION: 3.19.6
   JAVA_VERSION: "12.x"
   PROPERTIES_PATH: "./android/key.properties"
 
