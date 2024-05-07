@@ -33,8 +33,9 @@ jobs:
         with:
           flutter-version: ${{env.FLUTTER_VERSION}}
           channel: stable
-
-
+          cache: true
+          cache-key: flutter
+          cache-path: ${{ runner.tool_cache }}/flutter
 
       - name: Setup pokedex builder
         run: |

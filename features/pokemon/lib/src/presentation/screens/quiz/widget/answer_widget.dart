@@ -95,8 +95,10 @@ class _ChoiceWidget extends StatelessWidget {
           isEnabled: isEnabled,
         );
       },
-      onWillAccept: (data) => true,
-      onAccept: onSubmit,
+      onWillAcceptWithDetails: (data) => true,
+      onAcceptWithDetails: (dragDetailTarget) {
+        onSubmit(dragDetailTarget.data);
+      },
     );
   }
 }
