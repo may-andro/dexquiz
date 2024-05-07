@@ -1,5 +1,5 @@
 name: app_config
-description: "Provides app configuration data"
+description: "Provides configuration data for the app"
 publish_to: 'none'
 
 environment:

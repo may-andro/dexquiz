@@ -1,5 +1,5 @@
 name: feature_flag
-description: "Provides feature flags for various supported features"
+description: "Provides feature flags for various supported features for the app"
 publish_to: 'none'
 
 environment:

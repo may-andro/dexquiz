@@ -1,5 +1,5 @@
 name: cache
-description: "Flutter package for caches."
+description: "Provides cache capabilities for the app"
 publish_to: 'none'
 
 environment:

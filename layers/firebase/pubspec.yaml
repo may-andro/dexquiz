@@ -1,5 +1,5 @@
 name: firebase
-description: Provides all firebase related features.
+description: Provides all firebase related features for the app.
 publish_to: 'none'
 
 environment:

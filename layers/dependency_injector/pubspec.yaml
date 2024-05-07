@@ -1,5 +1,5 @@
 name: dependency_injector
-description: Provides the dependency injection.
+description: Provides dependency injection for the app
 publish_to: 'none'
 
 environment:

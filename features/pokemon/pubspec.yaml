@@ -1,5 +1,5 @@
 name: pokemon
-description: "Provides pokemon features for app"
+description: "Provides pokemon features for the app"
 publish_to: 'none'
 
 environment:

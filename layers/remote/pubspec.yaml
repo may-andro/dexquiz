@@ -1,5 +1,5 @@
 name: remote
-description: Provides all remote service for apis.
+description: Provides all remote service for apis for the app
 publish_to: 'none'
 
 environment:

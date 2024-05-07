@@ -1,5 +1,5 @@
 name: settings
-description: "Provides setting features for the app"
+description: "Provides setting features for app"
 publish_to: 'none'
 
 environment:

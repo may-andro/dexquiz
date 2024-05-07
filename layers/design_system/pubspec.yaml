@@ -1,5 +1,5 @@
 name: design_system
-description: "Provide design system for the app"
+description: "Provides design system for the app"
 publish_to: 'none'
 
 environment:

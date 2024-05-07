@@ -1,5 +1,5 @@
 name: core
-description: Provides the core functionality of the app.
+description: Provides core functionality for the app.
 publish_to: 'none'
 
 environment:
