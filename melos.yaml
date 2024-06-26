@@ -47,6 +47,33 @@ scripts:
     packageFilters:
       flutter: true
 
+  cache_clean:
+    run: |
+      flutter clean
+      flutter pub cache repair
+      flutter pub get
+    description: Clean cache.
+    exec:
+      concurrency: 1
+
+  ios_clean:
+    run: |
+      rm -rf ios/Pods/*
+      rm -f ios/Podfile.lock
+      rm -r ios/.symlinks
+      rm -r ios/Flutter/Flutter.framework
+      rm -f ios/Flutter/Flutter.podspec
+      flutter clean
+      flutter pub get
+      cd ios 
+      pod cache clean --all
+      pod repo update
+      cd ..
+      flutter pub get
+      cd ios
+      pod install
+    description: Clean cache.
+
   format:
     run: dart format lib test --set-exit-if-changed
     description: Run `flutter format` in all packages.
@@ -187,5 +214,24 @@ scripts:
       melos dart_analyze --no-select
       melos dart_test --no-select
     description: Format, analyse and test all packages.
+
+  # Run commands
+  run_kanto_prod:
+    run: flutter run lib/flavors/kanto/main_kanto.dart --flavor kanto  --dart-define=build_env=prod
+    description: Run Kanto app in prod env.
+
+  run_kanto_staging:
+    run: flutter run lib/flavors/kanto/main_kanto.dart --flavor kanto  --dart-define=build_env=staging
+    description: Run Kanto app in prod env.
+
+  run_johto_prod:
+    run: flutter run lib/flavors/johto/main_johto.dart --flavor johto  --dart-define=build_env=prod
+    description: Run Johto app in prod env.
+
+  run_johto_staging:
+    run: flutter run lib/flavors/johto/main_johto.dart --flavor johto  --dart-define=build_env=staging
+    description: Run Johto app in prod env.
+
+
 
 

@@ -5,7 +5,7 @@ class LogEventUseCase {
 
   final FirebaseAnalytics _firebaseAnalytics;
 
-  Future<void> call(String event, {Map<String, dynamic>? parameters}) {
+  Future<void> call(String event, {Map<String, Object>? parameters}) {
     return _firebaseAnalytics.logEvent(name: event, parameters: parameters);
   }
 }

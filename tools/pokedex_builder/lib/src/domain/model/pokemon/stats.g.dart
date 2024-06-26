@@ -7,8 +7,8 @@ part of 'stats.dart';
 // **************************************************************************
 
 Stats _$StatsFromJson(Map<String, dynamic> json) => Stats(
-      json['base_stat'] as int,
-      json['effort'] as int,
+      (json['base_stat'] as num).toInt(),
+      (json['effort'] as num).toInt(),
       json['name'] as String,
       json['url'] as String,
     );

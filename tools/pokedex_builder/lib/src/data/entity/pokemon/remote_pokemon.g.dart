@@ -8,11 +8,11 @@ part of 'remote_pokemon.dart';
 
 RemotePokemon _$RemotePokemonFromJson(Map<String, dynamic> json) =>
     RemotePokemon(
-      json['id'] as int,
+      (json['id'] as num).toInt(),
       json['name'] as String,
-      json['base_experience'] as int,
-      json['height'] as int,
-      json['weight'] as int,
+      (json['base_experience'] as num).toInt(),
+      (json['height'] as num).toInt(),
+      (json['weight'] as num).toInt(),
       (json['abilities'] as List<dynamic>)
           .map((e) => RemoteAbilities.fromJson(e as Map<String, dynamic>))
           .toList(),

@@ -3,12 +3,14 @@ name: Analyse and test Storybook
 on:
   push:
     branches:
-      - staging
+      - '**'
+    tags-ignore:
+      - '*-review'
+      - '*-prod'
     paths:
       - 'tools/storybook/**'
+      - '.github/workflows/storybook_test_and_analyze.yaml'
 
-#on:
-#  push
 
 jobs:
   analyze-and-test-storybook:

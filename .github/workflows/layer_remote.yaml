@@ -6,11 +6,14 @@ concurrency:
 
 on:
   push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*-review'
+      - '*-prod'
     paths:
-      - layers/remote/**
-
-#on:
-#  push
+      - 'layers/remote/**'
+      - '.github/workflows/layer_remote.yaml'
 
 permissions:
   checks: write

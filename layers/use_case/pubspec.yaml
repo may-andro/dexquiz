@@ -1,9 +1,9 @@
 name: use_case
-description: Provides base classes for making use cases.
+description: Provides base classes for making use cases for the app
 publish_to: 'none'
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
+  sdk: 3.4.3
 
 dependencies:
   either_dart: ^1.0.0
@@ -13,6 +13,5 @@ dependencies:
     path: ../dependency_injector
 
 dev_dependencies:
-  lints: ^3.0.0
   test: ^1.24.9
   mocktail: ^1.0.2

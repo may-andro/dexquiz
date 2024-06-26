@@ -6,11 +6,14 @@ concurrency:
 
 on:
   push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*-review'
+      - '*-prod'
     paths:
-      - layers/cache/**
-
-#on:
-#  push
+      - 'layers/cache/**'
+      - '.github/workflows/layer_cache.yaml'
 
 permissions:
   checks: write

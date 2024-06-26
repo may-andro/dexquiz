@@ -6,11 +6,15 @@ concurrency:
 
 on:
   push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*-review'
+      - '*-prod'
     paths:
-      - layers/error_reporter/**
+      - 'layers/error_reporter/**'
+      - '.github/workflows/layer_error_reporter.yaml'
 
-#on:
-#  push
 
 permissions:
   checks: write

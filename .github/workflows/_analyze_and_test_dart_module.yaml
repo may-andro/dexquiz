@@ -14,7 +14,7 @@ on:
         required: true
 
 env:
-  DART_SDK_VERSION: 3.2.3
+  DART_SDK_VERSION: 3.4.3
 
 permissions:
   checks: write
@@ -28,7 +28,7 @@ jobs:
         working-directory: ${{ inputs.module_path }}
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup dart environment
         uses: dart-lang/setup-dart@v1

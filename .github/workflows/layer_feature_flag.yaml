@@ -6,11 +6,14 @@ concurrency:
 
 on:
   push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*-review'
+      - '*-prod'
     paths:
-      - layers/feature_flag/**
-
-#on:
-#  push
+      - 'layers/feature_flag/**'
+      - '.github/workflows/layer_feature_flag.yaml'
 
 permissions:
   checks: write

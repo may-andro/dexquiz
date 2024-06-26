@@ -5,7 +5,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
+  sdk: ^3.4.3
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -17,9 +17,9 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.6
+  cupertino_icons: ^1.0.8
   widgetbook_annotation: ^3.1.0
-  widgetbook: ^3.7.1
+  widgetbook: ^3.8.0
 
   design_system:
     path: ../../layers/design_system
@@ -27,9 +27,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
-  widgetbook_generator: ^3.7.0
-  build_runner: ^2.4.8
+  flutter_lints: ^4.0.0
+  widgetbook_generator: ^3.8.0
+  build_runner: ^2.4.11
 
 
 flutter:

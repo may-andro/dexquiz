@@ -1,10 +1,9 @@
 name: design_system
-description: "Provide design system for the app"
+description: "Provides design system for the app"
 publish_to: 'none'
 
 environment:
-  sdk: '>=3.2.3 <4.0.0'
-  flutter: ">=1.17.0"
+  sdk: 3.4.3
 
 dependencies:
   flutter:
@@ -13,11 +12,11 @@ dependencies:
   adaptive_breakpoints: ^0.1.7
   alchemist: ^0.7.0
   cached_network_image: ^3.3.1
-  cupertino_icons: ^1.0.6
-  flutter_svg: ^2.0.9
-  google_fonts: ^6.1.0
-  lottie: ^3.0.0
-  meta: ^1.10.0
+  cupertino_icons: ^1.0.8
+  flutter_svg: ^2.0.10+1
+  google_fonts: ^6.2.1
+  lottie: ^3.1.2
+  meta: any
   recase: ^4.1.0
   shimmer: ^3.0.0
 
@@ -25,10 +24,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.1
-  flutter_gen_runner: ^5.4.0
-  mocktail: ^1.0.3
-  build_runner: ^2.4.8
+  flutter_gen_runner: ^5.6.0
+  mocktail: ^1.0.4
+  build_runner: ^2.4.11
 
 flutter:
   uses-material-design: true

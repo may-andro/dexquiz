@@ -6,17 +6,20 @@ concurrency:
 
 on:
   push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*-review'
+      - '*-prod'
     paths:
-      - features/pokemon/**
-
-#on:
-#  push
+      - 'features/pokemon/**'
+      - '.github/workflows/feature_pokemon.yaml'
 
 permissions:
   checks: write
 
 jobs:
-  feature_settings:
+  feature_pokemon:
     uses: ./.github/workflows/_analyze_and_test_flutter_module.yaml
     with:
       module_path: './features/pokemon'

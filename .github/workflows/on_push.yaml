@@ -7,10 +7,10 @@ concurrency:
 on:
   push:
     branches:
-      - staging
-  pull_request:
-    branches:
-      - staging
+      - "**"
+    tags-ignore:
+      - '*-review'
+      - '*-prod'
 
 jobs:
   analyze_and_test:
@@ -23,7 +23,7 @@ jobs:
       flavor: kanto
       target: lib/flavors/kanto/main_kanto.dart
       build_env: staging
-      upload_to_github: 'true'
+      upload_to_github: 'false'
       upload_to_firebase: 'false'
       upload_to_play_store: 'false'
     secrets:
@@ -42,7 +42,7 @@ jobs:
       flavor: johto
       target: lib/flavors/johto/main_johto.dart
       build_env: staging
-      upload_to_github: 'true'
+      upload_to_github: 'false'
       upload_to_firebase: 'false'
       upload_to_play_store: 'false'
     secrets:

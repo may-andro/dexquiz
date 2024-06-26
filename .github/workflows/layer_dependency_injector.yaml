@@ -6,11 +6,14 @@ concurrency:
 
 on:
   push:
+    branches:
+      - '**'
+    tags-ignore:
+      - '*-review'
+      - '*-prod'
     paths:
-      - layers/dependency_injector/**
-
-#on:
-#  push
+      - 'layers/dependency_injector/**'
+      - '.github/workflows/layer_dependency_injector.yaml'
 
 permissions:
   checks: write

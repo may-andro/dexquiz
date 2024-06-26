@@ -10,7 +10,7 @@ RemoteAbilities _$RemoteAbilitiesFromJson(Map<String, dynamic> json) =>
     RemoteAbilities(
       RemoteAbility.fromJson(json['ability'] as Map<String, dynamic>),
       json['is_hidden'] as bool,
-      json['slot'] as int,
+      (json['slot'] as num).toInt(),
     );
 
 Map<String, dynamic> _$RemoteAbilitiesToJson(RemoteAbilities instance) =>
