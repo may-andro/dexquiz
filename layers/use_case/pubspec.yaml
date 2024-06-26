@@ -3,7 +3,7 @@ description: Provides base classes for making use cases for the app
 publish_to: 'none'
 
 environment:
-  sdk: 3.3.4
+  sdk: 3.4.3
 
 dependencies:
   either_dart: ^1.0.0

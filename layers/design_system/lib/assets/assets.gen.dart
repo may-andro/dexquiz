@@ -38,6 +38,7 @@ class $AssetsGifsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// Directory path: assets/images/badge
   $AssetsImagesBadgeGen get badge => const $AssetsImagesBadgeGen();
 
   /// File path: assets/images/badge_bug.png
@@ -390,9 +391,16 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName);
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
+
+  final Size? size;
+  final Set<String> flavors;
 
   Image image({
     Key? key,

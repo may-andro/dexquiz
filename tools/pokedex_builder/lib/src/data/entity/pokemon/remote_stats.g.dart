@@ -7,8 +7,8 @@ part of 'remote_stats.dart';
 // **************************************************************************
 
 RemoteStats _$RemoteStatsFromJson(Map<String, dynamic> json) => RemoteStats(
-      json['base_stat'] as int,
-      json['effort'] as int,
+      (json['base_stat'] as num).toInt(),
+      (json['effort'] as num).toInt(),
       RemoteStat.fromJson(json['stat'] as Map<String, dynamic>),
     );
 

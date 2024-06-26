@@ -63,7 +63,7 @@ scripts:
       rm -r ios/.symlinks
       rm -r ios/Flutter/Flutter.framework
       rm -f ios/Flutter/Flutter.podspec
-      fvm flutter clean
+      flutter clean
       flutter pub get
       cd ios 
       pod cache clean --all

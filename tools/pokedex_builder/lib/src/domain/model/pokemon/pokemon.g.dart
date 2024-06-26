@@ -7,11 +7,11 @@ part of 'pokemon.dart';
 // **************************************************************************
 
 Pokemon _$PokemonFromJson(Map<String, dynamic> json) => Pokemon(
-      index: json['index'] as int,
+      index: (json['index'] as num).toInt(),
       name: json['name'] as String,
-      baseExperience: json['base_experience'] as int,
-      weight: json['weight'] as int,
-      height: json['height'] as int,
+      baseExperience: (json['base_experience'] as num).toInt(),
+      weight: (json['weight'] as num).toInt(),
+      height: (json['height'] as num).toInt(),
       imageUrl: json['image_url'] as String,
       abilities:
           (json['abilities'] as List<dynamic>).map((e) => e as String).toList(),

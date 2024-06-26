@@ -3,7 +3,7 @@ description: Provides all remote service for apis for the app
 publish_to: 'none'
 
 environment:
-  sdk: 3.3.4
+  sdk: 3.4.3
 
 dependencies:
   flutter:

@@ -31,8 +31,13 @@ class $AssetsAudioGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// Directory path: assets/images/pokedex
   $AssetsImagesPokedexGen get pokedex => const $AssetsImagesPokedexGen();
+
+  /// Directory path: assets/images/pokemon
   $AssetsImagesPokemonGen get pokemon => const $AssetsImagesPokemonGen();
+
+  /// Directory path: assets/images/quiz
   $AssetsImagesQuizGen get quiz => const $AssetsImagesQuizGen();
 }
 
@@ -50,8 +55,11 @@ class $AssetsImagesPokedexGen {
 class $AssetsImagesPokemonGen {
   const $AssetsImagesPokemonGen();
 
+  /// Directory path: assets/images/pokemon/background
   $AssetsImagesPokemonBackgroundGen get background =>
       const $AssetsImagesPokemonBackgroundGen();
+
+  /// Directory path: assets/images/pokemon/type
   $AssetsImagesPokemonTypeGen get type => const $AssetsImagesPokemonTypeGen();
 }
 
@@ -284,9 +292,16 @@ class Assets {
 }
 
 class AssetGenImage {
-  const AssetGenImage(this._assetName);
+  const AssetGenImage(
+    this._assetName, {
+    this.size,
+    this.flavors = const {},
+  });
 
   final String _assetName;
+
+  final Size? size;
+  final Set<String> flavors;
 
   Image image({
     Key? key,
