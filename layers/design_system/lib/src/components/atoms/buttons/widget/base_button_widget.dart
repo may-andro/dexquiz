@@ -34,18 +34,18 @@ class BaseButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ButtonStyle(
-        fixedSize: MaterialStateProperty.all(
+        fixedSize: WidgetStateProperty.all(
           Size(double.infinity, context.space(factor: heightFactor)),
         ),
         overlayColor: variant.getOverlayColor(context),
         foregroundColor: variant.getForegroundColor(context, isDisabled),
         backgroundColor: variant.getBackgroundColor(context, isDisabled),
-        shape: MaterialStateProperty.resolveWith<OutlinedBorder?>((states) {
+        shape: WidgetStateProperty.resolveWith<OutlinedBorder?>((states) {
           return border.getOutlinedBorder(context);
         }),
         side: variant.getSide(context, isDisabled, loading),
-        padding: MaterialStateProperty.all(EdgeInsets.zero),
-        elevation: MaterialStateProperty.all(0),
+        padding: WidgetStateProperty.all(EdgeInsets.zero),
+        elevation: WidgetStateProperty.all(0),
       ),
       onPressed:
           isDisabled || (loading?.blockClicks ?? false) ? null : onPressed,
@@ -117,27 +117,27 @@ class _ButtonChildWidget extends StatelessWidget {
 }
 
 extension _VariantDTOExtension on VariantDTO {
-  MaterialStateProperty<Color?> getOverlayColor(BuildContext context) {
-    return MaterialStateProperty.resolveWith<Color>(
-      (Set<MaterialState> states) {
-        return states.contains(MaterialState.focused)
+  WidgetStateProperty<Color?> getOverlayColor(BuildContext context) {
+    return WidgetStateProperty.resolveWith<Color>(
+      (Set<WidgetState> states) {
+        return states.contains(WidgetState.focused)
             ? getDefaultBackgroundColor(context)
             : getPressedBackgroundColor(context);
       },
     );
   }
 
-  MaterialStateProperty<Color?> getForegroundColor(
+  WidgetStateProperty<Color?> getForegroundColor(
     BuildContext context,
     bool isDisabled,
   ) {
-    return MaterialStateProperty.resolveWith<Color>(
-      (Set<MaterialState> states) {
-        if (states.contains(MaterialState.disabled) && isDisabled) {
+    return WidgetStateProperty.resolveWith<Color>(
+      (Set<WidgetState> states) {
+        if (states.contains(WidgetState.disabled) && isDisabled) {
           return getDisabledTextColor(context);
         }
-        if (states.contains(MaterialState.pressed) ||
-            states.contains(MaterialState.hovered)) {
+        if (states.contains(WidgetState.pressed) ||
+            states.contains(WidgetState.hovered)) {
           return getPressedTextColor(context);
         }
         return getDefaultTextColor(context);
@@ -145,30 +145,30 @@ extension _VariantDTOExtension on VariantDTO {
     );
   }
 
-  MaterialStateProperty<Color?> getBackgroundColor(
+  WidgetStateProperty<Color?> getBackgroundColor(
     BuildContext context,
     bool isDisabled,
   ) {
-    return MaterialStateProperty.resolveWith<Color>((states) {
-      if (states.contains(MaterialState.disabled) && isDisabled) {
+    return WidgetStateProperty.resolveWith<Color>((states) {
+      if (states.contains(WidgetState.disabled) && isDisabled) {
         return getDisabledBackgroundColor(context);
       }
       return getDefaultBackgroundColor(context);
     });
   }
 
-  MaterialStateProperty<BorderSide?> getSide(
+  WidgetStateProperty<BorderSide?> getSide(
     BuildContext context,
     bool isDisabled,
     LoadingDTO<dynamic>? loading,
   ) {
-    return MaterialStateProperty.resolveWith<BorderSide?>((states) {
+    return WidgetStateProperty.resolveWith<BorderSide?>((states) {
       var color = getDefaultBorderColor(context);
-      if (states.contains(MaterialState.disabled) && isDisabled) {
+      if (states.contains(WidgetState.disabled) && isDisabled) {
         color = getDisabledBorderColor(context);
       }
-      if (states.contains(MaterialState.pressed) ||
-          states.contains(MaterialState.hovered)) {
+      if (states.contains(WidgetState.pressed) ||
+          states.contains(WidgetState.hovered)) {
         color = getPressedBorderColor(context);
       }
       if (loading != null && loading is LinearLoading) {

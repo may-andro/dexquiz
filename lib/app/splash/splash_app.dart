@@ -22,14 +22,14 @@ class SplashApp extends StatelessWidget {
       title: 'Splash',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          background: const Color(0xFFFFFFFF),
-          onBackground: const Color(0xFF121212),
+          surface: const Color(0xFFFFFFFF),
+          onSurface: const Color(0xFF121212),
         ),
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
-          background: const Color(0xFF121212),
-          onBackground: const Color(0xFFFFFFFF),
+          surface: const Color(0xFF121212),
+          onSurface: const Color(0xFFFFFFFF),
         ),
       ),
       home: SplashScreen(
