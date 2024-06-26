@@ -19,7 +19,7 @@ permissions:
   checks: write
 
 jobs:
-  feature_settings:
+  feature_pokemon:
     uses: ./.github/workflows/_analyze_and_test_flutter_module.yaml
     with:
       module_path: './features/pokemon'
