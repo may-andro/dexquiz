@@ -12,10 +12,16 @@ class ImageWidget extends StatelessWidget {
     final url = viewModel.pokemon.image;
     return Hero(
       tag: url,
-      child: DSColorFilteredImageWidget(
-        key: const Key('pokemon_image_widget'),
-        imageUrl: url,
-        boxFit: BoxFit.contain,
+      child: Animate(
+        effects: [
+          ShimmerEffect(duration: 800.ms),
+          MoveEffect(delay: 800.ms, duration: 500.ms),
+        ],
+        child: DSColorFilteredImageWidget(
+          key: const Key('pokemon_image_widget'),
+          imageUrl: url,
+          boxFit: BoxFit.contain,
+        ),
       ),
     );
   }

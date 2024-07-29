@@ -15,7 +15,7 @@ class LaunchHeaderWidget extends StatelessWidget {
             state.imageHeader,
             height: context.height * 0.25,
             width: context.width * 0.7,
-          );
+          ).animate().shimmer(delay: 100.ms, duration: 1000.ms);
         }
 
         return const CircularProgressIndicator();
