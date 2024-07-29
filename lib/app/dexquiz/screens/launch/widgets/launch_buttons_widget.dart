@@ -41,7 +41,9 @@ class LaunchButtonsWidget extends StatelessWidget {
                     );
                   },
                   elevation: context.dimens.elevationLevel3,
-                ),
+                )
+                    .animate(onPlay: (controller) => controller.loop())
+                    .rotate(delay: 600.ms, duration: 1000.ms),
               ],
               if (state.isPokedexEnabled) ...[
                 DSFabWidget(
