@@ -81,12 +81,20 @@ class QuestionWidget extends StatelessWidget {
     final pokemonImage = viewModel.questionDTO?.pokemon.image ?? '';
     return Hero(
       tag: pokemonImage,
-      child: DSColorFilteredImageWidget(
-        imageUrl: pokemonImage,
-        boxFit: BoxFit.contain,
-        filterColor: color,
-        blendMode: blendMode,
-        sizeFactor: 0.6,
+      child: Animate(
+        effects: isVisible
+            ? [
+                ShimmerEffect(delay: 100.ms, duration: 500.ms),
+                ShakeEffect(delay: 600.ms, duration: 500.ms),
+              ]
+            : [ScaleEffect()],
+        child: DSColorFilteredImageWidget(
+          imageUrl: pokemonImage,
+          boxFit: BoxFit.contain,
+          filterColor: color,
+          blendMode: blendMode,
+          sizeFactor: 0.6,
+        ),
       ),
     );
   }
