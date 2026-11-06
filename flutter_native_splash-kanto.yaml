@@ -1,7 +1,0 @@
-flutter_native_splash:
-  color: "#ffffff"
-  image: assets/launchers/kanto_launcher.png
-  color_dark: "#121212"
-  image_dark: assets/launchers/kanto_launcher.png
-
-  web: false

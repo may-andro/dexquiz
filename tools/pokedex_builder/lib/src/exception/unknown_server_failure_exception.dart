@@ -1,1 +1,0 @@
-class UnknownServerFailureException implements Exception {}
